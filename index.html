@@ -270,7 +270,7 @@
                 <button onclick="navigateTo('home')" class="flex items-center gap-2 text-brand-blue dark:text-brand-gold font-bold hover:translate-x-1 transition duration-200">
                     <i class="fa-solid fa-arrow-right"></i> العودة للصفحة الرئيسية
                 </button>
-                <input type="text" onkeyup="filterItems('teachers-grid', this.value)" placeholder="ابحث عن أستاذ أو مادة..." class="w-full md:w-80 px-4 py-2 bg-slate-100 dark:bg-slate-900 border border-slate-300 dark:border-slate-700 rounded-xl focus:outline-none focus:border-brand-gold text-slate-800 dark:text-white transition">
+                <input type="text" onkeyup="filterItems('teachers-container', this.value)" placeholder="ابحث عن أستاذ أو مادة..." class="w-full md:w-80 px-4 py-2 bg-slate-100 dark:bg-slate-900 border border-slate-300 dark:border-slate-700 rounded-xl focus:outline-none focus:border-brand-gold text-slate-800 dark:text-white transition">
             </div>
 
             <div class="space-y-3 max-w-xl mx-auto">
@@ -288,42 +288,148 @@
                 </button>
             </div>
 
-            <div id="teachers-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 pt-4">
-                <div class="search-item teacher-card abwaab card-hover-effect bg-white dark:bg-slate-800 p-6 rounded-2xl shadow-md border border-slate-200 dark:border-slate-700 flex flex-col justify-between">
-                    <div>
-                        <span class="inline-block bg-blue-100 dark:bg-blue-900/60 text-brand-blue dark:text-brand-lightBlue border border-blue-300 dark:border-blue-500/30 text-xs font-bold px-3 py-1 rounded-full mb-3">منصة أبواب</span>
-                        <div class="flex items-center gap-4 mb-4">
-                            <div class="w-12 h-12 rounded-xl bg-blue-500/10 text-brand-lightBlue flex items-center justify-center text-xl font-bold border border-blue-500/20"><i class="fa-solid fa-user-tie"></i></div>
-                            <div>
-                                <h3 class="text-lg font-bold item-title text-slate-800 dark:text-white">أ. أحمد الفضلي</h3>
-                                <p class="text-sm text-slate-500 dark:text-slate-400 item-sub">مادة الرياضيات</p>
-                            </div>
-                        </div>
-                        <div class="space-y-2 text-sm text-slate-600 dark:text-slate-300">
-                            <p><strong class="text-slate-800 dark:text-slate-100">الملزمة:</strong> ملزمة الرياضيات الذهبية</p>
-                            <p><strong class="text-slate-800 dark:text-slate-100">السعر:</strong> 7,000 د.ع</p>
-                        </div>
+            <!-- Teachers Container -->
+            <div id="teachers-container" class="pt-4 space-y-6">
+
+                <!-- SECTION: ABWAAB PLATFORM -->
+                <div class="teacher-card abwaab space-y-4">
+                    <div class="flex items-center gap-2 border-b border-slate-200 dark:border-slate-700 pb-2">
+                        <i class="fa-solid fa-graduation-cap text-brand-lightBlue text-xl"></i>
+                        <h2 class="text-xl font-bold text-slate-800 dark:text-white">منصة أبواب</h2>
                     </div>
-                    <button class="mt-4 w-full py-2.5 bg-brand-blue text-white font-bold rounded-xl hover:bg-blue-700 transition active:scale-95 shadow-md">طلب الملزمة</button>
+
+                    <!-- 3 Cards Per Row Grid -->
+                    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+
+                        <!-- 1. العربي -->
+                        <div class="search-item card-hover-effect bg-white dark:bg-slate-800 p-4 rounded-xl shadow-sm border border-slate-200 dark:border-slate-700 flex flex-col justify-between aspect-square">
+                            <div>
+                                <div class="flex items-center gap-2 mb-2">
+                                    <div class="w-8 h-8 rounded-lg bg-blue-500/10 text-brand-lightBlue flex items-center justify-center text-sm font-bold"><i class="fa-solid fa-book-bookmark"></i></div>
+                                    <h3 class="font-extrabold text-base text-slate-800 dark:text-white item-title">اللغة العربية</h3>
+                                </div>
+                                <div class="text-xs text-slate-600 dark:text-slate-300 space-y-1 mt-2 item-sub">
+                                    <p class="flex items-center gap-1.5"><i class="fa-solid fa-user-tie text-brand-gold text-[10px]"></i> هاشم المعموري</p>
+                                    <p class="flex items-center gap-1.5"><i class="fa-solid fa-user-tie text-brand-gold text-[10px]"></i> إبراهيم الصميدعي</p>
+                                    <p class="flex items-center gap-1.5"><i class="fa-solid fa-user-tie text-brand-gold text-[10px]"></i> ريان الجاف</p>
+                                    <p class="flex items-center gap-1.5"><i class="fa-solid fa-user-tie text-brand-gold text-[10px]"></i> رفل الزبيدي</p>
+                                </div>
+                            </div>
+                            <button class="w-full py-1.5 mt-2 bg-brand-blue text-white text-xs font-bold rounded-lg hover:bg-blue-700 transition active:scale-95 shadow-sm">تصفح الملازم</button>
+                        </div>
+
+                        <!-- 2. الرياضيات -->
+                        <div class="search-item card-hover-effect bg-white dark:bg-slate-800 p-4 rounded-xl shadow-sm border border-slate-200 dark:border-slate-700 flex flex-col justify-between aspect-square">
+                            <div>
+                                <div class="flex items-center gap-2 mb-2">
+                                    <div class="w-8 h-8 rounded-lg bg-blue-500/10 text-brand-lightBlue flex items-center justify-center text-sm font-bold"><i class="fa-solid fa-calculator"></i></div>
+                                    <h3 class="font-extrabold text-base text-slate-800 dark:text-white item-title">الرياضيات</h3>
+                                </div>
+                                <div class="text-xs text-slate-600 dark:text-slate-300 space-y-1 mt-2 item-sub">
+                                    <p class="flex items-center gap-1.5"><i class="fa-solid fa-user-tie text-brand-gold text-[10px]"></i> حيدر عبد الأئمة</p>
+                                    <p class="flex items-center gap-1.5"><i class="fa-solid fa-user-tie text-brand-gold text-[10px]"></i> محمد قاسم</p>
+                                    <p class="flex items-center gap-1.5"><i class="fa-solid fa-user-tie text-brand-gold text-[10px]"></i> عباس الدراجي</p>
+                                    <p class="flex items-center gap-1.5"><i class="fa-solid fa-user-tie text-brand-gold text-[10px]"></i> يوسف الجعفري</p>
+                                </div>
+                            </div>
+                            <button class="w-full py-1.5 mt-2 bg-brand-blue text-white text-xs font-bold rounded-lg hover:bg-blue-700 transition active:scale-95 shadow-sm">تصفح الملازم</button>
+                        </div>
+
+                        <!-- 3. الكيمياء -->
+                        <div class="search-item card-hover-effect bg-white dark:bg-slate-800 p-4 rounded-xl shadow-sm border border-slate-200 dark:border-slate-700 flex flex-col justify-between aspect-square">
+                            <div>
+                                <div class="flex items-center gap-2 mb-2">
+                                    <div class="w-8 h-8 rounded-lg bg-blue-500/10 text-brand-lightBlue flex items-center justify-center text-sm font-bold"><i class="fa-solid fa-flask"></i></div>
+                                    <h3 class="font-extrabold text-base text-slate-800 dark:text-white item-title">الكيمياء</h3>
+                                </div>
+                                <div class="text-xs text-slate-600 dark:text-slate-300 space-y-1 mt-2 item-sub">
+                                    <p class="flex items-center gap-1.5"><i class="fa-solid fa-user-tie text-brand-gold text-[10px]"></i> هاشم الغرباوي</p>
+                                    <p class="flex items-center gap-1.5"><i class="fa-solid fa-user-tie text-brand-gold text-[10px]"></i> مهند السوداني</p>
+                                    <p class="flex items-center gap-1.5"><i class="fa-solid fa-user-tie text-brand-gold text-[10px]"></i> زياد ماهر</p>
+                                </div>
+                            </div>
+                            <button class="w-full py-1.5 mt-2 bg-brand-blue text-white text-xs font-bold rounded-lg hover:bg-blue-700 transition active:scale-95 shadow-sm">تصفح الملازم</button>
+                        </div>
+
+                        <!-- 4. الأحياء -->
+                        <div class="search-item card-hover-effect bg-white dark:bg-slate-800 p-4 rounded-xl shadow-sm border border-slate-200 dark:border-slate-700 flex flex-col justify-between aspect-square">
+                            <div>
+                                <div class="flex items-center gap-2 mb-2">
+                                    <div class="w-8 h-8 rounded-lg bg-blue-500/10 text-brand-lightBlue flex items-center justify-center text-sm font-bold"><i class="fa-solid fa-dna"></i></div>
+                                    <h3 class="font-extrabold text-base text-slate-800 dark:text-white item-title">الأحياء</h3>
+                                </div>
+                                <div class="text-xs text-slate-600 dark:text-slate-300 space-y-1 mt-2 item-sub">
+                                    <p class="flex items-center gap-1.5"><i class="fa-solid fa-user-tie text-brand-gold text-[10px]"></i> نورس الموسوي</p>
+                                    <p class="flex items-center gap-1.5"><i class="fa-solid fa-user-tie text-brand-gold text-[10px]"></i> جعفر الحسيني</p>
+                                    <p class="flex items-center gap-1.5"><i class="fa-solid fa-user-tie text-brand-gold text-[10px]"></i> محمد العنزي</p>
+                                </div>
+                            </div>
+                            <button class="w-full py-1.5 mt-2 bg-brand-blue text-white text-xs font-bold rounded-lg hover:bg-blue-700 transition active:scale-95 shadow-sm">تصفح الملازم</button>
+                        </div>
+
+                        <!-- 5. الفيزياء -->
+                        <div class="search-item card-hover-effect bg-white dark:bg-slate-800 p-4 rounded-xl shadow-sm border border-slate-200 dark:border-slate-700 flex flex-col justify-between aspect-square">
+                            <div>
+                                <div class="flex items-center gap-2 mb-2">
+                                    <div class="w-8 h-8 rounded-lg bg-blue-500/10 text-brand-lightBlue flex items-center justify-center text-sm font-bold"><i class="fa-solid fa-atom"></i></div>
+                                    <h3 class="font-extrabold text-base text-slate-800 dark:text-white item-title">الفيزياء</h3>
+                                </div>
+                                <div class="text-xs text-slate-600 dark:text-slate-300 space-y-1 mt-2 item-sub">
+                                    <p class="flex items-center gap-1.5"><i class="fa-solid fa-user-tie text-brand-gold text-[10px]"></i> حسين عبد الكاظم</p>
+                                    <p class="flex items-center gap-1.5"><i class="fa-solid fa-user-tie text-brand-gold text-[10px]"></i> علي السوداني</p>
+                                    <p class="flex items-center gap-1.5"><i class="fa-solid fa-user-tie text-brand-gold text-[10px]"></i> حيدر ديوان</p>
+                                    <p class="flex items-center gap-1.5"><i class="fa-solid fa-user-tie text-brand-gold text-[10px]"></i> حسين محمد</p>
+                                </div>
+                            </div>
+                            <button class="w-full py-1.5 mt-2 bg-brand-blue text-white text-xs font-bold rounded-lg hover:bg-blue-700 transition active:scale-95 shadow-sm">تصفح الملازم</button>
+                        </div>
+
+                        <!-- 6. الإسلامية -->
+                        <div class="search-item card-hover-effect bg-white dark:bg-slate-800 p-4 rounded-xl shadow-sm border border-slate-200 dark:border-slate-700 flex flex-col justify-between aspect-square">
+                            <div>
+                                <div class="flex items-center gap-2 mb-2">
+                                    <div class="w-8 h-8 rounded-lg bg-blue-500/10 text-brand-lightBlue flex items-center justify-center text-sm font-bold"><i class="fa-solid fa-kaaba"></i></div>
+                                    <h3 class="font-extrabold text-base text-slate-800 dark:text-white item-title">التربية الإسلامية</h3>
+                                </div>
+                                <div class="text-xs text-slate-600 dark:text-slate-300 space-y-1 mt-2 item-sub">
+                                    <p class="flex items-center gap-1.5"><i class="fa-solid fa-user-tie text-brand-gold text-[10px]"></i> إسراء القيسي</p>
+                                    <p class="flex items-center gap-1.5"><i class="fa-solid fa-user-tie text-brand-gold text-[10px]"></i> هاشم المعموري</p>
+                                    <p class="flex items-center gap-1.5"><i class="fa-solid fa-user-tie text-brand-gold text-[10px]"></i> سجاد العكيلي</p>
+                                </div>
+                            </div>
+                            <button class="w-full py-1.5 mt-2 bg-brand-blue text-white text-xs font-bold rounded-lg hover:bg-blue-700 transition active:scale-95 shadow-sm">تصفح الملازم</button>
+                        </div>
+
+                    </div>
                 </div>
 
-                <div class="search-item teacher-card mirmaz card-hover-effect bg-white dark:bg-slate-800 p-6 rounded-2xl shadow-md border border-slate-200 dark:border-slate-700 flex flex-col justify-between">
-                    <div>
-                        <span class="inline-block bg-amber-100 dark:bg-amber-900/60 text-brand-gold border border-amber-300 dark:border-amber-500/30 text-xs font-bold px-3 py-1 rounded-full mb-3">منصة مرماز</span>
-                        <div class="flex items-center gap-4 mb-4">
-                            <div class="w-12 h-12 rounded-xl bg-amber-500/10 text-brand-gold flex items-center justify-center text-xl font-bold border border-amber-500/20"><i class="fa-solid fa-user-tie"></i></div>
+                <!-- SECTION: MIRMAZ PLATFORM -->
+                <div class="teacher-card mirmaz space-y-4 pt-4">
+                    <div class="flex items-center gap-2 border-b border-slate-200 dark:border-slate-700 pb-2">
+                        <i class="fa-solid fa-star text-brand-gold text-xl"></i>
+                        <h2 class="text-xl font-bold text-slate-800 dark:text-white">منصة مرماز</h2>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                        <div class="search-item card-hover-effect bg-white dark:bg-slate-800 p-6 rounded-2xl shadow-md border border-slate-200 dark:border-slate-700 flex flex-col justify-between">
                             <div>
-                                <h3 class="text-lg font-bold item-title text-slate-800 dark:text-white">أ. زينب الجبوري</h3>
-                                <p class="text-sm text-slate-500 dark:text-slate-400 item-sub">مادة اللغة الإنجليزية</p>
+                                <span class="inline-block bg-amber-100 dark:bg-amber-900/60 text-brand-gold border border-amber-300 dark:border-amber-500/30 text-xs font-bold px-3 py-1 rounded-full mb-3">منصة مرماز</span>
+                                <div class="flex items-center gap-4 mb-4">
+                                    <div class="w-12 h-12 rounded-xl bg-amber-500/10 text-brand-gold flex items-center justify-center text-xl font-bold border border-amber-500/20"><i class="fa-solid fa-user-tie"></i></div>
+                                    <div>
+                                        <h3 class="text-lg font-bold item-title text-slate-800 dark:text-white">أ. زينب الجبوري</h3>
+                                        <p class="text-sm text-slate-500 dark:text-slate-400 item-sub">مادة اللغة الإنجليزية</p>
+                                    </div>
+                                </div>
+                                <div class="space-y-2 text-sm text-slate-600 dark:text-slate-300">
+                                    <p><strong class="text-slate-800 dark:text-slate-100">الملزمة:</strong> الشامل في الإنجليزية</p>
+                                    <p><strong class="text-slate-800 dark:text-slate-100">السعر:</strong> 6,000 د.ع</p>
+                                </div>
                             </div>
-                        </div>
-                        <div class="space-y-2 text-sm text-slate-600 dark:text-slate-300">
-                            <p><strong class="text-slate-800 dark:text-slate-100">الملزمة:</strong> الشامل في الإنجليزية</p>
-                            <p><strong class="text-slate-800 dark:text-slate-100">السعر:</strong> 6,000 د.ع</p>
+                            <button class="mt-4 w-full py-2.5 bg-brand-blue text-white font-bold rounded-xl hover:bg-blue-700 transition active:scale-95 shadow-md">طلب الملزمة</button>
                         </div>
                     </div>
-                    <button class="mt-4 w-full py-2.5 bg-brand-blue text-white font-bold rounded-xl hover:bg-blue-700 transition active:scale-95 shadow-md">طلب الملزمة</button>
                 </div>
+
             </div>
         </section>
 
@@ -482,9 +588,12 @@
                 const title = items[i].querySelector('.item-title')?.textContent || '';
                 const sub = items[i].querySelector('.item-sub')?.textContent || '';
                 if (title.toLowerCase().includes(filter) || sub.toLowerCase().includes(filter)) {
-                    items[i].style.display = "";
+                    // Show closest card/wrapper parent
+                    let parentCard = items[i].closest('.search-item');
+                    if (parentCard) parentCard.style.display = "";
                 } else {
-                    items[i].style.display = "none";
+                    let parentCard = items[i].closest('.search-item');
+                    if (parentCard) parentCard.style.display = "none";
                 }
             }
         }
@@ -499,7 +608,13 @@
             setActiveTab(btn);
             const cards = document.querySelectorAll('.teacher-card');
             cards.forEach(card => {
-                card.style.display = (category === 'all' || card.classList.contains(category)) ? "flex" : "none";
+                if (category === 'all') {
+                    card.style.display = "block";
+                } else if (card.classList.contains(category)) {
+                    card.style.display = "block";
+                } else {
+                    card.style.display = "none";
+                }
             });
         }
 
