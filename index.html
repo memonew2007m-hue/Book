@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>مكتبة العبقري</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            blue: '#1e3a8a',
+                            lightBlue: '#3b82f6',
+                            gold: '#f59e0b',
+                            accent: '#d97706'
+                        }
+                    },
+                    fontFamily: {
+                        cairo: ['Cairo', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { font-family: 'Cairo', sans-serif; }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 min-h-screen flex flex-col justify-between">
+
+    <header class="bg-brand-blue text-white shadow-lg sticky top-0 z-50">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <div class="flex items-center space-x-3 space-x-reverse cursor-pointer" onclick="navigateTo('home')">
+                <i class="fa-solid fa-graduation-cap text-3xl text-brand-gold"></i>
+                <h1 class="text-2xl font-bold tracking-wide">مكتبة <span class="text-brand-gold">العبقري</span></h1>
+            </div>
+            <div class="flex space-x-4 space-x-reverse text-lg">
+                <a href="#" class="w-9 h-9 rounded-full bg-white/10 flex items-center justify-center hover:bg-brand-gold hover:text-brand-blue transition"><i class="fa-brands fa-facebook-f"></i></a>
+                <a href="#" class="w-9 h-9 rounded-full bg-white/10 flex items-center justify-center hover:bg-brand-gold hover:text-brand-blue transition"><i class="fa-brands fa-instagram"></i></a>
+                <a href="#" class="w-9 h-9 rounded-full bg-white/10 flex items-center justify-center hover:bg-brand-gold hover:text-brand-blue transition"><i class="fa-brands fa-whatsapp"></i></a>
+            </div>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-4 py-8 flex-grow">
+
+        <section id="page-home" class="space-y-10">
+            <div class="bg-gradient-to-r from-brand-blue to-blue-700 text-white rounded-3xl p-8 md:p-12 text-center shadow-xl relative overflow-hidden">
+                <div class="relative z-10 space-y-4">
+                    <h2 class="text-3xl md:text-5xl font-extrabold">أهلاً بكم في مكتبة العبقري</h2>
+                    <p class="text-lg md:text-xl text-blue-100 max-w-2xl mx-auto">بوابتك للتميز الدراسي! نوفر لك أحدث الملازم، الكتب الدراسية، والقرطاسية بأعلى جودة وأفضل الأسعار.</p>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div onclick="navigateTo('teachers')" class="bg-white rounded-2xl p-6 shadow-md hover:shadow-xl transition transform hover:-translate-y-1 cursor-pointer border-t-4 border-brand-gold text-center group">
+                    <div class="w-16 h-16 mx-auto mb-4 rounded-full bg-amber-100 text-brand-gold flex items-center justify-center text-2xl group-hover:bg-brand-gold group-hover:text-white transition">
+                        <i class="fa-solid fa-chalkboard-user"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-800 mb-2">الأساتذة</h3>
+                    <p class="text-slate-500 text-sm">قائمة نخبة الأساتذة والمواد والملازم الخاصة بهم.</p>
+                </div>
+
+                <div onclick="navigateTo('supplies')" class="bg-white rounded-2xl p-6 shadow-md hover:shadow-xl transition transform hover:-translate-y-1 cursor-pointer border-t-4 border-brand-blue text-center group">
+                    <div class="w-16 h-16 mx-auto mb-4 rounded-full bg-blue-100 text-brand-blue flex items-center justify-center text-2xl group-hover:bg-brand-blue group-hover:text-white transition">
+                        <i class="fa-solid fa-pen-ruler"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-800 mb-2">المستلزمات المدرسية</h3>
+                    <p class="text-slate-500 text-sm">قرطاسية، دفاتر، حقائب، وأدوات هندسية متكاملة.</p>
+                </div>
+
+                <div onclick="navigateTo('notes')" class="bg-white rounded-2xl p-6 shadow-md hover:shadow-xl transition transform hover:-translate-y-1 cursor-pointer border-t-4 border-brand-gold text-center group">
+                    <div class="w-16 h-16 mx-auto mb-4 rounded-full bg-amber-100 text-brand-gold flex items-center justify-center text-2xl group-hover:bg-brand-gold group-hover:text-white transition">
+                        <i class="fa-solid fa-file-lines"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-800 mb-2">الملازم الدراسية</h3>
+                    <p class="text-slate-500 text-sm">ملازم شاملة للمراحل (الابتدائية، المتوسطة، الإعدادية).</p>
+                </div>
+
+                <div onclick="navigateTo('books')" class="bg-white rounded-2xl p-6 shadow-md hover:shadow-xl transition transform hover:-translate-y-1 cursor-pointer border-t-4 border-brand-blue text-center group">
+                    <div class="w-16 h-16 mx-auto mb-4 rounded-full bg-blue-100 text-brand-blue flex items-center justify-center text-2xl group-hover:bg-brand-blue group-hover:text-white transition">
+                        <i class="fa-solid fa-book-open"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-800 mb-2">الكتب والقصص</h3>
+                    <p class="text-slate-500 text-sm">كتب منهجية، خارجية، وقصص متنوعة لتنمية مهاراتك.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="page-teachers" class="hidden space-y-6">
+            <div class="flex flex-col md:flex-row justify-between items-center gap-4 bg-white p-4 rounded-xl shadow-sm">
+                <button onclick="navigateTo('home')" class="flex items-center gap-2 text-brand-blue font-bold hover:text-brand-gold transition">
+                    <i class="fa-solid fa-arrow-right"></i> العودة للصفحة الرئيسية
+                </button>
+                <input type="text" onkeyup="filterItems('teachers-grid', this.value)" placeholder="ابحث عن أستاذ أو مادة..." class="w-full md:w-80 px-4 py-2 border border-slate-300 rounded-lg focus:outline-none focus:border-brand-blue">
+            </div>
+            <h2 class="text-2xl font-bold text-brand-blue border-r-4 border-brand-gold pr-3">قسم الأساتذة</h2>
+            
+            <div id="teachers-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="search-item bg-white p-6 rounded-2xl shadow-md border border-slate-100 flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center gap-4 mb-4">
+                            <div class="w-12 h-12 rounded-full bg-blue-50 text-brand-blue flex items-center justify-center text-xl font-bold"><i class="fa-solid fa-user-tie"></i></div>
+                            <div>
+                                <h3 class="text-lg font-bold item-title">أ. أحمد الفضلي</h3>
+                                <p class="text-sm text-slate-500 item-sub">مادة الرياضيات</p>
+                            </div>
+                        </div>
+                        <div class="space-y-2 text-sm text-slate-600">
+                            <p><strong class="text-slate-800">الملزمة المتاحة:</strong> ملزمة الرياضيات الذهبية (الإعدادية)</p>
+                            <p><strong class="text-slate-800">السعر:</strong> 7,000 د.ع</p>
+                        </div>
+                    </div>
+                    <button class="mt-4 w-full py-2 bg-brand-blue text-white rounded-lg hover:bg-blue-800 transition">طلب الملزمة</button>
+                </div>
+                <div class="search-item bg-white p-6 rounded-2xl shadow-md border border-slate-100 flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center gap-4 mb-4">
+                            <div class="w-12 h-12 rounded-full bg-amber-50 text-brand-gold flex items-center justify-center text-xl font-bold"><i class="fa-solid fa-user-tie"></i></div>
+                            <div>
+                                <h3 class="text-lg font-bold item-title">أ. زينب الجبوري</h3>
+                                <p class="text-sm text-slate-500 item-sub">مادة اللغة الإنجليزية</p>
+                            </div>
+                        </div>
+                        <div class="space-y-2 text-sm text-slate-600">
+                            <p><strong class="text-slate-800">الملزمة المتاحة:</strong> الشامل في قواعد اللغة الإنجليزية</p>
+                            <p><strong class="text-slate-800">السعر:</strong> 6,000 د.ع</p>
+                        </div>
+                    </div>
+                    <button class="mt-4 w-full py-2 bg-brand-blue text-white rounded-lg hover:bg-blue-800 transition">طلب
