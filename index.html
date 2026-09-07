@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="ar" dir="rtl" class="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,6 +12,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
     <script>
         tailwind.config = {
+            darkMode: 'class',
             theme: {
                 extend: {
                     colors: {
@@ -33,10 +34,10 @@
         body { 
             font-family: 'Cairo', sans-serif; 
             position: relative;
-            background-color: #0f172a;
+            transition: background-color 0.3s ease, color 0.3s ease;
         }
 
-        /* glowing elements in background */
+        /* Glowing background elements */
         .bg-glow-container {
             position: fixed;
             top: 0;
@@ -51,26 +52,22 @@
         .glow-icon {
             position: absolute;
             font-size: 2.2rem;
-            opacity: 0.25;
+            opacity: 0.2;
             animation: float 14s infinite ease-in-out;
-            filter: drop-shadow(0 0 12px currentColor);
+            filter: drop-shadow(0 0 10px currentColor);
         }
 
-        .glow-yellow {
-            color: #f59e0b;
+        /* Adjust opacity for light mode visibility */
+        html:not(.dark) .glow-icon {
+            opacity: 0.15;
         }
 
-        .glow-blue {
-            color: #3b82f6;
-        }
+        .glow-yellow { color: #f59e0b; }
+        .glow-blue { color: #3b82f6; }
 
         @keyframes float {
-            0%, 100% {
-                transform: translateY(0) rotate(0deg) scale(1);
-            }
-            50% {
-                transform: translateY(-35px) rotate(15deg) scale(1.1);
-            }
+            0%, 100% { transform: translateY(0) rotate(0deg) scale(1); }
+            50% { transform: translateY(-35px) rotate(15deg) scale(1.1); }
         }
 
         .tab-btn.active {
@@ -80,7 +77,7 @@
             box-shadow: 0 4px 14px rgba(59, 130, 246, 0.3);
         }
 
-        /* Rounded-square logo design */
+        /* Logo box styling */
         .logo-box {
             width: 48px;
             height: 48px;
@@ -91,9 +88,9 @@
         }
     </style>
 </head>
-<body class="bg-slate-900 text-slate-100 min-h-screen flex flex-col justify-between relative overflow-x-hidden">
+<body class="bg-slate-50 dark:bg-slate-900 text-slate-800 dark:text-slate-100 min-h-screen flex flex-col justify-between relative overflow-x-hidden">
 
-    <!-- 3. Dynamic Glowing Background (Books, Pens, Notebooks) -->
+    <!-- Glowing Dynamic Background -->
     <div class="bg-glow-container">
         <i class="fa-solid fa-book glow-icon glow-yellow" style="top: 10%; left: 12%; animation-delay: 0s;"></i>
         <i class="fa-solid fa-pen-nib glow-icon glow-blue" style="top: 25%; left: 80%; animation-delay: 2s;"></i>
@@ -106,10 +103,10 @@
     </div>
 
     <!-- Header Section -->
-    <header class="bg-slate-800/90 backdrop-blur-md text-white shadow-xl sticky top-0 z-40 border-b border-slate-700">
+    <header class="bg-white/90 dark:bg-slate-800/90 backdrop-blur-md text-slate-800 dark:text-white shadow-md dark:shadow-xl sticky top-0 z-40 border-b border-slate-200 dark:border-slate-700 transition-colors duration-300">
         <div class="container mx-auto px-4 py-3 flex justify-between items-center">
             
-            <!-- 4. Logo Square with Rounded Corners & Secret Click Counter -->
+            <!-- Logo with Secret Admin Trigger -->
             <div id="secret-logo-btn" class="flex items-center space-x-3 space-x-reverse cursor-pointer select-none group" onclick="handleLogoClick()">
                 <div class="logo-box flex items-center justify-center transition transform group-hover:scale-105">
                     <i id="header-logo-icon" class="fa-solid fa-graduation-cap text-2xl text-brand-gold"></i>
@@ -128,11 +125,16 @@
                 <button onclick="navigateTo('books')" class="hover:text-brand-gold transition">الكتب والقصص</button>
             </nav>
 
-            <!-- Social Links -->
-            <div class="flex space-x-3 space-x-reverse text-lg">
-                <a href="#" class="w-9 h-9 rounded-xl bg-slate-700 flex items-center justify-center hover:bg-brand-gold hover:text-brand-blue transition"><i class="fa-brands fa-facebook-f"></i></a>
-                <a href="#" class="w-9 h-9 rounded-xl bg-slate-700 flex items-center justify-center hover:bg-brand-gold hover:text-brand-blue transition"><i class="fa-brands fa-instagram"></i></a>
-                <a href="#" class="w-9 h-9 rounded-xl bg-slate-700 flex items-center justify-center hover:bg-brand-gold hover:text-brand-blue transition"><i class="fa-brands fa-whatsapp"></i></a>
+            <!-- Actions & Social Links -->
+            <div class="flex items-center space-x-3 space-x-reverse text-lg">
+                <!-- Theme Toggle Button -->
+                <button onclick="toggleTheme()" class="w-10 h-10 rounded-xl bg-slate-100 dark:bg-slate-700 text-amber-500 dark:text-amber-400 flex items-center justify-center hover:scale-110 transition shadow-sm border border-slate-200 dark:border-slate-600">
+                    <i id="theme-toggle-icon" class="fa-solid fa-moon"></i>
+                </button>
+
+                <a href="#" class="w-9 h-9 rounded-xl bg-slate-100 dark:bg-slate-700 flex items-center justify-center hover:bg-brand-gold hover:text-white transition"><i class="fa-brands fa-facebook-f"></i></a>
+                <a href="#" class="w-9 h-9 rounded-xl bg-slate-100 dark:bg-slate-700 flex items-center justify-center hover:bg-brand-gold hover:text-white transition"><i class="fa-brands fa-instagram"></i></a>
+                <a href="#" class="w-9 h-9 rounded-xl bg-slate-100 dark:bg-slate-700 flex items-center justify-center hover:bg-brand-gold hover:text-white transition"><i class="fa-brands fa-whatsapp"></i></a>
             </div>
         </div>
     </header>
@@ -143,9 +145,9 @@
         <!-- 1. PAGE: HOME -->
         <section id="page-home" class="page-section space-y-10">
             <!-- Hero Banner -->
-            <div class="bg-gradient-to-r from-brand-blue via-blue-900 to-slate-900 text-white rounded-3xl p-8 md:p-12 text-center shadow-2xl border border-blue-500/30 relative overflow-hidden">
+            <div class="bg-gradient-to-r from-brand-blue via-blue-800 to-slate-900 text-white rounded-3xl p-8 md:p-12 text-center shadow-2xl border border-blue-500/30 relative overflow-hidden">
                 <div class="relative z-10 space-y-4">
-                    <h2 class="text-3xl md:text-5xl font-extrabold">أهلاً بكم في <span class="text-brand-gold" id="hero-brand-name">مكتبة العبقري</span></h2>
+                    <h2 class="text-3xl md:text-5xl font-extrabold">أهلاً لكم في <span class="text-brand-gold" id="hero-brand-name">مكتبة العبقري</span></h2>
                     <p class="text-lg md:text-xl text-blue-100 max-w-2xl mx-auto">بوابتك للتميز الدراسي! نوفر لك أحدث الملازم، الكتب الدراسية، والقرطاسية بأعلى جودة وأفضل الأسعار.</p>
                 </div>
             </div>
@@ -153,63 +155,63 @@
             <!-- Dashboard Grid -->
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                 <!-- Card 1: Teachers -->
-                <div onclick="navigateTo('teachers')" class="bg-slate-800/80 backdrop-blur rounded-2xl p-6 shadow-xl hover:shadow-2xl transition transform hover:-translate-y-1 cursor-pointer border-t-4 border-brand-gold text-center group border-x border-b border-slate-700">
+                <div onclick="navigateTo('teachers')" class="bg-white dark:bg-slate-800/80 backdrop-blur rounded-2xl p-6 shadow-md dark:shadow-xl hover:shadow-2xl transition transform hover:-translate-y-1 cursor-pointer border-t-4 border-brand-gold text-center group border-x border-b border-slate-200 dark:border-slate-700">
                     <div class="w-16 h-16 mx-auto mb-4 rounded-2xl bg-amber-500/10 text-brand-gold flex items-center justify-center text-2xl group-hover:bg-brand-gold group-hover:text-slate-900 transition">
                         <i class="fa-solid fa-chalkboard-user"></i>
                     </div>
-                    <h3 class="text-xl font-bold text-slate-100 mb-2">الأساتذة</h3>
-                    <p class="text-slate-400 text-sm">أساتذة منصة أبواب ومنصة مرماز.</p>
+                    <h3 class="text-xl font-bold text-slate-800 dark:text-slate-100 mb-2">الأساتذة</h3>
+                    <p class="text-slate-500 dark:text-slate-400 text-sm">أساتذة منصة أبواب ومنصة مرماز.</p>
                 </div>
 
                 <!-- Card 2: Stationeries -->
-                <div onclick="navigateTo('supplies')" class="bg-slate-800/80 backdrop-blur rounded-2xl p-6 shadow-xl hover:shadow-2xl transition transform hover:-translate-y-1 cursor-pointer border-t-4 border-brand-blue text-center group border-x border-b border-slate-700">
+                <div onclick="navigateTo('supplies')" class="bg-white dark:bg-slate-800/80 backdrop-blur rounded-2xl p-6 shadow-md dark:shadow-xl hover:shadow-2xl transition transform hover:-translate-y-1 cursor-pointer border-t-4 border-brand-blue text-center group border-x border-b border-slate-200 dark:border-slate-700">
                     <div class="w-16 h-16 mx-auto mb-4 rounded-2xl bg-blue-500/10 text-brand-lightBlue flex items-center justify-center text-2xl group-hover:bg-brand-blue group-hover:text-white transition">
                         <i class="fa-solid fa-pen-ruler"></i>
                     </div>
-                    <h3 class="text-xl font-bold text-slate-100 mb-2">المستلزمات المدرسية</h3>
-                    <p class="text-slate-400 text-sm">قرطاسية، دفاتر، حقائب، وأدوات هندسية.</p>
+                    <h3 class="text-xl font-bold text-slate-800 dark:text-slate-100 mb-2">المستلزمات المدرسية</h3>
+                    <p class="text-slate-500 dark:text-slate-400 text-sm">قرطاسية، دفاتر، حقائب، وأدوات هندسية.</p>
                 </div>
 
                 <!-- Card 3: School Summaries -->
-                <div onclick="navigateTo('notes')" class="bg-slate-800/80 backdrop-blur rounded-2xl p-6 shadow-xl hover:shadow-2xl transition transform hover:-translate-y-1 cursor-pointer border-t-4 border-brand-gold text-center group border-x border-b border-slate-700">
+                <div onclick="navigateTo('notes')" class="bg-white dark:bg-slate-800/80 backdrop-blur rounded-2xl p-6 shadow-md dark:shadow-xl hover:shadow-2xl transition transform hover:-translate-y-1 cursor-pointer border-t-4 border-brand-gold text-center group border-x border-b border-slate-200 dark:border-slate-700">
                     <div class="w-16 h-16 mx-auto mb-4 rounded-2xl bg-amber-500/10 text-brand-gold flex items-center justify-center text-2xl group-hover:bg-brand-gold group-hover:text-slate-900 transition">
                         <i class="fa-solid fa-file-lines"></i>
                     </div>
-                    <h3 class="text-xl font-bold text-slate-100 mb-2">الملازم الدراسية</h3>
-                    <p class="text-slate-400 text-sm">ملازم مقسمة حسب المواد الدراسية.</p>
+                    <h3 class="text-xl font-bold text-slate-800 dark:text-slate-100 mb-2">الملازم الدراسية</h3>
+                    <p class="text-slate-500 dark:text-slate-400 text-sm">ملازم مقسمة حسب المواد الدراسية.</p>
                 </div>
 
                 <!-- Card 4: Books -->
-                <div onclick="navigateTo('books')" class="bg-slate-800/80 backdrop-blur rounded-2xl p-6 shadow-xl hover:shadow-2xl transition transform hover:-translate-y-1 cursor-pointer border-t-4 border-brand-blue text-center group border-x border-b border-slate-700">
+                <div onclick="navigateTo('books')" class="bg-white dark:bg-slate-800/80 backdrop-blur rounded-2xl p-6 shadow-md dark:shadow-xl hover:shadow-2xl transition transform hover:-translate-y-1 cursor-pointer border-t-4 border-brand-blue text-center group border-x border-b border-slate-200 dark:border-slate-700">
                     <div class="w-16 h-16 mx-auto mb-4 rounded-2xl bg-blue-500/10 text-brand-lightBlue flex items-center justify-center text-2xl group-hover:bg-brand-blue group-hover:text-white transition">
                         <i class="fa-solid fa-book-open"></i>
                     </div>
-                    <h3 class="text-xl font-bold text-slate-100 mb-2">الكتب والقصص</h3>
-                    <p class="text-slate-400 text-sm">كتب منهجية، خارجية، وقصص متنوعة.</p>
+                    <h3 class="text-xl font-bold text-slate-800 dark:text-slate-100 mb-2">الكتب والقصص</h3>
+                    <p class="text-slate-500 dark:text-slate-400 text-sm">كتب منهجية، خارجية، وقصص متنوعة.</p>
                 </div>
             </div>
         </section>
 
         <!-- 2. PAGE: TEACHERS -->
         <section id="page-teachers" class="page-section hidden space-y-6">
-            <div class="flex flex-col md:flex-row justify-between items-center gap-4 bg-slate-800 p-4 rounded-2xl shadow-md border border-slate-700">
-                <button onclick="navigateTo('home')" class="flex items-center gap-2 text-brand-gold font-bold hover:text-white transition">
+            <div class="flex flex-col md:flex-row justify-between items-center gap-4 bg-white dark:bg-slate-800 p-4 rounded-2xl shadow-md border border-slate-200 dark:border-slate-700">
+                <button onclick="navigateTo('home')" class="flex items-center gap-2 text-brand-blue dark:text-brand-gold font-bold hover:text-slate-600 dark:hover:text-white transition">
                     <i class="fa-solid fa-arrow-right"></i> العودة للصفحة الرئيسية
                 </button>
-                <input type="text" onkeyup="filterItems('teachers-grid', this.value)" placeholder="ابحث عن أستاذ أو مادة..." class="w-full md:w-80 px-4 py-2 bg-slate-900 border border-slate-700 rounded-xl focus:outline-none focus:border-brand-gold text-white">
+                <input type="text" onkeyup="filterItems('teachers-grid', this.value)" placeholder="ابحث عن أستاذ أو مادة..." class="w-full md:w-80 px-4 py-2 bg-slate-100 dark:bg-slate-900 border border-slate-300 dark:border-slate-700 rounded-xl focus:outline-none focus:border-brand-gold text-slate-800 dark:text-white">
             </div>
 
-            <!-- 2. Vertical Stacked Notification-Style Tabs for Teachers -->
+            <!-- Vertical Stacked Tabs for Teachers -->
             <div class="space-y-3 max-w-xl mx-auto">
-                <button onclick="filterTeacherCategory('all', this)" class="tab-btn active w-full p-4 rounded-2xl font-bold border border-slate-700 bg-slate-800 text-slate-200 flex items-center justify-between shadow-lg transition hover:border-brand-gold">
+                <button onclick="filterTeacherCategory('all', this)" class="tab-btn active w-full p-4 rounded-2xl font-bold border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-200 flex items-center justify-between shadow-md transition hover:border-brand-gold">
                     <span class="flex items-center gap-3"><i class="fa-solid fa-layer-group text-brand-gold"></i> عرض جميع الأساتذة</span>
                     <i class="fa-solid fa-chevron-left text-sm opacity-60"></i>
                 </button>
-                <button onclick="filterTeacherCategory('abwaab', this)" class="tab-btn w-full p-4 rounded-2xl font-bold border border-slate-700 bg-slate-800 text-slate-200 flex items-center justify-between shadow-lg transition hover:border-brand-gold">
+                <button onclick="filterTeacherCategory('abwaab', this)" class="tab-btn w-full p-4 rounded-2xl font-bold border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-200 flex items-center justify-between shadow-md transition hover:border-brand-gold">
                     <span class="flex items-center gap-3"><i class="fa-solid fa-graduation-cap text-brand-lightBlue"></i> أساتذة منصة أبواب</span>
                     <i class="fa-solid fa-chevron-left text-sm opacity-60"></i>
                 </button>
-                <button onclick="filterTeacherCategory('mirmaz', this)" class="tab-btn w-full p-4 rounded-2xl font-bold border border-slate-700 bg-slate-800 text-slate-200 flex items-center justify-between shadow-lg transition hover:border-brand-gold">
+                <button onclick="filterTeacherCategory('mirmaz', this)" class="tab-btn w-full p-4 rounded-2xl font-bold border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-200 flex items-center justify-between shadow-md transition hover:border-brand-gold">
                     <span class="flex items-center gap-3"><i class="fa-solid fa-star text-brand-gold"></i> أساتذة منصة مرماز</span>
                     <i class="fa-solid fa-chevron-left text-sm opacity-60"></i>
                 </button>
@@ -217,38 +219,38 @@
 
             <div id="teachers-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 pt-4">
                 <!-- Abwaab Teacher -->
-                <div class="search-item teacher-card abwaab bg-slate-800 p-6 rounded-2xl shadow-md border border-slate-700 flex flex-col justify-between">
+                <div class="search-item teacher-card abwaab bg-white dark:bg-slate-800 p-6 rounded-2xl shadow-md border border-slate-200 dark:border-slate-700 flex flex-col justify-between">
                     <div>
-                        <span class="inline-block bg-blue-900/60 text-brand-lightBlue border border-blue-500/30 text-xs font-bold px-3 py-1 rounded-full mb-3">منصة أبواب</span>
+                        <span class="inline-block bg-blue-100 dark:bg-blue-900/60 text-brand-blue dark:text-brand-lightBlue border border-blue-300 dark:border-blue-500/30 text-xs font-bold px-3 py-1 rounded-full mb-3">منصة أبواب</span>
                         <div class="flex items-center gap-4 mb-4">
                             <div class="w-12 h-12 rounded-xl bg-blue-500/10 text-brand-lightBlue flex items-center justify-center text-xl font-bold border border-blue-500/20"><i class="fa-solid fa-user-tie"></i></div>
                             <div>
-                                <h3 class="text-lg font-bold item-title text-white">أ. أحمد الفضلي</h3>
-                                <p class="text-sm text-slate-400 item-sub">مادة الرياضيات</p>
+                                <h3 class="text-lg font-bold item-title text-slate-800 dark:text-white">أ. أحمد الفضلي</h3>
+                                <p class="text-sm text-slate-500 dark:text-slate-400 item-sub">مادة الرياضيات</p>
                             </div>
                         </div>
-                        <div class="space-y-2 text-sm text-slate-300">
-                            <p><strong class="text-slate-100">الملزمة:</strong> ملزمة الرياضيات الذهبية</p>
-                            <p><strong class="text-slate-100">السعر:</strong> 7,000 د.ع</p>
+                        <div class="space-y-2 text-sm text-slate-600 dark:text-slate-300">
+                            <p><strong class="text-slate-800 dark:text-slate-100">الملزمة:</strong> ملزمة الرياضيات الذهبية</p>
+                            <p><strong class="text-slate-800 dark:text-slate-100">السعر:</strong> 7,000 د.ع</p>
                         </div>
                     </div>
                     <button class="mt-4 w-full py-2.5 bg-brand-blue text-white font-bold rounded-xl hover:bg-blue-700 transition shadow-lg">طلب الملزمة</button>
                 </div>
 
                 <!-- Mirmaz Teacher -->
-                <div class="search-item teacher-card mirmaz bg-slate-800 p-6 rounded-2xl shadow-md border border-slate-700 flex flex-col justify-between">
+                <div class="search-item teacher-card mirmaz bg-white dark:bg-slate-800 p-6 rounded-2xl shadow-md border border-slate-200 dark:border-slate-700 flex flex-col justify-between">
                     <div>
-                        <span class="inline-block bg-amber-900/60 text-brand-gold border border-amber-500/30 text-xs font-bold px-3 py-1 rounded-full mb-3">منصة مرماز</span>
+                        <span class="inline-block bg-amber-100 dark:bg-amber-900/60 text-brand-gold border border-amber-300 dark:border-amber-500/30 text-xs font-bold px-3 py-1 rounded-full mb-3">منصة مرماز</span>
                         <div class="flex items-center gap-4 mb-4">
                             <div class="w-12 h-12 rounded-xl bg-amber-500/10 text-brand-gold flex items-center justify-center text-xl font-bold border border-amber-500/20"><i class="fa-solid fa-user-tie"></i></div>
                             <div>
-                                <h3 class="text-lg font-bold item-title text-white">أ. زينب الجبوري</h3>
-                                <p class="text-sm text-slate-400 item-sub">مادة اللغة الإنجليزية</p>
+                                <h3 class="text-lg font-bold item-title text-slate-800 dark:text-white">أ. زينب الجبوري</h3>
+                                <p class="text-sm text-slate-500 dark:text-slate-400 item-sub">مادة اللغة الإنجليزية</p>
                             </div>
                         </div>
-                        <div class="space-y-2 text-sm text-slate-300">
-                            <p><strong class="text-slate-100">الملزمة:</strong> الشامل في الإنجليزية</p>
-                            <p><strong class="text-slate-100">السعر:</strong> 6,000 د.ع</p>
+                        <div class="space-y-2 text-sm text-slate-600 dark:text-slate-300">
+                            <p><strong class="text-slate-800 dark:text-slate-100">الملزمة:</strong> الشامل في الإنجليزية</p>
+                            <p><strong class="text-slate-800 dark:text-slate-100">السعر:</strong> 6,000 د.ع</p>
                         </div>
                     </div>
                     <button class="mt-4 w-full py-2.5 bg-brand-blue text-white font-bold rounded-xl hover:bg-blue-700 transition shadow-lg">طلب الملزمة</button>
@@ -256,182 +258,142 @@
             </div>
         </section>
 
-        <!-- 3. PAGE: SUPPLIES (Updated with Products + Images + Stacked Tabs) -->
+        <!-- 3. PAGE: SUPPLIES -->
         <section id="page-supplies" class="page-section hidden space-y-6">
-            <div class="flex flex-col md:flex-row justify-between items-center gap-4 bg-slate-800 p-4 rounded-2xl shadow-md border border-slate-700">
-                <button onclick="navigateTo('home')" class="flex items-center gap-2 text-brand-gold font-bold hover:text-white transition">
+            <div class="flex flex-col md:flex-row justify-between items-center gap-4 bg-white dark:bg-slate-800 p-4 rounded-2xl shadow-md border border-slate-200 dark:border-slate-700">
+                <button onclick="navigateTo('home')" class="flex items-center gap-2 text-brand-blue dark:text-brand-gold font-bold hover:text-slate-600 dark:hover:text-white transition">
                     <i class="fa-solid fa-arrow-right"></i> العودة للصفحة الرئيسية
                 </button>
-                <input type="text" onkeyup="filterItems('supplies-grid', this.value)" placeholder="ابحث عن مستلزمات..." class="w-full md:w-80 px-4 py-2 bg-slate-900 border border-slate-700 rounded-xl focus:outline-none focus:border-brand-gold text-white">
+                <input type="text" onkeyup="filterItems('supplies-grid', this.value)" placeholder="ابحث عن مستلزمات..." class="w-full md:w-80 px-4 py-2 bg-slate-100 dark:bg-slate-900 border border-slate-300 dark:border-slate-700 rounded-xl focus:outline-none focus:border-brand-gold text-slate-800 dark:text-white">
             </div>
 
-            <!-- 2. Stacked Horizontal Tabs (Notification Style) -->
+            <!-- Stacked Tabs -->
             <div class="space-y-3 max-w-xl mx-auto">
-                <button onclick="filterSupplyCategory('all', this)" class="tab-btn active w-full p-3.5 rounded-2xl font-bold border border-slate-700 bg-slate-800 text-slate-200 flex items-center justify-between shadow-md transition hover:border-brand-gold">
+                <button onclick="filterSupplyCategory('all', this)" class="tab-btn active w-full p-3.5 rounded-2xl font-bold border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-200 flex items-center justify-between shadow-md transition hover:border-brand-gold">
                     <span class="flex items-center gap-3"><i class="fa-solid fa-boxes-stacked text-brand-gold"></i> كل المستلزمات</span>
-                    <span class="text-xs bg-slate-700 px-2.5 py-1 rounded-full text-slate-300">الكل</span>
+                    <span class="text-xs bg-slate-200 dark:bg-slate-700 px-2.5 py-1 rounded-full text-slate-600 dark:text-slate-300">الكل</span>
                 </button>
-                <button onclick="filterSupplyCategory('stationery', this)" class="tab-btn w-full p-3.5 rounded-2xl font-bold border border-slate-700 bg-slate-800 text-slate-200 flex items-center justify-between shadow-md transition hover:border-brand-gold">
+                <button onclick="filterSupplyCategory('stationery', this)" class="tab-btn w-full p-3.5 rounded-2xl font-bold border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-200 flex items-center justify-between shadow-md transition hover:border-brand-gold">
                     <span class="flex items-center gap-3"><i class="fa-solid fa-pen-clip text-brand-lightBlue"></i> أقلام وقرطاسية</span>
-                    <span class="text-xs bg-slate-700 px-2.5 py-1 rounded-full text-slate-300">قرطاسية</span>
+                    <span class="text-xs bg-slate-200 dark:bg-slate-700 px-2.5 py-1 rounded-full text-slate-600 dark:text-slate-300">قرطاسية</span>
                 </button>
-                <button onclick="filterSupplyCategory('notebooks', this)" class="tab-btn w-full p-3.5 rounded-2xl font-bold border border-slate-700 bg-slate-800 text-slate-200 flex items-center justify-between shadow-md transition hover:border-brand-gold">
+                <button onclick="filterSupplyCategory('notebooks', this)" class="tab-btn w-full p-3.5 rounded-2xl font-bold border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-200 flex items-center justify-between shadow-md transition hover:border-brand-gold">
                     <span class="flex items-center gap-3"><i class="fa-solid fa-book-open text-brand-gold"></i> دفاتر ومذكرات</span>
-                    <span class="text-xs bg-slate-700 px-2.5 py-1 rounded-full text-slate-300">دفاتر</span>
+                    <span class="text-xs bg-slate-200 dark:bg-slate-700 px-2.5 py-1 rounded-full text-slate-600 dark:text-slate-300">دفاتر</span>
                 </button>
-                <button onclick="filterSupplyCategory('bags', this)" class="tab-btn w-full p-3.5 rounded-2xl font-bold border border-slate-700 bg-slate-800 text-slate-200 flex items-center justify-between shadow-md transition hover:border-brand-gold">
+                <button onclick="filterSupplyCategory('bags', this)" class="tab-btn w-full p-3.5 rounded-2xl font-bold border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-200 flex items-center justify-between shadow-md transition hover:border-brand-gold">
                     <span class="flex items-center gap-3"><i class="fa-solid fa-bag-shopping text-brand-lightBlue"></i> حقائب مدرسية</span>
-                    <span class="text-xs bg-slate-700 px-2.5 py-1 rounded-full text-slate-300">حقائب</span>
+                    <span class="text-xs bg-slate-200 dark:bg-slate-700 px-2.5 py-1 rounded-full text-slate-600 dark:text-slate-300">حقائب</span>
                 </button>
-                <button onclick="filterSupplyCategory('geometry', this)" class="tab-btn w-full p-3.5 rounded-2xl font-bold border border-slate-700 bg-slate-800 text-slate-200 flex items-center justify-between shadow-md transition hover:border-brand-gold">
+                <button onclick="filterSupplyCategory('geometry', this)" class="tab-btn w-full p-3.5 rounded-2xl font-bold border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-200 flex items-center justify-between shadow-md transition hover:border-brand-gold">
                     <span class="flex items-center gap-3"><i class="fa-solid fa-compass text-brand-gold"></i> أدوات هندسية وحسابية</span>
-                    <span class="text-xs bg-slate-700 px-2.5 py-1 rounded-full text-slate-300">أدوات</span>
+                    <span class="text-xs bg-slate-200 dark:bg-slate-700 px-2.5 py-1 rounded-full text-slate-600 dark:text-slate-300">أدوات</span>
                 </button>
             </div>
 
-            <!-- 1. School Supplies Grid with Real High-Quality Images -->
+            <!-- Products Grid -->
             <div id="supplies-grid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 pt-4">
-                
-                <!-- Product 1 -->
-                <div class="search-item supply-card notebooks bg-slate-800 rounded-2xl p-4 shadow-xl border border-slate-700 flex flex-col justify-between group hover:border-brand-gold transition">
+                <div class="search-item supply-card notebooks bg-white dark:bg-slate-800 rounded-2xl p-4 shadow-md dark:shadow-xl border border-slate-200 dark:border-slate-700 flex flex-col justify-between group hover:border-brand-gold transition">
                     <div>
-                        <div class="h-48 rounded-xl overflow-hidden mb-4 bg-slate-900 border border-slate-700">
+                        <div class="h-48 rounded-xl overflow-hidden mb-4 bg-slate-100 dark:bg-slate-900 border border-slate-200 dark:border-slate-700">
                             <img src="https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?auto=format&fit=crop&w=500&q=80" alt="دفتر سلك" class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
                         </div>
-                        <h3 class="font-bold text-slate-100 item-title text-lg">دفتر سلك جامعي 200 ورقة</h3>
-                        <p class="text-xs text-slate-400 mb-2 item-sub">دفاتر عالية الجودة</p>
+                        <h3 class="font-bold text-slate-800 dark:text-slate-100 item-title text-lg">دفتر سلك جامعي 200 ورقة</h3>
+                        <p class="text-xs text-slate-500 dark:text-slate-400 mb-2 item-sub">دفاتر عالية الجودة</p>
                     </div>
-                    <div class="flex justify-between items-center mt-3 pt-3 border-t border-slate-700">
+                    <div class="flex justify-between items-center mt-3 pt-3 border-t border-slate-200 dark:border-slate-700">
                         <span class="font-extrabold text-brand-gold text-lg">3,500 د.ع</span>
                         <button class="px-4 py-1.5 bg-brand-blue text-white text-sm font-bold rounded-lg hover:bg-blue-600 transition">شراء</button>
                     </div>
                 </div>
 
-                <!-- Product 2 -->
-                <div class="search-item supply-card bags bg-slate-800 rounded-2xl p-4 shadow-xl border border-slate-700 flex flex-col justify-between group hover:border-brand-gold transition">
+                <div class="search-item supply-card bags bg-white dark:bg-slate-800 rounded-2xl p-4 shadow-md dark:shadow-xl border border-slate-200 dark:border-slate-700 flex flex-col justify-between group hover:border-brand-gold transition">
                     <div>
-                        <div class="h-48 rounded-xl overflow-hidden mb-4 bg-slate-900 border border-slate-700">
+                        <div class="h-48 rounded-xl overflow-hidden mb-4 bg-slate-100 dark:bg-slate-900 border border-slate-200 dark:border-slate-700">
                             <img src="https://images.unsplash.com/photo-1553062407-98eeb64c6a62?auto=format&fit=crop&w=500&q=80" alt="حقيبة مدرسية" class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
                         </div>
-                        <h3 class="font-bold text-slate-100 item-title text-lg">حقيبة ظهر مدرسية مقاومة للماء</h3>
-                        <p class="text-xs text-slate-400 mb-2 item-sub">حقائب</p>
+                        <h3 class="font-bold text-slate-800 dark:text-slate-100 item-title text-lg">حقيبة ظهر مدرسية مقاومة للماء</h3>
+                        <p class="text-xs text-slate-500 dark:text-slate-400 mb-2 item-sub">حقائب</p>
                     </div>
-                    <div class="flex justify-between items-center mt-3 pt-3 border-t border-slate-700">
+                    <div class="flex justify-between items-center mt-3 pt-3 border-t border-slate-200 dark:border-slate-700">
                         <span class="font-extrabold text-brand-gold text-lg">25,000 د.ع</span>
                         <button class="px-4 py-1.5 bg-brand-blue text-white text-sm font-bold rounded-lg hover:bg-blue-600 transition">شراء</button>
                     </div>
                 </div>
 
-                <!-- Product 3 -->
-                <div class="search-item supply-card geometry bg-slate-800 rounded-2xl p-4 shadow-xl border border-slate-700 flex flex-col justify-between group hover:border-brand-gold transition">
+                <div class="search-item supply-card geometry bg-white dark:bg-slate-800 rounded-2xl p-4 shadow-md dark:shadow-xl border border-slate-200 dark:border-slate-700 flex flex-col justify-between group hover:border-brand-gold transition">
                     <div>
-                        <div class="h-48 rounded-xl overflow-hidden mb-4 bg-slate-900 border border-slate-700">
+                        <div class="h-48 rounded-xl overflow-hidden mb-4 bg-slate-100 dark:bg-slate-900 border border-slate-200 dark:border-slate-700">
                             <img src="https://images.unsplash.com/photo-1585336261026-8f5786372966?auto=format&fit=crop&w=500&q=80" alt="علبة هندسية" class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
                         </div>
-                        <h3 class="font-bold text-slate-100 item-title text-lg">علبة هندسية معدنية متكاملة</h3>
-                        <p class="text-xs text-slate-400 mb-2 item-sub">أدوات هندسية</p>
+                        <h3 class="font-bold text-slate-800 dark:text-slate-100 item-title text-lg">علبة هندسية معدنية متكاملة</h3>
+                        <p class="text-xs text-slate-500 dark:text-slate-400 mb-2 item-sub">أدوات هندسية</p>
                     </div>
-                    <div class="flex justify-between items-center mt-3 pt-3 border-t border-slate-700">
+                    <div class="flex justify-between items-center mt-3 pt-3 border-t border-slate-200 dark:border-slate-700">
                         <span class="font-extrabold text-brand-gold text-lg">4,500 د.ع</span>
                         <button class="px-4 py-1.5 bg-brand-blue text-white text-sm font-bold rounded-lg hover:bg-blue-600 transition">شراء</button>
                     </div>
                 </div>
 
-                <!-- Product 4 -->
-                <div class="search-item supply-card stationery bg-slate-800 rounded-2xl p-4 shadow-xl border border-slate-700 flex flex-col justify-between group hover:border-brand-gold transition">
+                <div class="search-item supply-card stationery bg-white dark:bg-slate-800 rounded-2xl p-4 shadow-md dark:shadow-xl border border-slate-200 dark:border-slate-700 flex flex-col justify-between group hover:border-brand-gold transition">
                     <div>
-                        <div class="h-48 rounded-xl overflow-hidden mb-4 bg-slate-900 border border-slate-700">
+                        <div class="h-48 rounded-xl overflow-hidden mb-4 bg-slate-100 dark:bg-slate-900 border border-slate-200 dark:border-slate-700">
                             <img src="https://images.unsplash.com/photo-1583485088034-697b5bc54ccd?auto=format&fit=crop&w=500&q=80" alt="أقلام جاف" class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
                         </div>
-                        <h3 class="font-bold text-slate-100 item-title text-lg">مجموعة أقلام جاف ملونة (10 أقلام)</h3>
-                        <p class="text-xs text-slate-400 mb-2 item-sub">قرطاسية</p>
+                        <h3 class="font-bold text-slate-800 dark:text-slate-100 item-title text-lg">مجموعة أقلام جاف ملونة (10 أقلام)</h3>
+                        <p class="text-xs text-slate-500 dark:text-slate-400 mb-2 item-sub">قرطاسية</p>
                     </div>
-                    <div class="flex justify-between items-center mt-3 pt-3 border-t border-slate-700">
+                    <div class="flex justify-between items-center mt-3 pt-3 border-t border-slate-200 dark:border-slate-700">
                         <span class="font-extrabold text-brand-gold text-lg">2,500 د.ع</span>
                         <button class="px-4 py-1.5 bg-brand-blue text-white text-sm font-bold rounded-lg hover:bg-blue-600 transition">شراء</button>
                     </div>
                 </div>
-
-                <!-- Product 5 -->
-                <div class="search-item supply-card stationery bg-slate-800 rounded-2xl p-4 shadow-xl border border-slate-700 flex flex-col justify-between group hover:border-brand-gold transition">
-                    <div>
-                        <div class="h-48 rounded-xl overflow-hidden mb-4 bg-slate-900 border border-slate-700">
-                            <img src="https://images.unsplash.com/photo-1513542789411-b6a5d4f31634?auto=format&fit=crop&w=500&q=80" alt="أقلام تمييز" class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
-                        </div>
-                        <h3 class="font-bold text-slate-100 item-title text-lg">طقم أقلام تمييز (Highlight) باستيل</h3>
-                        <p class="text-xs text-slate-400 mb-2 item-sub">قرطاسية</p>
-                    </div>
-                    <div class="flex justify-between items-center mt-3 pt-3 border-t border-slate-700">
-                        <span class="font-extrabold text-brand-gold text-lg">3,000 د.ع</span>
-                        <button class="px-4 py-1.5 bg-brand-blue text-white text-sm font-bold rounded-lg hover:bg-blue-600 transition">شراء</button>
-                    </div>
-                </div>
-
-                <!-- Product 6 -->
-                <div class="search-item supply-card notebooks bg-slate-800 rounded-2xl p-4 shadow-xl border border-slate-700 flex flex-col justify-between group hover:border-brand-gold transition">
-                    <div>
-                        <div class="h-48 rounded-xl overflow-hidden mb-4 bg-slate-900 border border-slate-700">
-                            <img src="https://images.unsplash.com/photo-1516962215378-7fa2e137ae93?auto=format&fit=crop&w=500&q=80" alt="دفتر ملاحظات" class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
-                        </div>
-                        <h3 class="font-bold text-slate-100 item-title text-lg">دفتر ملاحظات غلاف جلدي أنيق</h3>
-                        <p class="text-xs text-slate-400 mb-2 item-sub">دفاتر</p>
-                    </div>
-                    <div class="flex justify-between items-center mt-3 pt-3 border-t border-slate-700">
-                        <span class="font-extrabold text-brand-gold text-lg">5,000 د.ع</span>
-                        <button class="px-4 py-1.5 bg-brand-blue text-white text-sm font-bold rounded-lg hover:bg-blue-600 transition">شراء</button>
-                    </div>
-                </div>
-
             </div>
         </section>
 
         <!-- 4. PAGE: NOTES -->
         <section id="page-notes" class="page-section hidden space-y-6">
-            <div class="flex flex-col md:flex-row justify-between items-center gap-4 bg-slate-800 p-4 rounded-2xl shadow-md border border-slate-700">
-                <button onclick="navigateTo('home')" class="flex items-center gap-2 text-brand-gold font-bold hover:text-white transition">
+            <div class="flex flex-col md:flex-row justify-between items-center gap-4 bg-white dark:bg-slate-800 p-4 rounded-2xl shadow-md border border-slate-200 dark:border-slate-700">
+                <button onclick="navigateTo('home')" class="flex items-center gap-2 text-brand-blue dark:text-brand-gold font-bold hover:text-slate-600 dark:hover:text-white transition">
                     <i class="fa-solid fa-arrow-right"></i> العودة للصفحة الرئيسية
                 </button>
-                <input type="text" onkeyup="filterItems('notes-grid', this.value)" placeholder="ابحث عن ملزمة..." class="w-full md:w-80 px-4 py-2 bg-slate-900 border border-slate-700 rounded-xl focus:outline-none focus:border-brand-gold text-white">
+                <input type="text" onkeyup="filterItems('notes-grid', this.value)" placeholder="ابحث عن ملزمة..." class="w-full md:w-80 px-4 py-2 bg-slate-100 dark:bg-slate-900 border border-slate-300 dark:border-slate-700 rounded-xl focus:outline-none focus:border-brand-gold text-slate-800 dark:text-white">
             </div>
 
-            <!-- Vertical Stacked Notification Tabs for Notes -->
             <div class="space-y-3 max-w-xl mx-auto">
-                <button onclick="filterSubjectCategory('all', this)" class="tab-btn active w-full p-3.5 rounded-2xl font-bold border border-slate-700 bg-slate-800 text-slate-200 flex items-center justify-between shadow-md transition hover:border-brand-gold">
+                <button onclick="filterSubjectCategory('all', this)" class="tab-btn active w-full p-3.5 rounded-2xl font-bold border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-200 flex items-center justify-between shadow-md transition hover:border-brand-gold">
                     <span class="flex items-center gap-3"><i class="fa-solid fa-book-bookmark text-brand-gold"></i> جميع المواد الدراسية</span>
                 </button>
-                <button onclick="filterSubjectCategory('chemistry', this)" class="tab-btn w-full p-3.5 rounded-2xl font-bold border border-slate-700 bg-slate-800 text-slate-200 flex items-center justify-between shadow-md transition hover:border-brand-gold">
+                <button onclick="filterSubjectCategory('chemistry', this)" class="tab-btn w-full p-3.5 rounded-2xl font-bold border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-200 flex items-center justify-between shadow-md transition hover:border-brand-gold">
                     <span class="flex items-center gap-3"><i class="fa-solid fa-flask text-brand-lightBlue"></i> الكيمياء</span>
                 </button>
-                <button onclick="filterSubjectCategory('biology', this)" class="tab-btn w-full p-3.5 rounded-2xl font-bold border border-slate-700 bg-slate-800 text-slate-200 flex items-center justify-between shadow-md transition hover:border-brand-gold">
+                <button onclick="filterSubjectCategory('biology', this)" class="tab-btn w-full p-3.5 rounded-2xl font-bold border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-200 flex items-center justify-between shadow-md transition hover:border-brand-gold">
                     <span class="flex items-center gap-3"><i class="fa-solid fa-dna text-brand-gold"></i> الأحياء</span>
                 </button>
-                <button onclick="filterSubjectCategory('math', this)" class="tab-btn w-full p-3.5 rounded-2xl font-bold border border-slate-700 bg-slate-800 text-slate-200 flex items-center justify-between shadow-md transition hover:border-brand-gold">
+                <button onclick="filterSubjectCategory('math', this)" class="tab-btn w-full p-3.5 rounded-2xl font-bold border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-200 flex items-center justify-between shadow-md transition hover:border-brand-gold">
                     <span class="flex items-center gap-3"><i class="fa-solid fa-calculator text-brand-lightBlue"></i> الرياضيات</span>
                 </button>
             </div>
 
             <div id="notes-grid" class="grid grid-cols-1 md:grid-cols-3 gap-6 pt-4">
-                <!-- Chemistry Note -->
-                <div class="search-item note-card chemistry bg-slate-800 p-6 rounded-2xl shadow-xl border border-slate-700">
-                    <span class="bg-amber-500/10 text-brand-gold border border-amber-500/30 text-xs font-bold px-3 py-1 rounded-full item-sub">الكيمياء</span>
-                    <h3 class="text-xl font-bold mt-3 mb-2 item-title text-white">ملزمة الكيمياء - السادس العلمي</h3>
-                    <p class="text-sm text-slate-400 mb-4">تتضمن حلول الأسئلة الوزارية والشرح التوضيحي.</p>
+                <div class="search-item note-card chemistry bg-white dark:bg-slate-800 p-6 rounded-2xl shadow-md dark:shadow-xl border border-slate-200 dark:border-slate-700">
+                    <span class="bg-amber-100 dark:bg-amber-500/10 text-brand-gold border border-amber-300 dark:border-amber-500/30 text-xs font-bold px-3 py-1 rounded-full item-sub">الكيمياء</span>
+                    <h3 class="text-xl font-bold mt-3 mb-2 item-title text-slate-800 dark:text-white">ملزمة الكيمياء - السادس العلمي</h3>
+                    <p class="text-sm text-slate-500 dark:text-slate-400 mb-4">تتضمن حلول الأسئلة الوزارية والشرح التوضيحي.</p>
                     <button class="w-full py-2.5 bg-brand-blue text-white font-bold rounded-xl hover:bg-blue-700 transition shadow-lg">طلب الملزمة</button>
                 </div>
 
-                <!-- Biology Note -->
-                <div class="search-item note-card biology bg-slate-800 p-6 rounded-2xl shadow-xl border border-slate-700">
-                    <span class="bg-blue-500/10 text-brand-lightBlue border border-blue-500/30 text-xs font-bold px-3 py-1 rounded-full item-sub">الاحياء</span>
-                    <h3 class="text-xl font-bold mt-3 mb-2 item-title text-white">ملزمة الأحياء - الثالث المتوسط</h3>
-                    <p class="text-sm text-slate-400 mb-4">ملخصة بشكل مخططات ذهنية لسهولة الحفظ.</p>
+                <div class="search-item note-card biology bg-white dark:bg-slate-800 p-6 rounded-2xl shadow-md dark:shadow-xl border border-slate-200 dark:border-slate-700">
+                    <span class="bg-blue-100 dark:bg-blue-500/10 text-brand-blue dark:text-brand-lightBlue border border-blue-300 dark:border-blue-500/30 text-xs font-bold px-3 py-1 rounded-full item-sub">الاحياء</span>
+                    <h3 class="text-xl font-bold mt-3 mb-2 item-title text-slate-800 dark:text-white">ملزمة الأحياء - الثالث المتوسط</h3>
+                    <p class="text-sm text-slate-500 dark:text-slate-400 mb-4">ملخصة بشكل مخططات ذهنية لسهولة الحفظ.</p>
                     <button class="w-full py-2.5 bg-brand-blue text-white font-bold rounded-xl hover:bg-blue-700 transition shadow-lg">طلب الملزمة</button>
                 </div>
 
-                <!-- Math Note -->
-                <div class="search-item note-card math bg-slate-800 p-6 rounded-2xl shadow-xl border border-slate-700">
-                    <span class="bg-amber-500/10 text-brand-gold border border-amber-500/30 text-xs font-bold px-3 py-1 rounded-full item-sub">الرياضيات</span>
-                    <h3 class="text-xl font-bold mt-3 mb-2 item-title text-white">ملزمة الرياضيات الشاملة</h3>
-                    <p class="text-sm text-slate-400 mb-4">تمارين محلولة بالكامل لجميع الفصول.</p>
+                <div class="search-item note-card math bg-white dark:bg-slate-800 p-6 rounded-2xl shadow-md dark:shadow-xl border border-slate-200 dark:border-slate-700">
+                    <span class="bg-amber-100 dark:bg-amber-500/10 text-brand-gold border border-amber-300 dark:border-amber-500/30 text-xs font-bold px-3 py-1 rounded-full item-sub">الرياضيات</span>
+                    <h3 class="text-xl font-bold mt-3 mb-2 item-title text-slate-800 dark:text-white">ملزمة الرياضيات الشاملة</h3>
+                    <p class="text-sm text-slate-500 dark:text-slate-400 mb-4">تمارين محلولة بالكامل لجميع الفصول.</p>
                     <button class="w-full py-2.5 bg-brand-blue text-white font-bold rounded-xl hover:bg-blue-700 transition shadow-lg">طلب الملزمة</button>
                 </div>
             </div>
@@ -439,24 +401,23 @@
 
         <!-- 5. PAGE: BOOKS -->
         <section id="page-books" class="page-section hidden space-y-6">
-            <div class="flex flex-col md:flex-row justify-between items-center gap-4 bg-slate-800 p-4 rounded-2xl shadow-md border border-slate-700">
-                <button onclick="navigateTo('home')" class="flex items-center gap-2 text-brand-gold font-bold hover:text-white transition">
+            <div class="flex flex-col md:flex-row justify-between items-center gap-4 bg-white dark:bg-slate-800 p-4 rounded-2xl shadow-md border border-slate-200 dark:border-slate-700">
+                <button onclick="navigateTo('home')" class="flex items-center gap-2 text-brand-blue dark:text-brand-gold font-bold hover:text-slate-600 dark:hover:text-white transition">
                     <i class="fa-solid fa-arrow-right"></i> العودة للصفحة الرئيسية
                 </button>
-                <input type="text" onkeyup="filterItems('books-grid', this.value)" placeholder="ابحث عن كتاب أو قصة..." class="w-full md:w-80 px-4 py-2 bg-slate-900 border border-slate-700 rounded-xl focus:outline-none focus:border-brand-gold text-white">
+                <input type="text" onkeyup="filterItems('books-grid', this.value)" placeholder="ابحث عن كتاب أو قصة..." class="w-full md:w-80 px-4 py-2 bg-slate-100 dark:bg-slate-900 border border-slate-300 dark:border-slate-700 rounded-xl focus:outline-none focus:border-brand-gold text-slate-800 dark:text-white">
             </div>
-            <h2 class="text-2xl font-bold text-brand-gold border-r-4 border-brand-blue pr-3">قسم الكتب والقصص</h2>
+            <h2 class="text-2xl font-bold text-brand-blue dark:text-brand-gold border-r-4 border-brand-gold dark:border-brand-blue pr-3">قسم الكتب والقصص</h2>
 
             <div id="books-grid" class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <!-- Book Item -->
-                <div class="search-item bg-slate-800 p-5 rounded-2xl shadow-xl border border-slate-700 flex gap-4">
-                    <div class="w-24 h-32 bg-slate-900 rounded-xl flex-shrink-0 flex items-center justify-center text-3xl text-slate-600 border border-slate-700">
+                <div class="search-item bg-white dark:bg-slate-800 p-5 rounded-2xl shadow-md dark:shadow-xl border border-slate-200 dark:border-slate-700 flex gap-4">
+                    <div class="w-24 h-32 bg-slate-100 dark:bg-slate-900 rounded-xl flex-shrink-0 flex items-center justify-center text-3xl text-slate-400 dark:text-slate-600 border border-slate-200 dark:border-slate-700">
                         <i class="fa-solid fa-book"></i>
                     </div>
                     <div class="flex flex-col justify-between">
                         <div>
-                            <h3 class="font-bold text-slate-100 item-title">قصة المغامر الصغير</h3>
-                            <p class="text-xs text-slate-400 mt-1 item-sub">قصص أطفال وتنمية مهارات</p>
+                            <h3 class="font-bold text-slate-800 dark:text-slate-100 item-title">قصة المغامر الصغير</h3>
+                            <p class="text-xs text-slate-500 dark:text-slate-400 mt-1 item-sub">قصص أطفال وتنمية مهارات</p>
                         </div>
                         <button class="px-4 py-1.5 bg-brand-gold text-slate-900 font-bold text-sm rounded-xl hover:bg-amber-500 self-start transition">تصفح الآن</button>
                     </div>
@@ -466,28 +427,28 @@
 
     </main>
 
-    <!-- 5. Secret Admin Modal Panel -->
+    <!-- Secret Admin Modal -->
     <div id="admin-modal" class="fixed inset-0 bg-black/80 backdrop-blur-md z-50 hidden flex items-center justify-center p-4">
-        <div class="bg-slate-800 border border-slate-700 rounded-3xl p-6 md:p-8 max-w-md w-full shadow-2xl space-y-6 relative">
-            <button onclick="closeAdminModal()" class="absolute top-4 left-4 text-slate-400 hover:text-white"><i class="fa-solid fa-xmark text-xl"></i></button>
+        <div class="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-3xl p-6 md:p-8 max-w-md w-full shadow-2xl space-y-6 relative">
+            <button onclick="closeAdminModal()" class="absolute top-4 left-4 text-slate-400 hover:text-slate-600 dark:hover:text-white"><i class="fa-solid fa-xmark text-xl"></i></button>
             
             <div class="text-center space-y-2">
                 <div class="w-16 h-16 bg-brand-gold/10 text-brand-gold rounded-2xl flex items-center justify-center text-3xl mx-auto border border-brand-gold/30">
                     <i class="fa-solid fa-user-gear"></i>
                 </div>
-                <h3 class="text-2xl font-bold text-white">لوحة تحكم المكتبة</h3>
-                <p class="text-xs text-slate-400">يمكنك تعديل اسم المكتبة والشعار من هنا</p>
+                <h3 class="text-2xl font-bold text-slate-800 dark:text-white">لوحة تحكم المكتبة</h3>
+                <p class="text-xs text-slate-500 dark:text-slate-400">تعديل اسم المكتبة والشعار</p>
             </div>
 
             <div class="space-y-4">
                 <div>
-                    <label class="block text-xs text-slate-300 font-bold mb-2">اسم المكتبة الجديد:</label>
-                    <input type="text" id="admin-input-name" placeholder="أدخل الاسم الجديد..." class="w-full px-4 py-2.5 bg-slate-900 border border-slate-700 rounded-xl text-white focus:outline-none focus:border-brand-gold">
+                    <label class="block text-xs text-slate-700 dark:text-slate-300 font-bold mb-2">اسم المكتبة الجديد:</label>
+                    <input type="text" id="admin-input-name" placeholder="أدخل الاسم الجديد..." class="w-full px-4 py-2.5 bg-slate-100 dark:bg-slate-900 border border-slate-300 dark:border-slate-700 rounded-xl text-slate-800 dark:text-white focus:outline-none focus:border-brand-gold">
                 </div>
 
                 <div>
-                    <label class="block text-xs text-slate-300 font-bold mb-2">اختر شعار (Logo) جديد:</label>
-                    <select id="admin-input-icon" class="w-full px-4 py-2.5 bg-slate-900 border border-slate-700 rounded-xl text-white focus:outline-none focus:border-brand-gold">
+                    <label class="block text-xs text-slate-700 dark:text-slate-300 font-bold mb-2">اختر شعار (Logo) جديد:</label>
+                    <select id="admin-input-icon" class="w-full px-4 py-2.5 bg-slate-100 dark:bg-slate-900 border border-slate-300 dark:border-slate-700 rounded-xl text-slate-800 dark:text-white focus:outline-none focus:border-brand-gold">
                         <option value="fa-graduation-cap">قبعة تخرج (افتراضي)</option>
                         <option value="fa-book-open">كتاب مفتوح</option>
                         <option value="fa-feather-pointed">ريشة كتابة</option>
@@ -502,25 +463,51 @@
     </div>
 
     <!-- Footer -->
-    <footer class="bg-slate-950 text-slate-500 py-6 mt-10 border-t border-slate-800 relative z-10">
+    <footer class="bg-slate-100 dark:bg-slate-950 text-slate-500 dark:text-slate-500 py-6 mt-10 border-t border-slate-200 dark:border-slate-800 relative z-10 transition-colors duration-300">
         <div class="container mx-auto px-4 text-center space-y-2">
-            <p class="text-sm">جميع الحقوق محفوظة &copy; 2026 - <span id="footer-brand-name" class="text-slate-300 font-bold">مكتبة العبقري</span></p>
+            <p class="text-sm">جميع الحقوق محفوظة &copy; 2026 - <span id="footer-brand-name" class="text-slate-700 dark:text-slate-300 font-bold">مكتبة العبقري</span></p>
         </div>
     </footer>
 
     <!-- JavaScript Logic -->
     <script>
-        // 5. Secret Admin Modal Logic (10 Clicks + Code "2007")
+        // Dark / Light Mode Toggle Logic
+        function toggleTheme() {
+            const html = document.documentElement;
+            const icon = document.getElementById('theme-toggle-icon');
+            
+            if (html.classList.contains('dark')) {
+                html.classList.remove('dark');
+                icon.className = "fa-solid fa-sun text-amber-500";
+                localStorage.setItem('theme', 'light');
+            } else {
+                html.classList.add('dark');
+                icon.className = "fa-solid fa-moon text-amber-400";
+                localStorage.setItem('theme', 'dark');
+            }
+        }
+
+        // Apply saved theme on page load
+        (function initTheme() {
+            const savedTheme = localStorage.getItem('theme');
+            const icon = document.getElementById('theme-toggle-icon');
+            if (savedTheme === 'light') {
+                document.documentElement.classList.remove('dark');
+                if (icon) icon.className = "fa-solid fa-sun text-amber-500";
+            } else {
+                document.documentElement.classList.add('dark');
+                if (icon) icon.className = "fa-solid fa-moon text-amber-400";
+            }
+        })();
+
+        // Secret Admin Modal Logic
         let logoClickCount = 0;
         let logoClickTimer;
 
         function handleLogoClick() {
             logoClickCount++;
-            
             clearTimeout(logoClickTimer);
-            logoClickTimer = setTimeout(() => {
-                logoClickCount = 0;
-            }, 3000);
+            logoClickTimer = setTimeout(() => { logoClickCount = 0; }, 3000);
 
             if (logoClickCount === 10) {
                 logoClickCount = 0;
@@ -561,7 +548,7 @@
             alert("تم حفظ التعديلات بنجاح!");
         }
 
-        // Page Navigation Logic
+        // Page Navigation
         function navigateTo(pageId) {
             const pages = document.querySelectorAll('.page-section');
             pages.forEach(page => page.classList.add('hidden'));
@@ -590,51 +577,33 @@
             }
         }
 
-        // Helper to update active tab button
         function setActiveTab(btn) {
             const siblings = btn.parentElement.querySelectorAll('.tab-btn');
-            siblings.forEach(b => {
-                b.classList.remove('active');
-            });
+            siblings.forEach(b => b.classList.remove('active'));
             btn.classList.add('active');
         }
 
-        // Category Filter for Teachers
         function filterTeacherCategory(category, btn) {
             setActiveTab(btn);
             const cards = document.querySelectorAll('.teacher-card');
             cards.forEach(card => {
-                if (category === 'all' || card.classList.contains(category)) {
-                    card.style.display = "flex";
-                } else {
-                    card.style.display = "none";
-                }
+                card.style.display = (category === 'all' || card.classList.contains(category)) ? "flex" : "none";
             });
         }
 
-        // Category Filter for Supplies
         function filterSupplyCategory(category, btn) {
             setActiveTab(btn);
             const cards = document.querySelectorAll('.supply-card');
             cards.forEach(card => {
-                if (category === 'all' || card.classList.contains(category)) {
-                    card.style.display = "flex";
-                } else {
-                    card.style.display = "none";
-                }
+                card.style.display = (category === 'all' || card.classList.contains(category)) ? "flex" : "none";
             });
         }
 
-        // Category Filter for Subjects (Notes)
         function filterSubjectCategory(category, btn) {
             setActiveTab(btn);
             const cards = document.querySelectorAll('.note-card');
             cards.forEach(card => {
-                if (category === 'all' || card.classList.contains(category)) {
-                    card.style.display = "block";
-                } else {
-                    card.style.display = "none";
-                }
+                card.style.display = (category === 'all' || card.classList.contains(category)) ? "block" : "none";
             });
         }
     </script>
