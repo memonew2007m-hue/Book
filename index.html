@@ -113,6 +113,18 @@
             transform: scale(1.02);
         }
 
+        .subject-tab-btn {
+            transition: all 0.25s ease;
+        }
+
+        .subject-tab-btn.active {
+            background-color: #f59e0b;
+            color: #0f172a;
+            font-weight: 800;
+            border-color: #f59e0b;
+            box-shadow: 0 4px 15px rgba(245, 158, 11, 0.4);
+        }
+
         .card-hover-effect {
             transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
         }
@@ -178,8 +190,8 @@
     <header class="bg-white/90 dark:bg-slate-800/90 backdrop-blur-md text-slate-800 dark:text-white shadow-md sticky top-0 z-40 border-b border-slate-200 dark:border-slate-700 transition-colors duration-300">
         <div class="container mx-auto px-4 py-3 flex justify-between items-center">
             
-            <!-- Logo with Secret Admin Trigger -->
-            <div id="secret-logo-btn" class="flex items-center space-x-3 space-x-reverse cursor-pointer select-none group" onclick="handleLogoClick()">
+            <!-- Logo -->
+            <div id="secret-logo-btn" class="flex items-center space-x-3 space-x-reverse cursor-pointer select-none group">
                 <div class="logo-box flex items-center justify-center">
                     <i id="header-logo-icon" class="fa-solid fa-graduation-cap text-2xl text-brand-gold"></i>
                 </div>
@@ -215,7 +227,6 @@
 
         <!-- 1. PAGE: HOME -->
         <section id="page-home" class="page-section space-y-10">
-            <!-- Hero Banner -->
             <div class="bg-gradient-to-r from-brand-blue via-blue-800 to-slate-900 text-white rounded-3xl p-8 md:p-12 text-center shadow-2xl border border-blue-500/30 relative overflow-hidden group">
                 <div class="absolute -right-10 -bottom-10 w-40 h-40 bg-brand-gold/20 rounded-full blur-3xl group-hover:scale-150 transition duration-700"></div>
                 <div class="relative z-10 space-y-4">
@@ -224,9 +235,7 @@
                 </div>
             </div>
 
-            <!-- Dashboard Grid -->
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                <!-- Card 1: Teachers -->
                 <div onclick="navigateTo('teachers')" class="card-hover-effect bg-white dark:bg-slate-800/80 backdrop-blur rounded-2xl p-6 shadow-md dark:shadow-xl cursor-pointer border-t-4 border-brand-gold text-center group border-x border-b border-slate-200 dark:border-slate-700">
                     <div class="w-16 h-16 mx-auto mb-4 rounded-2xl bg-amber-500/10 text-brand-gold flex items-center justify-center text-2xl group-hover:bg-brand-gold group-hover:text-slate-900 transition duration-300">
                         <i class="fa-solid fa-chalkboard-user"></i>
@@ -235,7 +244,6 @@
                     <p class="text-slate-500 dark:text-slate-400 text-sm">أساتذة منصة أبواب ومنصة مرماز.</p>
                 </div>
 
-                <!-- Card 2: Stationeries -->
                 <div onclick="navigateTo('supplies')" class="card-hover-effect bg-white dark:bg-slate-800/80 backdrop-blur rounded-2xl p-6 shadow-md dark:shadow-xl cursor-pointer border-t-4 border-brand-blue text-center group border-x border-b border-slate-200 dark:border-slate-700">
                     <div class="w-16 h-16 mx-auto mb-4 rounded-2xl bg-blue-500/10 text-brand-lightBlue flex items-center justify-center text-2xl group-hover:bg-brand-blue group-hover:text-white transition duration-300">
                         <i class="fa-solid fa-pen-ruler"></i>
@@ -244,7 +252,6 @@
                     <p class="text-slate-500 dark:text-slate-400 text-sm">قرطاسية، دفاتر، حقائب، وأدوات هندسية.</p>
                 </div>
 
-                <!-- Card 3: School Summaries -->
                 <div onclick="navigateTo('notes')" class="card-hover-effect bg-white dark:bg-slate-800/80 backdrop-blur rounded-2xl p-6 shadow-md dark:shadow-xl cursor-pointer border-t-4 border-brand-gold text-center group border-x border-b border-slate-200 dark:border-slate-700">
                     <div class="w-16 h-16 mx-auto mb-4 rounded-2xl bg-amber-500/10 text-brand-gold flex items-center justify-center text-2xl group-hover:bg-brand-gold group-hover:text-slate-900 transition duration-300">
                         <i class="fa-solid fa-file-lines"></i>
@@ -253,7 +260,6 @@
                     <p class="text-slate-500 dark:text-slate-400 text-sm">ملازم مقسمة حسب المواد الدراسية.</p>
                 </div>
 
-                <!-- Card 4: Books -->
                 <div onclick="navigateTo('books')" class="card-hover-effect bg-white dark:bg-slate-800/80 backdrop-blur rounded-2xl p-6 shadow-md dark:shadow-xl cursor-pointer border-t-4 border-brand-blue text-center group border-x border-b border-slate-200 dark:border-slate-700">
                     <div class="w-16 h-16 mx-auto mb-4 rounded-2xl bg-blue-500/10 text-brand-lightBlue flex items-center justify-center text-2xl group-hover:bg-brand-blue group-hover:text-white transition duration-300">
                         <i class="fa-solid fa-book-open"></i>
@@ -270,9 +276,10 @@
                 <button onclick="navigateTo('home')" class="flex items-center gap-2 text-brand-blue dark:text-brand-gold font-bold hover:translate-x-1 transition duration-200">
                     <i class="fa-solid fa-arrow-right"></i> العودة للصفحة الرئيسية
                 </button>
-                <input type="text" onkeyup="filterItems('teachers-container', this.value)" placeholder="ابحث عن أستاذ أو مادة..." class="w-full md:w-80 px-4 py-2 bg-slate-100 dark:bg-slate-900 border border-slate-300 dark:border-slate-700 rounded-xl focus:outline-none focus:border-brand-gold text-slate-800 dark:text-white transition">
+                <input type="text" onkeyup="filterTeachers(this.value)" placeholder="ابحث عن أستاذ..." class="w-full md:w-80 px-4 py-2 bg-slate-100 dark:bg-slate-900 border border-slate-300 dark:border-slate-700 rounded-xl focus:outline-none focus:border-brand-gold text-slate-800 dark:text-white transition">
             </div>
 
+            <!-- Platform Filters -->
             <div class="space-y-3 max-w-xl mx-auto">
                 <button onclick="filterTeacherCategory('all', this)" class="tab-btn active w-full p-4 rounded-2xl font-bold border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-200 flex items-center justify-between shadow-md">
                     <span class="flex items-center gap-3"><i class="fa-solid fa-layer-group text-brand-gold"></i> عرض جميع الأساتذة</span>
@@ -288,149 +295,307 @@
                 </button>
             </div>
 
-            <!-- Teachers Container -->
-            <div id="teachers-container" class="pt-4 space-y-6">
+            <!-- PLATFORM: ABWAAB SECTION -->
+            <div id="section-abwaab" class="platform-section space-y-6 pt-4">
+                <div class="flex items-center gap-2 border-b border-slate-200 dark:border-slate-700 pb-2">
+                    <i class="fa-solid fa-graduation-cap text-brand-lightBlue text-2xl"></i>
+                    <h2 class="text-2xl font-extrabold text-slate-800 dark:text-white">منصة أبواب - اختر المادة</h2>
+                </div>
 
-                <!-- SECTION: ABWAAB PLATFORM -->
-                <div class="teacher-card abwaab space-y-4">
-                    <div class="flex items-center gap-2 border-b border-slate-200 dark:border-slate-700 pb-2">
-                        <i class="fa-solid fa-graduation-cap text-brand-lightBlue text-xl"></i>
-                        <h2 class="text-xl font-bold text-slate-800 dark:text-white">منصة أبواب</h2>
+                <!-- Subject Tabs Buttons (3 per row on mobile/tablet) -->
+                <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-2">
+                    <button onclick="switchSubjectTab('arabic', this)" class="subject-tab-btn active px-3 py-2.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-sm font-bold flex items-center justify-center gap-2 shadow-sm">
+                        <i class="fa-solid fa-book"></i> العربي
+                    </button>
+                    <button onclick="switchSubjectTab('math', this)" class="subject-tab-btn px-3 py-2.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-sm font-bold flex items-center justify-center gap-2 shadow-sm">
+                        <i class="fa-solid fa-calculator"></i> الرياضيات
+                    </button>
+                    <button onclick="switchSubjectTab('chem', this)" class="subject-tab-btn px-3 py-2.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-sm font-bold flex items-center justify-center gap-2 shadow-sm">
+                        <i class="fa-solid fa-flask"></i> الكيمياء
+                    </button>
+                    <button onclick="switchSubjectTab('bio', this)" class="subject-tab-btn px-3 py-2.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-sm font-bold flex items-center justify-center gap-2 shadow-sm">
+                        <i class="fa-solid fa-dna"></i> الأحياء
+                    </button>
+                    <button onclick="switchSubjectTab('physics', this)" class="subject-tab-btn px-3 py-2.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-sm font-bold flex items-center justify-center gap-2 shadow-sm">
+                        <i class="fa-solid fa-atom"></i> الفيزياء
+                    </button>
+                    <button onclick="switchSubjectTab('islamic', this)" class="subject-tab-btn px-3 py-2.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-sm font-bold flex items-center justify-center gap-2 shadow-sm">
+                        <i class="fa-solid fa-kaaba"></i> الإسلامية
+                    </button>
+                </div>
+
+                <!-- TEACHERS GRID (3 COLUMNS) -->
+                <!-- 1. العربي -->
+                <div id="subject-arabic" class="subject-content grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+                    <div class="teacher-card search-item card-hover-effect bg-white dark:bg-slate-800 p-4 rounded-2xl border border-slate-200 dark:border-slate-700 text-center flex flex-col items-center justify-between aspect-square shadow-md">
+                        <div class="w-16 h-16 rounded-full bg-amber-500/20 text-brand-gold flex items-center justify-center text-2xl font-bold border-2 border-brand-gold mb-2 overflow-hidden">
+                            <i class="fa-solid fa-user-tie"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-extrabold text-base text-slate-800 dark:text-white item-title">أ. هاشم المعموري</h3>
+                            <p class="text-xs text-brand-lightBlue font-bold mt-1">مادة اللغة العربية</p>
+                        </div>
+                        <button onclick="selectTeacher('هاشم المعموري', 'اللغة العربية')" class="w-full py-2 bg-brand-blue hover:bg-blue-700 text-white text-xs font-bold rounded-xl transition active:scale-95 shadow">اختيار الأستاذ</button>
                     </div>
 
-                    <!-- 3 Cards Per Row Grid -->
-                    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-
-                        <!-- 1. العربي -->
-                        <div class="search-item card-hover-effect bg-white dark:bg-slate-800 p-4 rounded-xl shadow-sm border border-slate-200 dark:border-slate-700 flex flex-col justify-between aspect-square">
-                            <div>
-                                <div class="flex items-center gap-2 mb-2">
-                                    <div class="w-8 h-8 rounded-lg bg-blue-500/10 text-brand-lightBlue flex items-center justify-center text-sm font-bold"><i class="fa-solid fa-book-bookmark"></i></div>
-                                    <h3 class="font-extrabold text-base text-slate-800 dark:text-white item-title">اللغة العربية</h3>
-                                </div>
-                                <div class="text-xs text-slate-600 dark:text-slate-300 space-y-1 mt-2 item-sub">
-                                    <p class="flex items-center gap-1.5"><i class="fa-solid fa-user-tie text-brand-gold text-[10px]"></i> هاشم المعموري</p>
-                                    <p class="flex items-center gap-1.5"><i class="fa-solid fa-user-tie text-brand-gold text-[10px]"></i> إبراهيم الصميدعي</p>
-                                    <p class="flex items-center gap-1.5"><i class="fa-solid fa-user-tie text-brand-gold text-[10px]"></i> ريان الجاف</p>
-                                    <p class="flex items-center gap-1.5"><i class="fa-solid fa-user-tie text-brand-gold text-[10px]"></i> رفل الزبيدي</p>
-                                </div>
-                            </div>
-                            <button class="w-full py-1.5 mt-2 bg-brand-blue text-white text-xs font-bold rounded-lg hover:bg-blue-700 transition active:scale-95 shadow-sm">تصفح الملازم</button>
+                    <div class="teacher-card search-item card-hover-effect bg-white dark:bg-slate-800 p-4 rounded-2xl border border-slate-200 dark:border-slate-700 text-center flex flex-col items-center justify-between aspect-square shadow-md">
+                        <div class="w-16 h-16 rounded-full bg-amber-500/20 text-brand-gold flex items-center justify-center text-2xl font-bold border-2 border-brand-gold mb-2 overflow-hidden">
+                            <i class="fa-solid fa-user-tie"></i>
                         </div>
-
-                        <!-- 2. الرياضيات -->
-                        <div class="search-item card-hover-effect bg-white dark:bg-slate-800 p-4 rounded-xl shadow-sm border border-slate-200 dark:border-slate-700 flex flex-col justify-between aspect-square">
-                            <div>
-                                <div class="flex items-center gap-2 mb-2">
-                                    <div class="w-8 h-8 rounded-lg bg-blue-500/10 text-brand-lightBlue flex items-center justify-center text-sm font-bold"><i class="fa-solid fa-calculator"></i></div>
-                                    <h3 class="font-extrabold text-base text-slate-800 dark:text-white item-title">الرياضيات</h3>
-                                </div>
-                                <div class="text-xs text-slate-600 dark:text-slate-300 space-y-1 mt-2 item-sub">
-                                    <p class="flex items-center gap-1.5"><i class="fa-solid fa-user-tie text-brand-gold text-[10px]"></i> حيدر عبد الأئمة</p>
-                                    <p class="flex items-center gap-1.5"><i class="fa-solid fa-user-tie text-brand-gold text-[10px]"></i> محمد قاسم</p>
-                                    <p class="flex items-center gap-1.5"><i class="fa-solid fa-user-tie text-brand-gold text-[10px]"></i> عباس الدراجي</p>
-                                    <p class="flex items-center gap-1.5"><i class="fa-solid fa-user-tie text-brand-gold text-[10px]"></i> يوسف الجعفري</p>
-                                </div>
-                            </div>
-                            <button class="w-full py-1.5 mt-2 bg-brand-blue text-white text-xs font-bold rounded-lg hover:bg-blue-700 transition active:scale-95 shadow-sm">تصفح الملازم</button>
+                        <div>
+                            <h3 class="font-extrabold text-base text-slate-800 dark:text-white item-title">أ. إبراهيم الصميدعي</h3>
+                            <p class="text-xs text-brand-lightBlue font-bold mt-1">مادة اللغة العربية</p>
                         </div>
+                        <button onclick="selectTeacher('إبراهيم الصميدعي', 'اللغة العربية')" class="w-full py-2 bg-brand-blue hover:bg-blue-700 text-white text-xs font-bold rounded-xl transition active:scale-95 shadow">اختيار الأستاذ</button>
+                    </div>
 
-                        <!-- 3. الكيمياء -->
-                        <div class="search-item card-hover-effect bg-white dark:bg-slate-800 p-4 rounded-xl shadow-sm border border-slate-200 dark:border-slate-700 flex flex-col justify-between aspect-square">
-                            <div>
-                                <div class="flex items-center gap-2 mb-2">
-                                    <div class="w-8 h-8 rounded-lg bg-blue-500/10 text-brand-lightBlue flex items-center justify-center text-sm font-bold"><i class="fa-solid fa-flask"></i></div>
-                                    <h3 class="font-extrabold text-base text-slate-800 dark:text-white item-title">الكيمياء</h3>
-                                </div>
-                                <div class="text-xs text-slate-600 dark:text-slate-300 space-y-1 mt-2 item-sub">
-                                    <p class="flex items-center gap-1.5"><i class="fa-solid fa-user-tie text-brand-gold text-[10px]"></i> هاشم الغرباوي</p>
-                                    <p class="flex items-center gap-1.5"><i class="fa-solid fa-user-tie text-brand-gold text-[10px]"></i> مهند السوداني</p>
-                                    <p class="flex items-center gap-1.5"><i class="fa-solid fa-user-tie text-brand-gold text-[10px]"></i> زياد ماهر</p>
-                                </div>
-                            </div>
-                            <button class="w-full py-1.5 mt-2 bg-brand-blue text-white text-xs font-bold rounded-lg hover:bg-blue-700 transition active:scale-95 shadow-sm">تصفح الملازم</button>
+                    <div class="teacher-card search-item card-hover-effect bg-white dark:bg-slate-800 p-4 rounded-2xl border border-slate-200 dark:border-slate-700 text-center flex flex-col items-center justify-between aspect-square shadow-md">
+                        <div class="w-16 h-16 rounded-full bg-amber-500/20 text-brand-gold flex items-center justify-center text-2xl font-bold border-2 border-brand-gold mb-2 overflow-hidden">
+                            <i class="fa-solid fa-user-tie"></i>
                         </div>
-
-                        <!-- 4. الأحياء -->
-                        <div class="search-item card-hover-effect bg-white dark:bg-slate-800 p-4 rounded-xl shadow-sm border border-slate-200 dark:border-slate-700 flex flex-col justify-between aspect-square">
-                            <div>
-                                <div class="flex items-center gap-2 mb-2">
-                                    <div class="w-8 h-8 rounded-lg bg-blue-500/10 text-brand-lightBlue flex items-center justify-center text-sm font-bold"><i class="fa-solid fa-dna"></i></div>
-                                    <h3 class="font-extrabold text-base text-slate-800 dark:text-white item-title">الأحياء</h3>
-                                </div>
-                                <div class="text-xs text-slate-600 dark:text-slate-300 space-y-1 mt-2 item-sub">
-                                    <p class="flex items-center gap-1.5"><i class="fa-solid fa-user-tie text-brand-gold text-[10px]"></i> نورس الموسوي</p>
-                                    <p class="flex items-center gap-1.5"><i class="fa-solid fa-user-tie text-brand-gold text-[10px]"></i> جعفر الحسيني</p>
-                                    <p class="flex items-center gap-1.5"><i class="fa-solid fa-user-tie text-brand-gold text-[10px]"></i> محمد العنزي</p>
-                                </div>
-                            </div>
-                            <button class="w-full py-1.5 mt-2 bg-brand-blue text-white text-xs font-bold rounded-lg hover:bg-blue-700 transition active:scale-95 shadow-sm">تصفح الملازم</button>
+                        <div>
+                            <h3 class="font-extrabold text-base text-slate-800 dark:text-white item-title">أ. ريان الجاف</h3>
+                            <p class="text-xs text-brand-lightBlue font-bold mt-1">مادة اللغة العربية</p>
                         </div>
+                        <button onclick="selectTeacher('ريان الجاف', 'اللغة العربية')" class="w-full py-2 bg-brand-blue hover:bg-blue-700 text-white text-xs font-bold rounded-xl transition active:scale-95 shadow">اختيار الأستاذ</button>
+                    </div>
 
-                        <!-- 5. الفيزياء -->
-                        <div class="search-item card-hover-effect bg-white dark:bg-slate-800 p-4 rounded-xl shadow-sm border border-slate-200 dark:border-slate-700 flex flex-col justify-between aspect-square">
-                            <div>
-                                <div class="flex items-center gap-2 mb-2">
-                                    <div class="w-8 h-8 rounded-lg bg-blue-500/10 text-brand-lightBlue flex items-center justify-center text-sm font-bold"><i class="fa-solid fa-atom"></i></div>
-                                    <h3 class="font-extrabold text-base text-slate-800 dark:text-white item-title">الفيزياء</h3>
-                                </div>
-                                <div class="text-xs text-slate-600 dark:text-slate-300 space-y-1 mt-2 item-sub">
-                                    <p class="flex items-center gap-1.5"><i class="fa-solid fa-user-tie text-brand-gold text-[10px]"></i> حسين عبد الكاظم</p>
-                                    <p class="flex items-center gap-1.5"><i class="fa-solid fa-user-tie text-brand-gold text-[10px]"></i> علي السوداني</p>
-                                    <p class="flex items-center gap-1.5"><i class="fa-solid fa-user-tie text-brand-gold text-[10px]"></i> حيدر ديوان</p>
-                                    <p class="flex items-center gap-1.5"><i class="fa-solid fa-user-tie text-brand-gold text-[10px]"></i> حسين محمد</p>
-                                </div>
-                            </div>
-                            <button class="w-full py-1.5 mt-2 bg-brand-blue text-white text-xs font-bold rounded-lg hover:bg-blue-700 transition active:scale-95 shadow-sm">تصفح الملازم</button>
+                    <div class="teacher-card search-item card-hover-effect bg-white dark:bg-slate-800 p-4 rounded-2xl border border-slate-200 dark:border-slate-700 text-center flex flex-col items-center justify-between aspect-square shadow-md">
+                        <div class="w-16 h-16 rounded-full bg-amber-500/20 text-brand-gold flex items-center justify-center text-2xl font-bold border-2 border-brand-gold mb-2 overflow-hidden">
+                            <i class="fa-solid fa-user-tie"></i>
                         </div>
-
-                        <!-- 6. الإسلامية -->
-                        <div class="search-item card-hover-effect bg-white dark:bg-slate-800 p-4 rounded-xl shadow-sm border border-slate-200 dark:border-slate-700 flex flex-col justify-between aspect-square">
-                            <div>
-                                <div class="flex items-center gap-2 mb-2">
-                                    <div class="w-8 h-8 rounded-lg bg-blue-500/10 text-brand-lightBlue flex items-center justify-center text-sm font-bold"><i class="fa-solid fa-kaaba"></i></div>
-                                    <h3 class="font-extrabold text-base text-slate-800 dark:text-white item-title">التربية الإسلامية</h3>
-                                </div>
-                                <div class="text-xs text-slate-600 dark:text-slate-300 space-y-1 mt-2 item-sub">
-                                    <p class="flex items-center gap-1.5"><i class="fa-solid fa-user-tie text-brand-gold text-[10px]"></i> إسراء القيسي</p>
-                                    <p class="flex items-center gap-1.5"><i class="fa-solid fa-user-tie text-brand-gold text-[10px]"></i> هاشم المعموري</p>
-                                    <p class="flex items-center gap-1.5"><i class="fa-solid fa-user-tie text-brand-gold text-[10px]"></i> سجاد العكيلي</p>
-                                </div>
-                            </div>
-                            <button class="w-full py-1.5 mt-2 bg-brand-blue text-white text-xs font-bold rounded-lg hover:bg-blue-700 transition active:scale-95 shadow-sm">تصفح الملازم</button>
+                        <div>
+                            <h3 class="font-extrabold text-base text-slate-800 dark:text-white item-title">أ. رفل الزبيدي</h3>
+                            <p class="text-xs text-brand-lightBlue font-bold mt-1">مادة اللغة العربية</p>
                         </div>
-
+                        <button onclick="selectTeacher('رفل الزبيدي', 'اللغة العربية')" class="w-full py-2 bg-brand-blue hover:bg-blue-700 text-white text-xs font-bold rounded-xl transition active:scale-95 shadow">اختيار الأستاذ</button>
                     </div>
                 </div>
 
-                <!-- SECTION: MIRMAZ PLATFORM -->
-                <div class="teacher-card mirmaz space-y-4 pt-4">
-                    <div class="flex items-center gap-2 border-b border-slate-200 dark:border-slate-700 pb-2">
-                        <i class="fa-solid fa-star text-brand-gold text-xl"></i>
-                        <h2 class="text-xl font-bold text-slate-800 dark:text-white">منصة مرماز</h2>
-                    </div>
-                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                        <div class="search-item card-hover-effect bg-white dark:bg-slate-800 p-6 rounded-2xl shadow-md border border-slate-200 dark:border-slate-700 flex flex-col justify-between">
-                            <div>
-                                <span class="inline-block bg-amber-100 dark:bg-amber-900/60 text-brand-gold border border-amber-300 dark:border-amber-500/30 text-xs font-bold px-3 py-1 rounded-full mb-3">منصة مرماز</span>
-                                <div class="flex items-center gap-4 mb-4">
-                                    <div class="w-12 h-12 rounded-xl bg-amber-500/10 text-brand-gold flex items-center justify-center text-xl font-bold border border-amber-500/20"><i class="fa-solid fa-user-tie"></i></div>
-                                    <div>
-                                        <h3 class="text-lg font-bold item-title text-slate-800 dark:text-white">أ. زينب الجبوري</h3>
-                                        <p class="text-sm text-slate-500 dark:text-slate-400 item-sub">مادة اللغة الإنجليزية</p>
-                                    </div>
-                                </div>
-                                <div class="space-y-2 text-sm text-slate-600 dark:text-slate-300">
-                                    <p><strong class="text-slate-800 dark:text-slate-100">الملزمة:</strong> الشامل في الإنجليزية</p>
-                                    <p><strong class="text-slate-800 dark:text-slate-100">السعر:</strong> 6,000 د.ع</p>
-                                </div>
-                            </div>
-                            <button class="mt-4 w-full py-2.5 bg-brand-blue text-white font-bold rounded-xl hover:bg-blue-700 transition active:scale-95 shadow-md">طلب الملزمة</button>
+                <!-- 2. الرياضيات -->
+                <div id="subject-math" class="subject-content hidden grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+                    <div class="teacher-card search-item card-hover-effect bg-white dark:bg-slate-800 p-4 rounded-2xl border border-slate-200 dark:border-slate-700 text-center flex flex-col items-center justify-between aspect-square shadow-md">
+                        <div class="w-16 h-16 rounded-full bg-amber-500/20 text-brand-gold flex items-center justify-center text-2xl font-bold border-2 border-brand-gold mb-2 overflow-hidden">
+                            <i class="fa-solid fa-user-tie"></i>
                         </div>
+                        <div>
+                            <h3 class="font-extrabold text-base text-slate-800 dark:text-white item-title">أ. حيدر عبد الأئمة</h3>
+                            <p class="text-xs text-brand-lightBlue font-bold mt-1">مادة الرياضيات</p>
+                        </div>
+                        <button onclick="selectTeacher('حيدر عبد الأئمة', 'الرياضيات')" class="w-full py-2 bg-brand-blue hover:bg-blue-700 text-white text-xs font-bold rounded-xl transition active:scale-95 shadow">اختيار الأستاذ</button>
+                    </div>
+
+                    <div class="teacher-card search-item card-hover-effect bg-white dark:bg-slate-800 p-4 rounded-2xl border border-slate-200 dark:border-slate-700 text-center flex flex-col items-center justify-between aspect-square shadow-md">
+                        <div class="w-16 h-16 rounded-full bg-amber-500/20 text-brand-gold flex items-center justify-center text-2xl font-bold border-2 border-brand-gold mb-2 overflow-hidden">
+                            <i class="fa-solid fa-user-tie"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-extrabold text-base text-slate-800 dark:text-white item-title">أ. محمد قاسم</h3>
+                            <p class="text-xs text-brand-lightBlue font-bold mt-1">مادة الرياضيات</p>
+                        </div>
+                        <button onclick="selectTeacher('محمد قاسم', 'الرياضيات')" class="w-full py-2 bg-brand-blue hover:bg-blue-700 text-white text-xs font-bold rounded-xl transition active:scale-95 shadow">اختيار الأستاذ</button>
+                    </div>
+
+                    <div class="teacher-card search-item card-hover-effect bg-white dark:bg-slate-800 p-4 rounded-2xl border border-slate-200 dark:border-slate-700 text-center flex flex-col items-center justify-between aspect-square shadow-md">
+                        <div class="w-16 h-16 rounded-full bg-amber-500/20 text-brand-gold flex items-center justify-center text-2xl font-bold border-2 border-brand-gold mb-2 overflow-hidden">
+                            <i class="fa-solid fa-user-tie"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-extrabold text-base text-slate-800 dark:text-white item-title">أ. عباس الدراجي</h3>
+                            <p class="text-xs text-brand-lightBlue font-bold mt-1">مادة الرياضيات</p>
+                        </div>
+                        <button onclick="selectTeacher('عباس الدراجي', 'الرياضيات')" class="w-full py-2 bg-brand-blue hover:bg-blue-700 text-white text-xs font-bold rounded-xl transition active:scale-95 shadow">اختيار الأستاذ</button>
+                    </div>
+
+                    <div class="teacher-card search-item card-hover-effect bg-white dark:bg-slate-800 p-4 rounded-2xl border border-slate-200 dark:border-slate-700 text-center flex flex-col items-center justify-between aspect-square shadow-md">
+                        <div class="w-16 h-16 rounded-full bg-amber-500/20 text-brand-gold flex items-center justify-center text-2xl font-bold border-2 border-brand-gold mb-2 overflow-hidden">
+                            <i class="fa-solid fa-user-tie"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-extrabold text-base text-slate-800 dark:text-white item-title">أ. يوسف الجعفري</h3>
+                            <p class="text-xs text-brand-lightBlue font-bold mt-1">مادة الرياضيات</p>
+                        </div>
+                        <button onclick="selectTeacher('يوسف الجعفري', 'الرياضيات')" class="w-full py-2 bg-brand-blue hover:bg-blue-700 text-white text-xs font-bold rounded-xl transition active:scale-95 shadow">اختيار الأستاذ</button>
+                    </div>
+                </div>
+
+                <!-- 3. الكيمياء -->
+                <div id="subject-chem" class="subject-content hidden grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+                    <div class="teacher-card search-item card-hover-effect bg-white dark:bg-slate-800 p-4 rounded-2xl border border-slate-200 dark:border-slate-700 text-center flex flex-col items-center justify-between aspect-square shadow-md">
+                        <div class="w-16 h-16 rounded-full bg-amber-500/20 text-brand-gold flex items-center justify-center text-2xl font-bold border-2 border-brand-gold mb-2 overflow-hidden">
+                            <i class="fa-solid fa-user-tie"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-extrabold text-base text-slate-800 dark:text-white item-title">أ. هاشم الغرباوي</h3>
+                            <p class="text-xs text-brand-lightBlue font-bold mt-1">مادة الكيمياء</p>
+                        </div>
+                        <button onclick="selectTeacher('هاشم الغرباوي', 'الكيمياء')" class="w-full py-2 bg-brand-blue hover:bg-blue-700 text-white text-xs font-bold rounded-xl transition active:scale-95 shadow">اختيار الأستاذ</button>
+                    </div>
+
+                    <div class="teacher-card search-item card-hover-effect bg-white dark:bg-slate-800 p-4 rounded-2xl border border-slate-200 dark:border-slate-700 text-center flex flex-col items-center justify-between aspect-square shadow-md">
+                        <div class="w-16 h-16 rounded-full bg-amber-500/20 text-brand-gold flex items-center justify-center text-2xl font-bold border-2 border-brand-gold mb-2 overflow-hidden">
+                            <i class="fa-solid fa-user-tie"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-extrabold text-base text-slate-800 dark:text-white item-title">أ. مهند السوداني</h3>
+                            <p class="text-xs text-brand-lightBlue font-bold mt-1">مادة الكيمياء</p>
+                        </div>
+                        <button onclick="selectTeacher('مهند السوداني', 'الكيمياء')" class="w-full py-2 bg-brand-blue hover:bg-blue-700 text-white text-xs font-bold rounded-xl transition active:scale-95 shadow">اختيار الأستاذ</button>
+                    </div>
+
+                    <div class="teacher-card search-item card-hover-effect bg-white dark:bg-slate-800 p-4 rounded-2xl border border-slate-200 dark:border-slate-700 text-center flex flex-col items-center justify-between aspect-square shadow-md">
+                        <div class="w-16 h-16 rounded-full bg-amber-500/20 text-brand-gold flex items-center justify-center text-2xl font-bold border-2 border-brand-gold mb-2 overflow-hidden">
+                            <i class="fa-solid fa-user-tie"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-extrabold text-base text-slate-800 dark:text-white item-title">أ. زياد ماهر</h3>
+                            <p class="text-xs text-brand-lightBlue font-bold mt-1">مادة الكيمياء</p>
+                        </div>
+                        <button onclick="selectTeacher('زياد ماهر', 'الكيمياء')" class="w-full py-2 bg-brand-blue hover:bg-blue-700 text-white text-xs font-bold rounded-xl transition active:scale-95 shadow">اختيار الأستاذ</button>
+                    </div>
+                </div>
+
+                <!-- 4. الأحياء -->
+                <div id="subject-bio" class="subject-content hidden grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+                    <div class="teacher-card search-item card-hover-effect bg-white dark:bg-slate-800 p-4 rounded-2xl border border-slate-200 dark:border-slate-700 text-center flex flex-col items-center justify-between aspect-square shadow-md">
+                        <div class="w-16 h-16 rounded-full bg-amber-500/20 text-brand-gold flex items-center justify-center text-2xl font-bold border-2 border-brand-gold mb-2 overflow-hidden">
+                            <i class="fa-solid fa-user-tie"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-extrabold text-base text-slate-800 dark:text-white item-title">أ. نورس الموسوي</h3>
+                            <p class="text-xs text-brand-lightBlue font-bold mt-1">مادة الأحياء</p>
+                        </div>
+                        <button onclick="selectTeacher('نورس الموسوي', 'الأحياء')" class="w-full py-2 bg-brand-blue hover:bg-blue-700 text-white text-xs font-bold rounded-xl transition active:scale-95 shadow">اختيار الأستاذ</button>
+                    </div>
+
+                    <div class="teacher-card search-item card-hover-effect bg-white dark:bg-slate-800 p-4 rounded-2xl border border-slate-200 dark:border-slate-700 text-center flex flex-col items-center justify-between aspect-square shadow-md">
+                        <div class="w-16 h-16 rounded-full bg-amber-500/20 text-brand-gold flex items-center justify-center text-2xl font-bold border-2 border-brand-gold mb-2 overflow-hidden">
+                            <i class="fa-solid fa-user-tie"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-extrabold text-base text-slate-800 dark:text-white item-title">أ. جعفر الحسيني</h3>
+                            <p class="text-xs text-brand-lightBlue font-bold mt-1">مادة الأحياء</p>
+                        </div>
+                        <button onclick="selectTeacher('جعفر الحسيني', 'الأحياء')" class="w-full py-2 bg-brand-blue hover:bg-blue-700 text-white text-xs font-bold rounded-xl transition active:scale-95 shadow">اختيار الأستاذ</button>
+                    </div>
+
+                    <div class="teacher-card search-item card-hover-effect bg-white dark:bg-slate-800 p-4 rounded-2xl border border-slate-200 dark:border-slate-700 text-center flex flex-col items-center justify-between aspect-square shadow-md">
+                        <div class="w-16 h-16 rounded-full bg-amber-500/20 text-brand-gold flex items-center justify-center text-2xl font-bold border-2 border-brand-gold mb-2 overflow-hidden">
+                            <i class="fa-solid fa-user-tie"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-extrabold text-base text-slate-800 dark:text-white item-title">أ. محمد العنزي</h3>
+                            <p class="text-xs text-brand-lightBlue font-bold mt-1">مادة الأحياء</p>
+                        </div>
+                        <button onclick="selectTeacher('محمد العنزي', 'الأحياء')" class="w-full py-2 bg-brand-blue hover:bg-blue-700 text-white text-xs font-bold rounded-xl transition active:scale-95 shadow">اختيار الأستاذ</button>
+                    </div>
+                </div>
+
+                <!-- 5. الفيزياء -->
+                <div id="subject-physics" class="subject-content hidden grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+                    <div class="teacher-card search-item card-hover-effect bg-white dark:bg-slate-800 p-4 rounded-2xl border border-slate-200 dark:border-slate-700 text-center flex flex-col items-center justify-between aspect-square shadow-md">
+                        <div class="w-16 h-16 rounded-full bg-amber-500/20 text-brand-gold flex items-center justify-center text-2xl font-bold border-2 border-brand-gold mb-2 overflow-hidden">
+                            <i class="fa-solid fa-user-tie"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-extrabold text-base text-slate-800 dark:text-white item-title">أ. حسين عبد الكاظم</h3>
+                            <p class="text-xs text-brand-lightBlue font-bold mt-1">مادة الفيزياء</p>
+                        </div>
+                        <button onclick="selectTeacher('حسين عبد الكاظم', 'الفيزياء')" class="w-full py-2 bg-brand-blue hover:bg-blue-700 text-white text-xs font-bold rounded-xl transition active:scale-95 shadow">اختيار الأستاذ</button>
+                    </div>
+
+                    <div class="teacher-card search-item card-hover-effect bg-white dark:bg-slate-800 p-4 rounded-2xl border border-slate-200 dark:border-slate-700 text-center flex flex-col items-center justify-between aspect-square shadow-md">
+                        <div class="w-16 h-16 rounded-full bg-amber-500/20 text-brand-gold flex items-center justify-center text-2xl font-bold border-2 border-brand-gold mb-2 overflow-hidden">
+                            <i class="fa-solid fa-user-tie"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-extrabold text-base text-slate-800 dark:text-white item-title">أ. علي السوداني</h3>
+                            <p class="text-xs text-brand-lightBlue font-bold mt-1">مادة الفيزياء</p>
+                        </div>
+                        <button onclick="selectTeacher('علي السوداني', 'الفيزياء')" class="w-full py-2 bg-brand-blue hover:bg-blue-700 text-white text-xs font-bold rounded-xl transition active:scale-95 shadow">اختيار الأستاذ</button>
+                    </div>
+
+                    <div class="teacher-card search-item card-hover-effect bg-white dark:bg-slate-800 p-4 rounded-2xl border border-slate-200 dark:border-slate-700 text-center flex flex-col items-center justify-between aspect-square shadow-md">
+                        <div class="w-16 h-16 rounded-full bg-amber-500/20 text-brand-gold flex items-center justify-center text-2xl font-bold border-2 border-brand-gold mb-2 overflow-hidden">
+                            <i class="fa-solid fa-user-tie"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-extrabold text-base text-slate-800 dark:text-white item-title">أ. حيدر ديوان</h3>
+                            <p class="text-xs text-brand-lightBlue font-bold mt-1">مادة الفيزياء</p>
+                        </div>
+                        <button onclick="selectTeacher('حيدر ديوان', 'الفيزياء')" class="w-full py-2 bg-brand-blue hover:bg-blue-700 text-white text-xs font-bold rounded-xl transition active:scale-95 shadow">اختيار الأستاذ</button>
+                    </div>
+
+                    <div class="teacher-card search-item card-hover-effect bg-white dark:bg-slate-800 p-4 rounded-2xl border border-slate-200 dark:border-slate-700 text-center flex flex-col items-center justify-between aspect-square shadow-md">
+                        <div class="w-16 h-16 rounded-full bg-amber-500/20 text-brand-gold flex items-center justify-center text-2xl font-bold border-2 border-brand-gold mb-2 overflow-hidden">
+                            <i class="fa-solid fa-user-tie"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-extrabold text-base text-slate-800 dark:text-white item-title">أ. حسين محمد</h3>
+                            <p class="text-xs text-brand-lightBlue font-bold mt-1">مادة الفيزياء</p>
+                        </div>
+                        <button onclick="selectTeacher('حسين محمد', 'الفيزياء')" class="w-full py-2 bg-brand-blue hover:bg-blue-700 text-white text-xs font-bold rounded-xl transition active:scale-95 shadow">اختيار الأستاذ</button>
+                    </div>
+                </div>
+
+                <!-- 6. الإسلامية -->
+                <div id="subject-islamic" class="subject-content hidden grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+                    <div class="teacher-card search-item card-hover-effect bg-white dark:bg-slate-800 p-4 rounded-2xl border border-slate-200 dark:border-slate-700 text-center flex flex-col items-center justify-between aspect-square shadow-md">
+                        <div class="w-16 h-16 rounded-full bg-amber-500/20 text-brand-gold flex items-center justify-center text-2xl font-bold border-2 border-brand-gold mb-2 overflow-hidden">
+                            <i class="fa-solid fa-user-tie"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-extrabold text-base text-slate-800 dark:text-white item-title">أ. إسراء القيسي</h3>
+                            <p class="text-xs text-brand-lightBlue font-bold mt-1">التربية الإسلامية</p>
+                        </div>
+                        <button onclick="selectTeacher('إسراء القيسي', 'التربية الإسلامية')" class="w-full py-2 bg-brand-blue hover:bg-blue-700 text-white text-xs font-bold rounded-xl transition active:scale-95 shadow">اختيار الأستاذ</button>
+                    </div>
+
+                    <div class="teacher-card search-item card-hover-effect bg-white dark:bg-slate-800 p-4 rounded-2xl border border-slate-200 dark:border-slate-700 text-center flex flex-col items-center justify-between aspect-square shadow-md">
+                        <div class="w-16 h-16 rounded-full bg-amber-500/20 text-brand-gold flex items-center justify-center text-2xl font-bold border-2 border-brand-gold mb-2 overflow-hidden">
+                            <i class="fa-solid fa-user-tie"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-extrabold text-base text-slate-800 dark:text-white item-title">أ. هاشم المعموري</h3>
+                            <p class="text-xs text-brand-lightBlue font-bold mt-1">التربية الإسلامية</p>
+                        </div>
+                        <button onclick="selectTeacher('هاشم المعموري', 'التربية الإسلامية')" class="w-full py-2 bg-brand-blue hover:bg-blue-700 text-white text-xs font-bold rounded-xl transition active:scale-95 shadow">اختيار الأستاذ</button>
+                    </div>
+
+                    <div class="teacher-card search-item card-hover-effect bg-white dark:bg-slate-800 p-4 rounded-2xl border border-slate-200 dark:border-slate-700 text-center flex flex-col items-center justify-between aspect-square shadow-md">
+                        <div class="w-16 h-16 rounded-full bg-amber-500/20 text-brand-gold flex items-center justify-center text-2xl font-bold border-2 border-brand-gold mb-2 overflow-hidden">
+                            <i class="fa-solid fa-user-tie"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-extrabold text-base text-slate-800 dark:text-white item-title">أ. سجاد العكيلي</h3>
+                            <p class="text-xs text-brand-lightBlue font-bold mt-1">التربية الإسلامية</p>
+                        </div>
+                        <button onclick="selectTeacher('سجاد العكيلي', 'التربية الإسلامية')" class="w-full py-2 bg-brand-blue hover:bg-blue-700 text-white text-xs font-bold rounded-xl transition active:scale-95 shadow">اختيار الأستاذ</button>
                     </div>
                 </div>
 
             </div>
+
+            <!-- PLATFORM: MIRMAZ SECTION -->
+            <div id="section-mirmaz" class="platform-section space-y-4 pt-6 border-t border-slate-200 dark:border-slate-700">
+                <div class="flex items-center gap-2 border-b border-slate-200 dark:border-slate-700 pb-2">
+                    <i class="fa-solid fa-star text-brand-gold text-2xl"></i>
+                    <h2 class="text-2xl font-extrabold text-slate-800 dark:text-white">منصة مرماز</h2>
+                </div>
+                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+                    <div class="teacher-card search-item card-hover-effect bg-white dark:bg-slate-800 p-4 rounded-2xl border border-slate-200 dark:border-slate-700 text-center flex flex-col items-center justify-between aspect-square shadow-md">
+                        <div class="w-16 h-16 rounded-full bg-amber-500/20 text-brand-gold flex items-center justify-center text-2xl font-bold border-2 border-brand-gold mb-2 overflow-hidden">
+                            <i class="fa-solid fa-user-tie"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-extrabold text-base text-slate-800 dark:text-white item-title">أ. زينب الجبوري</h3>
+                            <p class="text-xs text-brand-gold font-bold mt-1">مادة اللغة الإنجليزية</p>
+                        </div>
+                        <button onclick="selectTeacher('زينب الجبوري', 'اللغة الإنجليزية')" class="w-full py-2 bg-brand-blue hover:bg-blue-700 text-white text-xs font-bold rounded-xl transition active:scale-95 shadow">اختيار الأستاذ</button>
+                    </div>
+                </div>
+            </div>
+
         </section>
 
         <!-- 3. PAGE: SUPPLIES -->
@@ -534,7 +699,7 @@
                     splash.classList.add('fade-out');
                     setTimeout(() => splash.remove(), 600);
                 }
-            }, 1000); // 1000ms = 1 second
+            }, 1000);
         });
 
         // Dark / Light Mode Toggle Logic
@@ -578,7 +743,63 @@
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
-        // Search Filter
+        // Switch Subject Tabs
+        function switchSubjectTab(subjectId, btn) {
+            const allTabs = document.querySelectorAll('.subject-tab-btn');
+            allTabs.forEach(t => t.classList.remove('active'));
+            btn.classList.add('active');
+
+            const allContents = document.querySelectorAll('.subject-content');
+            allContents.forEach(c => c.classList.add('hidden'));
+
+            const targetContent = document.getElementById('subject-' + subjectId);
+            if (targetContent) {
+                targetContent.classList.remove('hidden');
+            }
+        }
+
+        // Select Teacher Action
+        function selectTeacher(name, subject) {
+            alert(`تم اختيار الأستاذ: ${name} (${subject})`);
+        }
+
+        // Filter Teacher Categories
+        function filterTeacherCategory(category, btn) {
+            const siblings = btn.parentElement.querySelectorAll('.tab-btn');
+            siblings.forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+
+            const secAbwaab = document.getElementById('section-abwaab');
+            const secMirmaz = document.getElementById('section-mirmaz');
+
+            if (category === 'all') {
+                secAbwaab.style.display = "block";
+                secMirmaz.style.display = "block";
+            } else if (category === 'abwaab') {
+                secAbwaab.style.display = "block";
+                secMirmaz.style.display = "none";
+            } else if (category === 'mirmaz') {
+                secAbwaab.style.display = "none";
+                secMirmaz.style.display = "block";
+            }
+        }
+
+        // Filter Search for Teachers
+        function filterTeachers(query) {
+            const filter = query.toLowerCase();
+            const cards = document.querySelectorAll('.teacher-card');
+
+            cards.forEach(card => {
+                const name = card.querySelector('.item-title')?.textContent || '';
+                if (name.toLowerCase().includes(filter)) {
+                    card.style.display = "flex";
+                } else {
+                    card.style.display = "none";
+                }
+            });
+        }
+
+        // Search Filter General
         function filterItems(gridId, query) {
             const container = document.getElementById(gridId);
             const items = container.getElementsByClassName('search-item');
@@ -588,38 +809,18 @@
                 const title = items[i].querySelector('.item-title')?.textContent || '';
                 const sub = items[i].querySelector('.item-sub')?.textContent || '';
                 if (title.toLowerCase().includes(filter) || sub.toLowerCase().includes(filter)) {
-                    // Show closest card/wrapper parent
-                    let parentCard = items[i].closest('.search-item');
-                    if (parentCard) parentCard.style.display = "";
+                    items[i].style.display = "";
                 } else {
-                    let parentCard = items[i].closest('.search-item');
-                    if (parentCard) parentCard.style.display = "none";
+                    items[i].style.display = "none";
                 }
             }
         }
 
-        function setActiveTab(btn) {
+        function filterSupplyCategory(category, btn) {
             const siblings = btn.parentElement.querySelectorAll('.tab-btn');
             siblings.forEach(b => b.classList.remove('active'));
             btn.classList.add('active');
-        }
 
-        function filterTeacherCategory(category, btn) {
-            setActiveTab(btn);
-            const cards = document.querySelectorAll('.teacher-card');
-            cards.forEach(card => {
-                if (category === 'all') {
-                    card.style.display = "block";
-                } else if (card.classList.contains(category)) {
-                    card.style.display = "block";
-                } else {
-                    card.style.display = "none";
-                }
-            });
-        }
-
-        function filterSupplyCategory(category, btn) {
-            setActiveTab(btn);
             const cards = document.querySelectorAll('.supply-card');
             cards.forEach(card => {
                 card.style.display = (category === 'all' || card.classList.contains(category)) ? "flex" : "none";
