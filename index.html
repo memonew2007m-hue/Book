@@ -124,6 +124,30 @@
             box-shadow: 0 4px 15px rgba(245, 158, 11, 0.4);
         }
 
+        .stage-btn {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .stage-btn.active {
+            background-color: #1e3a8a;
+            color: #ffffff;
+            border-color: #f59e0b;
+            box-shadow: 0 8px 25px rgba(245, 158, 11, 0.35);
+            transform: translateY(-2px) scale(1.02);
+        }
+
+        .grade-tab-btn {
+            transition: all 0.25s ease;
+        }
+
+        .grade-tab-btn.active {
+            background-color: #f59e0b;
+            color: #0f172a;
+            font-weight: 800;
+            border-color: #f59e0b;
+            box-shadow: 0 4px 12px rgba(245, 158, 11, 0.35);
+        }
+
         .card-hover-effect {
             transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
         }
@@ -159,14 +183,9 @@
         .logo-box:hover {
             transform: rotate(5deg) scale(1.08);
         }
-
-        /* Toast Notice */
-        #toast-notification {
-            transition: transform 0.3s ease, opacity 0.3s ease;
-        }
     </style>
 </head>
-<body class="bg-slate-50 dark:bg-slate-900 text-slate-800 dark:text-slate-100 min-h-screen flex flex-col justify-between relative overflow-x-hidden pb-16 md:pb-0">
+<body class="bg-slate-50 dark:bg-slate-900 text-slate-800 dark:text-slate-100 min-h-screen flex flex-col justify-between relative overflow-x-hidden">
 
     <!-- INTRO WELCOME SPLASH -->
     <div id="welcome-splash">
@@ -178,13 +197,7 @@
         </div>
     </div>
 
-    <!-- Toast Notification -->
-    <div id="toast-notification" class="fixed top-20 left-4 z-50 transform -translate-x-full opacity-0 bg-emerald-600 text-white px-5 py-3 rounded-2xl shadow-xl flex items-center gap-3 border border-emerald-400">
-        <i class="fa-solid fa-circle-check text-xl"></i>
-        <span id="toast-message" class="font-bold text-sm">تمت إضافة المنتج إلى السلة!</span>
-    </div>
-
-    <!-- Floating Background -->
+    <!-- Background Icons -->
     <div class="bg-glow-container">
         <i class="fa-solid fa-book glow-icon glow-yellow" style="top: 10%; left: 12%; animation-delay: 0s;"></i>
         <i class="fa-solid fa-pen-nib glow-icon glow-blue" style="top: 25%; left: 80%; animation-delay: 2s;"></i>
@@ -198,7 +211,6 @@
     <header class="bg-white/90 dark:bg-slate-800/90 backdrop-blur-md text-slate-800 dark:text-white shadow-md sticky top-0 z-40 border-b border-slate-200 dark:border-slate-700 transition-colors duration-300">
         <div class="container mx-auto px-4 py-3 flex justify-between items-center">
             
-            <!-- Logo -->
             <div id="secret-logo-btn" onclick="navigateTo('home')" class="flex items-center space-x-3 space-x-reverse cursor-pointer select-none group">
                 <div class="logo-box flex items-center justify-center">
                     <i id="header-logo-icon" class="fa-solid fa-graduation-cap text-2xl text-brand-gold"></i>
@@ -208,7 +220,6 @@
                 </h1>
             </div>
 
-            <!-- Navigation Links -->
             <nav class="hidden md:flex space-x-6 space-x-reverse font-semibold">
                 <button onclick="navigateTo('home')" class="hover:text-brand-gold transition duration-200">الرئيسية</button>
                 <button onclick="navigateTo('teachers')" class="hover:text-brand-gold transition duration-200">الأساتذة</button>
@@ -217,26 +228,17 @@
                 <button onclick="navigateTo('books')" class="hover:text-brand-gold transition duration-200">الكتب والقصص</button>
             </nav>
 
-            <!-- Actions, Cart & Social Links -->
             <div class="flex items-center space-x-3 space-x-reverse text-lg">
-                <!-- Cart Button -->
-                <button onclick="toggleCartDrawer()" class="relative w-10 h-10 rounded-xl bg-slate-100 dark:bg-slate-700 text-brand-blue dark:text-brand-gold flex items-center justify-center hover:scale-110 active:scale-95 transition shadow-sm border border-slate-200 dark:border-slate-600">
-                    <i class="fa-solid fa-cart-shopping"></i>
-                    <span id="cart-badge" class="absolute -top-1.5 -right-1.5 bg-red-500 text-white text-xs font-black w-5 h-5 rounded-full flex items-center justify-center border-2 border-white dark:border-slate-800 hidden">0</span>
-                </button>
-
                 <button onclick="toggleTheme()" class="w-10 h-10 rounded-xl bg-slate-100 dark:bg-slate-700 text-amber-500 dark:text-amber-400 flex items-center justify-center hover:scale-110 active:scale-95 transition shadow-sm border border-slate-200 dark:border-slate-600">
                     <i id="theme-toggle-icon" class="fa-solid fa-moon"></i>
                 </button>
-
-                <a href="#" class="hidden sm:flex w-9 h-9 rounded-xl bg-slate-100 dark:bg-slate-700 items-center justify-center hover:bg-brand-gold hover:text-white transition duration-200"><i class="fa-brands fa-facebook-f"></i></a>
-                <a href="#" class="hidden sm:flex w-9 h-9 rounded-xl bg-slate-100 dark:bg-slate-700 items-center justify-center hover:bg-brand-gold hover:text-white transition duration-200"><i class="fa-brands fa-instagram"></i></a>
-                <a href="https://wa.me/" target="_blank" class="w-9 h-9 rounded-xl bg-slate-100 dark:bg-slate-700 flex items-center justify-center hover:bg-emerald-500 hover:text-white transition duration-200"><i class="fa-brands fa-whatsapp"></i></a>
+                <a href="#" class="w-9 h-9 rounded-xl bg-slate-100 dark:bg-slate-700 flex items-center justify-center hover:bg-brand-gold hover:text-white transition duration-200"><i class="fa-brands fa-facebook-f"></i></a>
+                <a href="#" class="w-9 h-9 rounded-xl bg-slate-100 dark:bg-slate-700 flex items-center justify-center hover:bg-brand-gold hover:text-white transition duration-200"><i class="fa-brands fa-instagram"></i></a>
+                <a href="#" class="w-9 h-9 rounded-xl bg-slate-100 dark:bg-slate-700 flex items-center justify-center hover:bg-brand-gold hover:text-white transition duration-200"><i class="fa-brands fa-whatsapp"></i></a>
             </div>
         </div>
     </header>
 
-    <!-- Main Content Area -->
     <main class="container mx-auto px-4 py-8 flex-grow relative z-10">
 
         <!-- 1. PAGE: HOME -->
@@ -271,7 +273,7 @@
                         <i class="fa-solid fa-file-lines"></i>
                     </div>
                     <h3 class="text-xl font-bold text-slate-800 dark:text-slate-100 mb-2">الملازم الدراسية</h3>
-                    <p class="text-slate-500 dark:text-slate-400 text-sm">ملازم مقسمة حسب المراحل الدراسية.</p>
+                    <p class="text-slate-500 dark:text-slate-400 text-sm">ملازم مقسمة حسب المراحل والصفوف الدراسية.</p>
                 </div>
 
                 <div onclick="navigateTo('books')" class="card-hover-effect bg-white dark:bg-slate-800/80 backdrop-blur rounded-2xl p-6 shadow-md dark:shadow-xl cursor-pointer border-t-4 border-brand-blue text-center group border-x border-b border-slate-200 dark:border-slate-700">
@@ -293,7 +295,6 @@
                 <input type="text" onkeyup="filterTeachers(this.value)" placeholder="ابحث عن أستاذ..." class="w-full md:w-80 px-4 py-2 bg-slate-100 dark:bg-slate-900 border border-slate-300 dark:border-slate-700 rounded-xl focus:outline-none focus:border-brand-gold text-slate-800 dark:text-white transition">
             </div>
 
-            <!-- Platform Filters -->
             <div class="space-y-3 max-w-xl mx-auto">
                 <button onclick="filterTeacherCategory('all', this)" class="tab-btn active w-full p-4 rounded-2xl font-bold border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-200 flex items-center justify-between shadow-md">
                     <span class="flex items-center gap-3"><i class="fa-solid fa-layer-group text-brand-gold"></i> عرض جميع الأساتذة</span>
@@ -309,14 +310,12 @@
                 </button>
             </div>
 
-            <!-- PLATFORM: ABWAAB SECTION -->
             <div id="section-abwaab" class="platform-section space-y-6 pt-4">
                 <div class="flex items-center gap-2 border-b border-slate-200 dark:border-slate-700 pb-2">
                     <i class="fa-solid fa-graduation-cap text-brand-lightBlue text-2xl"></i>
                     <h2 class="text-2xl font-extrabold text-slate-800 dark:text-white">منصة أبواب - اختر المادة</h2>
                 </div>
 
-                <!-- Subject Tabs Buttons -->
                 <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-2">
                     <button onclick="switchSubjectTab('arabic', this)" class="subject-tab-btn active px-3 py-2.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-sm font-bold flex items-center justify-center gap-2 shadow-sm">
                         <i class="fa-solid fa-book"></i> العربي
@@ -338,107 +337,103 @@
                     </button>
                 </div>
 
-                <!-- TEACHERS GRID -->
                 <div id="subject-arabic" class="subject-content grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-                    <div class="teacher-card search-item card-hover-effect bg-white dark:bg-slate-800 p-4 rounded-2xl border border-slate-200 dark:border-slate-700 text-center flex flex-col items-center justify-between shadow-md">
+                    <div class="teacher-card search-item card-hover-effect bg-white dark:bg-slate-800 p-4 rounded-2xl border border-slate-200 dark:border-slate-700 text-center flex flex-col items-center justify-between aspect-square shadow-md">
                         <div class="w-16 h-16 rounded-full bg-amber-500/20 text-brand-gold flex items-center justify-center text-2xl font-bold border-2 border-brand-gold mb-2 overflow-hidden">
                             <i class="fa-solid fa-user-tie"></i>
                         </div>
-                        <div class="mb-3">
+                        <div>
                             <h3 class="font-extrabold text-base text-slate-800 dark:text-white item-title">أ. هاشم المعموري</h3>
                             <p class="text-xs text-brand-lightBlue font-bold mt-1">مادة اللغة العربية</p>
                         </div>
-                        <button onclick="addToCart('ملزمة اللغة العربية - أ. هاشم المعموري', 10000)" class="w-full py-2 bg-brand-blue hover:bg-blue-700 text-white text-xs font-bold rounded-xl transition active:scale-95 shadow">طلب الملزمة (10,000 د.ع)</button>
+                        <button onclick="selectTeacher('هاشم المعموري', 'اللغة العربية')" class="w-full py-2 bg-brand-blue hover:bg-blue-700 text-white text-xs font-bold rounded-xl transition active:scale-95 shadow">اختيار الأستاذ</button>
                     </div>
                 </div>
 
                 <div id="subject-math" class="subject-content hidden grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-                    <div class="teacher-card search-item card-hover-effect bg-white dark:bg-slate-800 p-4 rounded-2xl border border-slate-200 dark:border-slate-700 text-center flex flex-col items-center justify-between shadow-md">
+                    <div class="teacher-card search-item card-hover-effect bg-white dark:bg-slate-800 p-4 rounded-2xl border border-slate-200 dark:border-slate-700 text-center flex flex-col items-center justify-between aspect-square shadow-md">
                         <div class="w-16 h-16 rounded-full bg-amber-500/20 text-brand-gold flex items-center justify-center text-2xl font-bold border-2 border-brand-gold mb-2 overflow-hidden">
                             <i class="fa-solid fa-user-tie"></i>
                         </div>
-                        <div class="mb-3">
+                        <div>
                             <h3 class="font-extrabold text-base text-slate-800 dark:text-white item-title">أ. حيدر عبد الأئمة</h3>
                             <p class="text-xs text-brand-lightBlue font-bold mt-1">مادة الرياضيات</p>
                         </div>
-                        <button onclick="addToCart('ملزمة الرياضيات - أ. حيدر عبد الأئمة', 12000)" class="w-full py-2 bg-brand-blue hover:bg-blue-700 text-white text-xs font-bold rounded-xl transition active:scale-95 shadow">طلب الملزمة (12,000 د.ع)</button>
+                        <button onclick="selectTeacher('حيدر عبد الأئمة', 'الرياضيات')" class="w-full py-2 bg-brand-blue hover:bg-blue-700 text-white text-xs font-bold rounded-xl transition active:scale-95 shadow">اختيار الأستاذ</button>
                     </div>
                 </div>
 
                 <div id="subject-chem" class="subject-content hidden grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-                    <div class="teacher-card search-item card-hover-effect bg-white dark:bg-slate-800 p-4 rounded-2xl border border-slate-200 dark:border-slate-700 text-center flex flex-col items-center justify-between shadow-md">
+                    <div class="teacher-card search-item card-hover-effect bg-white dark:bg-slate-800 p-4 rounded-2xl border border-slate-200 dark:border-slate-700 text-center flex flex-col items-center justify-between aspect-square shadow-md">
                         <div class="w-16 h-16 rounded-full bg-amber-500/20 text-brand-gold flex items-center justify-center text-2xl font-bold border-2 border-brand-gold mb-2 overflow-hidden">
                             <i class="fa-solid fa-user-tie"></i>
                         </div>
-                        <div class="mb-3">
+                        <div>
                             <h3 class="font-extrabold text-base text-slate-800 dark:text-white item-title">أ. هاشم الغرباوي</h3>
                             <p class="text-xs text-brand-lightBlue font-bold mt-1">مادة الكيمياء</p>
                         </div>
-                        <button onclick="addToCart('ملزمة الكيمياء - أ. هاشم الغرباوي', 11000)" class="w-full py-2 bg-brand-blue hover:bg-blue-700 text-white text-xs font-bold rounded-xl transition active:scale-95 shadow">طلب الملزمة (11,000 د.ع)</button>
+                        <button onclick="selectTeacher('هاشم الغرباوي', 'الكيمياء')" class="w-full py-2 bg-brand-blue hover:bg-blue-700 text-white text-xs font-bold rounded-xl transition active:scale-95 shadow">اختيار الأستاذ</button>
                     </div>
                 </div>
 
                 <div id="subject-bio" class="subject-content hidden grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-                    <div class="teacher-card search-item card-hover-effect bg-white dark:bg-slate-800 p-4 rounded-2xl border border-slate-200 dark:border-slate-700 text-center flex flex-col items-center justify-between shadow-md">
+                    <div class="teacher-card search-item card-hover-effect bg-white dark:bg-slate-800 p-4 rounded-2xl border border-slate-200 dark:border-slate-700 text-center flex flex-col items-center justify-between aspect-square shadow-md">
                         <div class="w-16 h-16 rounded-full bg-amber-500/20 text-brand-gold flex items-center justify-center text-2xl font-bold border-2 border-brand-gold mb-2 overflow-hidden">
                             <i class="fa-solid fa-user-tie"></i>
                         </div>
-                        <div class="mb-3">
+                        <div>
                             <h3 class="font-extrabold text-base text-slate-800 dark:text-white item-title">أ. نورس الموسوي</h3>
                             <p class="text-xs text-brand-lightBlue font-bold mt-1">مادة الأحياء</p>
                         </div>
-                        <button onclick="addToCart('ملزمة الأحياء - أ. نورس الموسوي', 10000)" class="w-full py-2 bg-brand-blue hover:bg-blue-700 text-white text-xs font-bold rounded-xl transition active:scale-95 shadow">طلب الملزمة (10,000 د.ع)</button>
+                        <button onclick="selectTeacher('نورس الموسوي', 'الأحياء')" class="w-full py-2 bg-brand-blue hover:bg-blue-700 text-white text-xs font-bold rounded-xl transition active:scale-95 shadow">اختيار الأستاذ</button>
                     </div>
                 </div>
 
                 <div id="subject-physics" class="subject-content hidden grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-                    <div class="teacher-card search-item card-hover-effect bg-white dark:bg-slate-800 p-4 rounded-2xl border border-slate-200 dark:border-slate-700 text-center flex flex-col items-center justify-between shadow-md">
+                    <div class="teacher-card search-item card-hover-effect bg-white dark:bg-slate-800 p-4 rounded-2xl border border-slate-200 dark:border-slate-700 text-center flex flex-col items-center justify-between aspect-square shadow-md">
                         <div class="w-16 h-16 rounded-full bg-amber-500/20 text-brand-gold flex items-center justify-center text-2xl font-bold border-2 border-brand-gold mb-2 overflow-hidden">
                             <i class="fa-solid fa-user-tie"></i>
                         </div>
-                        <div class="mb-3">
+                        <div>
                             <h3 class="font-extrabold text-base text-slate-800 dark:text-white item-title">أ. حسين عبد الكاظم</h3>
                             <p class="text-xs text-brand-lightBlue font-bold mt-1">مادة الفيزياء</p>
                         </div>
-                        <button onclick="addToCart('ملزمة الفيزياء - أ. حسين عبد الكاظم', 11000)" class="w-full py-2 bg-brand-blue hover:bg-blue-700 text-white text-xs font-bold rounded-xl transition active:scale-95 shadow">طلب الملزمة (11,000 د.ع)</button>
+                        <button onclick="selectTeacher('حسين عبد الكاظم', 'الفيزياء')" class="w-full py-2 bg-brand-blue hover:bg-blue-700 text-white text-xs font-bold rounded-xl transition active:scale-95 shadow">اختيار الأستاذ</button>
                     </div>
                 </div>
 
                 <div id="subject-islamic" class="subject-content hidden grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-                    <div class="teacher-card search-item card-hover-effect bg-white dark:bg-slate-800 p-4 rounded-2xl border border-slate-200 dark:border-slate-700 text-center flex flex-col items-center justify-between shadow-md">
+                    <div class="teacher-card search-item card-hover-effect bg-white dark:bg-slate-800 p-4 rounded-2xl border border-slate-200 dark:border-slate-700 text-center flex flex-col items-center justify-between aspect-square shadow-md">
                         <div class="w-16 h-16 rounded-full bg-amber-500/20 text-brand-gold flex items-center justify-center text-2xl font-bold border-2 border-brand-gold mb-2 overflow-hidden">
                             <i class="fa-solid fa-user-tie"></i>
                         </div>
-                        <div class="mb-3">
+                        <div>
                             <h3 class="font-extrabold text-base text-slate-800 dark:text-white item-title">أ. إسراء القيسي</h3>
                             <p class="text-xs text-brand-lightBlue font-bold mt-1">التربية الإسلامية</p>
                         </div>
-                        <button onclick="addToCart('ملزمة التربية الإسلامية - أ. إسراء القيسي', 8000)" class="w-full py-2 bg-brand-blue hover:bg-blue-700 text-white text-xs font-bold rounded-xl transition active:scale-95 shadow">طلب الملزمة (8,000 د.ع)</button>
+                        <button onclick="selectTeacher('إسراء القيسي', 'التربية الإسلامية')" class="w-full py-2 bg-brand-blue hover:bg-blue-700 text-white text-xs font-bold rounded-xl transition active:scale-95 shadow">اختيار الأستاذ</button>
                     </div>
                 </div>
-
             </div>
 
-            <!-- PLATFORM: MIRMAZ SECTION -->
             <div id="section-mirmaz" class="platform-section space-y-4 pt-6 border-t border-slate-200 dark:border-slate-700">
                 <div class="flex items-center gap-2 border-b border-slate-200 dark:border-slate-700 pb-2">
                     <i class="fa-solid fa-star text-brand-gold text-2xl"></i>
                     <h2 class="text-2xl font-extrabold text-slate-800 dark:text-white">منصة مرماز</h2>
                 </div>
                 <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-                    <div class="teacher-card search-item card-hover-effect bg-white dark:bg-slate-800 p-4 rounded-2xl border border-slate-200 dark:border-slate-700 text-center flex flex-col items-center justify-between shadow-md">
+                    <div class="teacher-card search-item card-hover-effect bg-white dark:bg-slate-800 p-4 rounded-2xl border border-slate-200 dark:border-slate-700 text-center flex flex-col items-center justify-between aspect-square shadow-md">
                         <div class="w-16 h-16 rounded-full bg-amber-500/20 text-brand-gold flex items-center justify-center text-2xl font-bold border-2 border-brand-gold mb-2 overflow-hidden">
                             <i class="fa-solid fa-user-tie"></i>
                         </div>
-                        <div class="mb-3">
+                        <div>
                             <h3 class="font-extrabold text-base text-slate-800 dark:text-white item-title">أ. زينب الجبوري</h3>
                             <p class="text-xs text-brand-gold font-bold mt-1">مادة اللغة الإنجليزية</p>
                         </div>
-                        <button onclick="addToCart('ملزمة الإنجليزية - أ. زينب الجبوري', 10000)" class="w-full py-2 bg-brand-blue hover:bg-blue-700 text-white text-xs font-bold rounded-xl transition active:scale-95 shadow">طلب الملزمة (10,000 د.ع)</button>
+                        <button onclick="selectTeacher('زينب الجبوري', 'اللغة الإنجليزية')" class="w-full py-2 bg-brand-blue hover:bg-blue-700 text-white text-xs font-bold rounded-xl transition active:scale-95 shadow">اختيار الأستاذ</button>
                     </div>
                 </div>
             </div>
-
         </section>
 
         <!-- 3. PAGE: SUPPLIES -->
@@ -465,49 +460,21 @@
             <div id="supplies-grid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 pt-4">
                 <div class="search-item supply-card notebooks card-hover-effect bg-white dark:bg-slate-800 rounded-2xl p-4 shadow-md dark:shadow-xl border border-slate-200 dark:border-slate-700 flex flex-col justify-between group">
                     <div>
-                        <div class="h-44 rounded-xl overflow-hidden mb-4 bg-slate-100 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 flex items-center justify-center">
-                            <i class="fa-solid fa-book-open text-5xl text-amber-500"></i>
+                        <div class="h-48 rounded-xl overflow-hidden mb-4 bg-slate-100 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 flex items-center justify-center">
+                            <i class="fa-solid fa-book-open text-5xl text-slate-400"></i>
                         </div>
                         <h3 class="font-bold text-slate-800 dark:text-slate-100 item-title text-lg">دفتر سلك جامعي 200 ورقة</h3>
-                        <p class="text-xs text-slate-500 dark:text-slate-400 mb-2 item-sub">دفاتر عالية الجودة غلاف مقوى</p>
+                        <p class="text-xs text-slate-500 dark:text-slate-400 mb-2 item-sub">دفاتر عالية الجودة</p>
                     </div>
                     <div class="flex justify-between items-center mt-3 pt-3 border-t border-slate-200 dark:border-slate-700">
                         <span class="font-extrabold text-brand-gold text-lg">3,500 د.ع</span>
-                        <button onclick="addToCart('دفتر سلك جامعي 200 ورقة', 3500)" class="px-4 py-1.5 bg-brand-blue text-white text-sm font-bold rounded-lg hover:bg-blue-600 transition active:scale-95">شراء</button>
-                    </div>
-                </div>
-
-                <div class="search-item supply-card stationery card-hover-effect bg-white dark:bg-slate-800 rounded-2xl p-4 shadow-md dark:shadow-xl border border-slate-200 dark:border-slate-700 flex flex-col justify-between group">
-                    <div>
-                        <div class="h-44 rounded-xl overflow-hidden mb-4 bg-slate-100 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 flex items-center justify-center">
-                            <i class="fa-solid fa-pen text-5xl text-blue-500"></i>
-                        </div>
-                        <h3 class="font-bold text-slate-800 dark:text-slate-100 item-title text-lg">باكيت أقلام جاف فاخر (10 أقلام)</h3>
-                        <p class="text-xs text-slate-500 dark:text-slate-400 mb-2 item-sub">أقلام حبر أزرق وسلس للتدوين</p>
-                    </div>
-                    <div class="flex justify-between items-center mt-3 pt-3 border-t border-slate-200 dark:border-slate-700">
-                        <span class="font-extrabold text-brand-gold text-lg">2,500 د.ع</span>
-                        <button onclick="addToCart('باكيت أقلام جاف فاخر', 2500)" class="px-4 py-1.5 bg-brand-blue text-white text-sm font-bold rounded-lg hover:bg-blue-600 transition active:scale-95">شراء</button>
-                    </div>
-                </div>
-
-                <div class="search-item supply-card stationery card-hover-effect bg-white dark:bg-slate-800 rounded-2xl p-4 shadow-md dark:shadow-xl border border-slate-200 dark:border-slate-700 flex flex-col justify-between group">
-                    <div>
-                        <div class="h-44 rounded-xl overflow-hidden mb-4 bg-slate-100 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 flex items-center justify-center">
-                            <i class="fa-solid fa-pen-ruler text-5xl text-emerald-500"></i>
-                        </div>
-                        <h3 class="font-bold text-slate-800 dark:text-slate-100 item-title text-lg">حقيبة أدوات هندسية متكاملة</h3>
-                        <p class="text-xs text-slate-500 dark:text-slate-400 mb-2 item-sub">تتضمن فرجار ومساطر دقيقة</p>
-                    </div>
-                    <div class="flex justify-between items-center mt-3 pt-3 border-t border-slate-200 dark:border-slate-700">
-                        <span class="font-extrabold text-brand-gold text-lg">4,000 د.ع</span>
-                        <button onclick="addToCart('حقيبة أدوات هندسية متكاملة', 4000)" class="px-4 py-1.5 bg-brand-blue text-white text-sm font-bold rounded-lg hover:bg-blue-600 transition active:scale-95">شراء</button>
+                        <button class="px-4 py-1.5 bg-brand-blue text-white text-sm font-bold rounded-lg hover:bg-blue-600 transition active:scale-95">شراء</button>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- 4. PAGE: NOTES (الملازم الدراسية) -->
+        <!-- 4. PAGE: NOTES (الملازم الدراسية - المعدل) -->
         <section id="page-notes" class="page-section hidden space-y-8">
             <div class="flex flex-col md:flex-row justify-between items-center gap-4 bg-white dark:bg-slate-800 p-4 rounded-2xl shadow-md border border-slate-200 dark:border-slate-700">
                 <button onclick="navigateTo('home')" class="flex items-center gap-2 text-brand-blue dark:text-brand-gold font-bold hover:translate-x-1 transition duration-200">
@@ -516,170 +483,200 @@
                 <input type="text" onkeyup="filterNotes(this.value)" placeholder="ابحث في كافة الملازم..." class="w-full md:w-80 px-4 py-2 bg-slate-100 dark:bg-slate-900 border border-slate-300 dark:border-slate-700 rounded-xl focus:outline-none focus:border-brand-gold text-slate-800 dark:text-white transition">
             </div>
 
-            <!-- الأقسام الثلاثة بشكل أفقـي -->
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                <button onclick="switchNotesCategory('primary-6', this)" class="notes-tab-btn active p-5 rounded-2xl border-2 border-brand-gold bg-white dark:bg-slate-800 shadow-lg flex items-center justify-between group transition hover:scale-105">
-                    <div class="flex items-center gap-4">
-                        <div class="w-12 h-12 rounded-xl bg-amber-500/20 text-brand-gold flex items-center justify-center text-2xl font-black">
-                            <i class="fa-solid fa-child"></i>
-                        </div>
-                        <div class="text-right">
-                            <h3 class="font-extrabold text-lg text-slate-800 dark:text-white">السادس ابتدائي</h3>
-                            <p class="text-xs text-slate-500 dark:text-slate-400">ملازم وزرارية وشاملة</p>
-                        </div>
+            <!-- 1. أزرار اختيار المرحلة الدراسية -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- المرحلة الابتدائية -->
+                <button onclick="switchStage('primary', this)" class="stage-btn active p-6 rounded-3xl border-2 border-brand-gold bg-white dark:bg-slate-800 shadow-xl flex flex-col items-center text-center space-y-3 group cursor-pointer">
+                    <div class="w-16 h-16 rounded-2xl bg-amber-500/20 text-brand-gold flex items-center justify-center text-3xl font-black group-hover:scale-110 transition duration-300">
+                        <i class="fa-solid fa-child"></i>
                     </div>
-                    <i class="fa-solid fa-chevron-left text-brand-gold text-xl group-hover:-translate-x-1 transition duration-200"></i>
+                    <div>
+                        <h3 class="font-extrabold text-xl text-slate-800 dark:text-white">المرحلة الابتدائية</h3>
+                        <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">من الصف الأول إلى السادس ابتدائي</p>
+                    </div>
                 </button>
 
-                <button onclick="switchNotesCategory('middle-3', this)" class="notes-tab-btn p-5 rounded-2xl border-2 border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 shadow-md flex items-center justify-between group transition hover:scale-105">
-                    <div class="flex items-center gap-4">
-                        <div class="w-12 h-12 rounded-xl bg-blue-500/20 text-brand-lightBlue flex items-center justify-center text-2xl font-black">
-                            <i class="fa-solid fa-user-graduate"></i>
-                        </div>
-                        <div class="text-right">
-                            <h3 class="font-extrabold text-lg text-slate-800 dark:text-white">الثالث متوسط</h3>
-                            <p class="text-xs text-slate-500 dark:text-slate-400">ملخصات وحلول نموذجية</p>
-                        </div>
+                <!-- المرحلة المتوسطة -->
+                <button onclick="switchStage('middle', this)" class="stage-btn p-6 rounded-3xl border-2 border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 shadow-md flex flex-col items-center text-center space-y-3 group cursor-pointer">
+                    <div class="w-16 h-16 rounded-2xl bg-blue-500/20 text-brand-lightBlue flex items-center justify-center text-3xl font-black group-hover:scale-110 transition duration-300">
+                        <i class="fa-solid fa-school"></i>
                     </div>
-                    <i class="fa-solid fa-chevron-left text-slate-400 text-xl group-hover:-translate-x-1 transition duration-200"></i>
+                    <div>
+                        <h3 class="font-extrabold text-xl text-slate-800 dark:text-white">المرحلة المتوسطة</h3>
+                        <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">الأول والثاني والثالث متوسط</p>
+                    </div>
                 </button>
 
-                <button onclick="switchNotesCategory('scientific-6', this)" class="notes-tab-btn p-5 rounded-2xl border-2 border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 shadow-md flex items-center justify-between group transition hover:scale-105">
-                    <div class="flex items-center gap-4">
-                        <div class="w-12 h-12 rounded-xl bg-amber-500/20 text-brand-gold flex items-center justify-center text-2xl font-black">
-                            <i class="fa-solid fa-atom"></i>
-                        </div>
-                        <div class="text-right">
-                            <h3 class="font-extrabold text-lg text-slate-800 dark:text-white">السادس علمي</h3>
-                            <p class="text-xs text-slate-500 dark:text-slate-400">ملازم كبار الأساتذة</p>
-                        </div>
+                <!-- المرحلة الإعدادية -->
+                <button onclick="switchStage('high', this)" class="stage-btn p-6 rounded-3xl border-2 border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 shadow-md flex flex-col items-center text-center space-y-3 group cursor-pointer">
+                    <div class="w-16 h-16 rounded-2xl bg-amber-500/20 text-brand-gold flex items-center justify-center text-3xl font-black group-hover:scale-110 transition duration-300">
+                        <i class="fa-solid fa-user-graduate"></i>
                     </div>
-                    <i class="fa-solid fa-chevron-left text-slate-400 text-xl group-hover:-translate-x-1 transition duration-200"></i>
+                    <div>
+                        <h3 class="font-extrabold text-xl text-slate-800 dark:text-white">المرحلة الإعدادية</h3>
+                        <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">الرابع والخامس والسادس إعدادي</p>
+                    </div>
                 </button>
             </div>
 
-            <!-- محتوى الأقسام الثلاثة للملازم -->
+            <!-- 2. أقسام الصفوف حسب المرحلة المختارة -->
 
-            <!-- 1. قسم السادس ابتدائي -->
-            <div id="notes-cat-primary-6" class="notes-category-content space-y-4">
-                <div class="flex items-center justify-between border-b border-slate-200 dark:border-slate-700 pb-2">
-                    <h2 onclick="registerSecretClick('primary-6')" class="text-2xl font-extrabold text-slate-800 dark:text-white cursor-pointer select-none title-secret" title="انقر 10 مرات للوصول لوضع الإضافة">
-                        <i class="fa-solid fa-child text-brand-gold me-2"></i>ملازم السادس ابتدائي
-                    </h2>
-                    <span class="text-xs bg-brand-gold/20 text-brand-gold px-3 py-1 rounded-full font-bold">قسم مميز</span>
+            <!-- تفاصيل المرحلة الابتدائية -->
+            <div id="stage-primary" class="stage-content space-y-6">
+                <div class="flex items-center gap-3 border-b border-slate-200 dark:border-slate-700 pb-3">
+                    <i class="fa-solid fa-child text-brand-gold text-2xl"></i>
+                    <h2 class="text-2xl font-extrabold text-slate-800 dark:text-white">المرحلة الابتدائية - اختر الصف</h2>
                 </div>
 
-                <!-- نموذج الإضافة الخفي -->
-                <div id="add-form-primary-6" class="hidden bg-slate-100 dark:bg-slate-800/90 p-4 rounded-2xl border-2 border-dashed border-brand-gold space-y-3">
-                    <h4 class="font-bold text-brand-gold text-sm flex items-center gap-2"><i class="fa-solid fa-plus-circle"></i> لوحة الإضافة الخفية - السادس ابتدائي</h4>
-                    <div class="grid grid-cols-1 md:grid-cols-4 gap-3">
-                        <input type="text" id="input-title-primary-6" placeholder="عنوان الملزمة" class="px-3 py-2 rounded-xl bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 text-sm focus:outline-none">
-                        <input type="text" id="input-sub-primary-6" placeholder="المادة" class="px-3 py-2 rounded-xl bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 text-sm focus:outline-none">
-                        <input type="number" id="input-price-primary-6" placeholder="السعر (د.ع)" class="px-3 py-2 rounded-xl bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 text-sm focus:outline-none">
-                        <input type="text" id="input-desc-primary-6" placeholder="الوصف المختصر" class="px-3 py-2 rounded-xl bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 text-sm focus:outline-none">
-                    </div>
-                    <button onclick="addNewNote('primary-6')" class="px-5 py-2 bg-brand-gold text-slate-900 font-bold rounded-xl text-sm hover:bg-amber-500 transition shadow">إضافة المنتج للقسم</button>
+                <!-- أزرار الصفوف الابتدائية -->
+                <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-2">
+                    <button onclick="switchGrade('primary', '1', this)" class="grade-tab-btn grade-btn-primary px-3 py-2.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-sm font-bold text-center">الأول ابتدائي</button>
+                    <button onclick="switchGrade('primary', '2', this)" class="grade-tab-btn grade-btn-primary px-3 py-2.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-sm font-bold text-center">الثاني ابتدائي</button>
+                    <button onclick="switchGrade('primary', '3', this)" class="grade-tab-btn grade-btn-primary px-3 py-2.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-sm font-bold text-center">الثالث ابتدائي</button>
+                    <button onclick="switchGrade('primary', '4', this)" class="grade-tab-btn grade-btn-primary px-3 py-2.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-sm font-bold text-center">الرابع ابتدائي</button>
+                    <button onclick="switchGrade('primary', '5', this)" class="grade-tab-btn grade-btn-primary px-3 py-2.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-sm font-bold text-center">الخامس ابتدائي</button>
+                    <button onclick="switchGrade('primary', '6', this)" class="grade-tab-btn grade-btn-primary active px-3 py-2.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-sm font-bold text-center">السادس ابتدائي</button>
                 </div>
 
-                <!-- شبكة المنتجات -->
-                <div id="notes-grid-primary-6" class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                    <div class="search-item note-card card-hover-effect bg-white dark:bg-slate-800 p-6 rounded-2xl shadow-md dark:shadow-xl border border-slate-200 dark:border-slate-700 flex flex-col justify-between">
-                        <div>
-                            <div class="flex justify-between items-center mb-2">
-                                <span class="bg-amber-100 dark:bg-amber-500/10 text-brand-gold border border-amber-300 dark:border-amber-500/30 text-xs font-bold px-3 py-1 rounded-full item-sub">العلوم</span>
-                                <span class="font-extrabold text-brand-gold">7,000 د.ع</span>
-                            </div>
-                            <h3 class="text-xl font-bold mt-1 mb-2 item-title text-slate-800 dark:text-white">ملزمة العلوم الشاملة</h3>
-                            <p class="text-sm text-slate-500 dark:text-slate-400 mb-4">شرح ميسر ملائم لطلاب المرحلة الابتدائية مدعوم بالتجارب.</p>
-                        </div>
-                        <button onclick="addToCart('ملزمة العلوم الشاملة - السادس ابتدائي', 7000)" class="w-full py-2.5 bg-brand-blue text-white font-bold rounded-xl hover:bg-blue-700 transition active:scale-95 shadow-md">طلب الملزمة</button>
+                <!-- ملازم الصفوف الابتدائية -->
+                <div id="grade-primary-1" class="grade-content grade-content-primary hidden grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="search-item note-card bg-white dark:bg-slate-800 p-6 rounded-2xl border border-slate-200 dark:border-slate-700">
+                        <span class="bg-amber-100 dark:bg-amber-500/10 text-brand-gold text-xs font-bold px-3 py-1 rounded-full item-sub">قراءة</span>
+                        <h3 class="text-lg font-bold mt-3 mb-2 item-title">ملزمة القراءة - الأول ابتدائي</h3>
+                        <p class="text-sm text-slate-500 dark:text-slate-400 mb-4">تعليم الحروف والكلمات بالصور التوضيحية.</p>
+                        <button class="w-full py-2 bg-brand-blue text-white font-bold rounded-xl text-sm hover:bg-blue-700 transition">طلب الملزمة</button>
                     </div>
-
-                    <div class="search-item note-card card-hover-effect bg-white dark:bg-slate-800 p-6 rounded-2xl shadow-md dark:shadow-xl border border-slate-200 dark:border-slate-700 flex flex-col justify-between">
+                </div>
+                <div id="grade-primary-2" class="grade-content grade-content-primary hidden grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="search-item note-card bg-white dark:bg-slate-800 p-6 rounded-2xl border border-slate-200 dark:border-slate-700">
+                        <span class="bg-amber-100 dark:bg-amber-500/10 text-brand-gold text-xs font-bold px-3 py-1 rounded-full item-sub">الرياضيات</span>
+                        <h3 class="text-lg font-bold mt-3 mb-2 item-title">ملزمة الرياضيات - الثاني ابتدائي</h3>
+                        <p class="text-sm text-slate-500 dark:text-slate-400 mb-4">تمارين الحساب والأرقام الميسرة.</p>
+                        <button class="w-full py-2 bg-brand-blue text-white font-bold rounded-xl text-sm hover:bg-blue-700 transition">طلب الملزمة</button>
+                    </div>
+                </div>
+                <div id="grade-primary-3" class="grade-content grade-content-primary hidden grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="search-item note-card bg-white dark:bg-slate-800 p-6 rounded-2xl border border-slate-200 dark:border-slate-700">
+                        <span class="bg-amber-100 dark:bg-amber-500/10 text-brand-gold text-xs font-bold px-3 py-1 rounded-full item-sub">العلوم</span>
+                        <h3 class="text-lg font-bold mt-3 mb-2 item-title">ملزمة العلوم - الثالث ابتدائي</h3>
+                        <p class="text-sm text-slate-500 dark:text-slate-400 mb-4">شرح مبسط ومصور للعلوم الأساسية.</p>
+                        <button class="w-full py-2 bg-brand-blue text-white font-bold rounded-xl text-sm hover:bg-blue-700 transition">طلب الملزمة</button>
+                    </div>
+                </div>
+                <div id="grade-primary-4" class="grade-content grade-content-primary hidden grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="search-item note-card bg-white dark:bg-slate-800 p-6 rounded-2xl border border-slate-200 dark:border-slate-700">
+                        <span class="bg-amber-100 dark:bg-amber-500/10 text-brand-gold text-xs font-bold px-3 py-1 rounded-full item-sub">اللغة العربية</span>
+                        <h3 class="text-lg font-bold mt-3 mb-2 item-title">ملزمة القواعد - الرابع ابتدائي</h3>
+                        <p class="text-sm text-slate-500 dark:text-slate-400 mb-4">أساسيات قواعد اللغة العربية والملاء.</p>
+                        <button class="w-full py-2 bg-brand-blue text-white font-bold rounded-xl text-sm hover:bg-blue-700 transition">طلب الملزمة</button>
+                    </div>
+                </div>
+                <div id="grade-primary-5" class="grade-content grade-content-primary hidden grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="search-item note-card bg-white dark:bg-slate-800 p-6 rounded-2xl border border-slate-200 dark:border-slate-700">
+                        <span class="bg-amber-100 dark:bg-amber-500/10 text-brand-gold text-xs font-bold px-3 py-1 rounded-full item-sub">الإنكليزي</span>
+                        <h3 class="text-lg font-bold mt-3 mb-2 item-title">ملزمة اللغة الإنكليزية - الخامس ابتدائي</h3>
+                        <p class="text-sm text-slate-500 dark:text-slate-400 mb-4">مفردات وقواعد المنهج المفصلة.</p>
+                        <button class="w-full py-2 bg-brand-blue text-white font-bold rounded-xl text-sm hover:bg-blue-700 transition">طلب الملزمة</button>
+                    </div>
+                </div>
+                <div id="grade-primary-6" class="grade-content grade-content-primary grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="search-item note-card card-hover-effect bg-white dark:bg-slate-800 p-6 rounded-2xl shadow-md border border-slate-200 dark:border-slate-700 flex flex-col justify-between">
                         <div>
-                            <div class="flex justify-between items-center mb-2">
-                                <span class="bg-amber-100 dark:bg-amber-500/10 text-brand-gold border border-amber-300 dark:border-amber-500/30 text-xs font-bold px-3 py-1 rounded-full item-sub">الرياضيات</span>
-                                <span class="font-extrabold text-brand-gold">8,000 د.ع</span>
-                            </div>
-                            <h3 class="text-xl font-bold mt-1 mb-2 item-title text-slate-800 dark:text-white">ملزمة الرياضيات الذهبية</h3>
-                            <p class="text-sm text-slate-500 dark:text-slate-400 mb-4">حلول كافة أسئلة الكتاب مع نماذج اختبارات وزارية.</p>
+                            <span class="bg-amber-100 dark:bg-amber-500/10 text-brand-gold border border-amber-300 dark:border-amber-500/30 text-xs font-bold px-3 py-1 rounded-full item-sub">العلوم</span>
+                            <h3 class="text-xl font-bold mt-3 mb-2 item-title text-slate-800 dark:text-white">ملزمة العلوم الشاملة</h3>
+                            <p class="text-sm text-slate-500 dark:text-slate-400 mb-4">شرح ميسر ملائم لطلاب السادس الابتدائي.</p>
                         </div>
-                        <button onclick="addToCart('ملزمة الرياضيات الذهبية - السادس ابتدائي', 8000)" class="w-full py-2.5 bg-brand-blue text-white font-bold rounded-xl hover:bg-blue-700 transition active:scale-95 shadow-md">طلب الملزمة</button>
+                        <button class="w-full py-2.5 bg-brand-blue text-white font-bold rounded-xl hover:bg-blue-700 transition active:scale-95 shadow-md">طلب الملزمة</button>
                     </div>
                 </div>
             </div>
 
-            <!-- 2. قسم الثالث متوسط -->
-            <div id="notes-cat-middle-3" class="notes-category-content hidden space-y-4">
-                <div class="flex items-center justify-between border-b border-slate-200 dark:border-slate-700 pb-2">
-                    <h2 onclick="registerSecretClick('middle-3')" class="text-2xl font-extrabold text-slate-800 dark:text-white cursor-pointer select-none title-secret" title="انقر 10 مرات للوصول لوضع الإضافة">
-                        <i class="fa-solid fa-user-graduate text-brand-lightBlue me-2"></i>ملازم الثالث متوسط
-                    </h2>
-                    <span class="text-xs bg-blue-500/20 text-brand-lightBlue px-3 py-1 rounded-full font-bold">قسم مميز</span>
+            <!-- تفاصيل المرحلة المتوسطة -->
+            <div id="stage-middle" class="stage-content hidden space-y-6">
+                <div class="flex items-center gap-3 border-b border-slate-200 dark:border-slate-700 pb-3">
+                    <i class="fa-solid fa-school text-brand-lightBlue text-2xl"></i>
+                    <h2 class="text-2xl font-extrabold text-slate-800 dark:text-white">المرحلة المتوسطة - اختر الصف</h2>
                 </div>
 
-                <!-- نموذج الإضافة الخفي -->
-                <div id="add-form-middle-3" class="hidden bg-slate-100 dark:bg-slate-800/90 p-4 rounded-2xl border-2 border-dashed border-brand-lightBlue space-y-3">
-                    <h4 class="font-bold text-brand-lightBlue text-sm flex items-center gap-2"><i class="fa-solid fa-plus-circle"></i> لوحة الإضافة الخفية - الثالث متوسط</h4>
-                    <div class="grid grid-cols-1 md:grid-cols-4 gap-3">
-                        <input type="text" id="input-title-middle-3" placeholder="عنوان الملزمة" class="px-3 py-2 rounded-xl bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 text-sm focus:outline-none">
-                        <input type="text" id="input-sub-middle-3" placeholder="المادة" class="px-3 py-2 rounded-xl bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 text-sm focus:outline-none">
-                        <input type="number" id="input-price-middle-3" placeholder="السعر (د.ع)" class="px-3 py-2 rounded-xl bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 text-sm focus:outline-none">
-                        <input type="text" id="input-desc-middle-3" placeholder="الوصف المختصر" class="px-3 py-2 rounded-xl bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 text-sm focus:outline-none">
+                <!-- أزرار الصفوف المتوسطة -->
+                <div class="grid grid-cols-3 gap-3 max-w-lg mx-auto">
+                    <button onclick="switchGrade('middle', '1', this)" class="grade-tab-btn grade-btn-middle px-4 py-3 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-sm font-bold text-center">الأول متوسط</button>
+                    <button onclick="switchGrade('middle', '2', this)" class="grade-tab-btn grade-btn-middle px-4 py-3 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-sm font-bold text-center">الثاني متوسط</button>
+                    <button onclick="switchGrade('middle', '3', this)" class="grade-tab-btn grade-btn-middle active px-4 py-3 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-sm font-bold text-center">الثالث متوسط</button>
+                </div>
+
+                <!-- ملازم الصفوف المتوسطة -->
+                <div id="grade-middle-1" class="grade-content grade-content-middle hidden grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="search-item note-card bg-white dark:bg-slate-800 p-6 rounded-2xl border border-slate-200 dark:border-slate-700">
+                        <span class="bg-blue-100 dark:bg-blue-500/10 text-brand-lightBlue text-xs font-bold px-3 py-1 rounded-full item-sub">الرياضيات</span>
+                        <h3 class="text-lg font-bold mt-3 mb-2 item-title">ملزمة الرياضيات - الجزء الأول</h3>
+                        <p class="text-sm text-slate-500 dark:text-slate-400 mb-4">شرح المنهج الجديد للأول متوسط.</p>
+                        <button class="w-full py-2 bg-brand-blue text-white font-bold rounded-xl text-sm hover:bg-blue-700 transition">طلب الملزمة</button>
                     </div>
-                    <button onclick="addNewNote('middle-3')" class="px-5 py-2 bg-brand-lightBlue text-white font-bold rounded-xl text-sm hover:bg-blue-600 transition shadow">إضافة المنتج للقسم</button>
                 </div>
-
-                <div id="notes-grid-middle-3" class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                    <div class="search-item note-card card-hover-effect bg-white dark:bg-slate-800 p-6 rounded-2xl shadow-md dark:shadow-xl border border-slate-200 dark:border-slate-700 flex flex-col justify-between">
+                <div id="grade-middle-2" class="grade-content grade-content-middle hidden grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="search-item note-card bg-white dark:bg-slate-800 p-6 rounded-2xl border border-slate-200 dark:border-slate-700">
+                        <span class="bg-blue-100 dark:bg-blue-500/10 text-brand-lightBlue text-xs font-bold px-3 py-1 rounded-full item-sub">العلوم</span>
+                        <h3 class="text-lg font-bold mt-3 mb-2 item-title">ملزمة الفيزياء والكيمياء</h3>
+                        <p class="text-sm text-slate-500 dark:text-slate-400 mb-4">ملخص الفيزياء والكيمياء للثاني متوسط.</p>
+                        <button class="w-full py-2 bg-brand-blue text-white font-bold rounded-xl text-sm hover:bg-blue-700 transition">طلب الملزمة</button>
+                    </div>
+                </div>
+                <div id="grade-middle-3" class="grade-content grade-content-middle grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="search-item note-card card-hover-effect bg-white dark:bg-slate-800 p-6 rounded-2xl shadow-md border border-slate-200 dark:border-slate-700 flex flex-col justify-between">
                         <div>
-                            <div class="flex justify-between items-center mb-2">
-                                <span class="bg-blue-100 dark:bg-blue-500/10 text-brand-lightBlue border border-blue-300 dark:border-blue-500/30 text-xs font-bold px-3 py-1 rounded-full item-sub">اللغة الإنجليزية</span>
-                                <span class="font-extrabold text-brand-gold">9,000 د.ع</span>
-                            </div>
-                            <h3 class="text-xl font-bold mt-1 mb-2 item-title text-slate-800 dark:text-white">ملزمة الإنكليزي المكثفة</h3>
-                            <p class="text-sm text-slate-500 dark:text-slate-400 mb-4">قواعد وإنشاءات الوزاري والقطع المطلوبة مترجمة بالكامل.</p>
+                            <span class="bg-blue-100 dark:bg-blue-500/10 text-brand-lightBlue border border-blue-300 dark:border-blue-500/30 text-xs font-bold px-3 py-1 rounded-full item-sub">اللغة الإنجليزية</span>
+                            <h3 class="text-xl font-bold mt-3 mb-2 item-title text-slate-800 dark:text-white">ملزمة الإنكليزي المكثفة</h3>
+                            <p class="text-sm text-slate-500 dark:text-slate-400 mb-4">قواعد وإنشاءات الوزاري للثالث متوسط.</p>
                         </div>
-                        <button onclick="addToCart('ملزمة الإنكليزي المكثفة - الثالث متوسط', 9000)" class="w-full py-2.5 bg-brand-blue text-white font-bold rounded-xl hover:bg-blue-700 transition active:scale-95 shadow-md">طلب الملزمة</button>
+                        <button class="w-full py-2.5 bg-brand-blue text-white font-bold rounded-xl hover:bg-blue-700 transition active:scale-95 shadow-md">طلب الملزمة</button>
                     </div>
                 </div>
             </div>
 
-            <!-- 3. قسم السادس علمي -->
-            <div id="notes-cat-scientific-6" class="notes-category-content hidden space-y-4">
-                <div class="flex items-center justify-between border-b border-slate-200 dark:border-slate-700 pb-2">
-                    <h2 onclick="registerSecretClick('scientific-6')" class="text-2xl font-extrabold text-slate-800 dark:text-white cursor-pointer select-none title-secret" title="انقر 10 مرات للوصول لوضع الإضافة">
-                        <i class="fa-solid fa-atom text-brand-gold me-2"></i>ملازم السادس علمي
-                    </h2>
-                    <span class="text-xs bg-brand-gold/20 text-brand-gold px-3 py-1 rounded-full font-bold">قسم مميز</span>
+            <!-- تفاصيل المرحلة الإعدادية -->
+            <div id="stage-high" class="stage-content hidden space-y-6">
+                <div class="flex items-center gap-3 border-b border-slate-200 dark:border-slate-700 pb-3">
+                    <i class="fa-solid fa-user-graduate text-brand-gold text-2xl"></i>
+                    <h2 class="text-2xl font-extrabold text-slate-800 dark:text-white">المرحلة الإعدادية - اختر الصف</h2>
                 </div>
 
-                <!-- نموذج الإضافة الخفي -->
-                <div id="add-form-scientific-6" class="hidden bg-slate-100 dark:bg-slate-800/90 p-4 rounded-2xl border-2 border-dashed border-brand-gold space-y-3">
-                    <h4 class="font-bold text-brand-gold text-sm flex items-center gap-2"><i class="fa-solid fa-plus-circle"></i> لوحة الإضافة الخفية - السادس علمي</h4>
-                    <div class="grid grid-cols-1 md:grid-cols-4 gap-3">
-                        <input type="text" id="input-title-scientific-6" placeholder="عنوان الملزمة" class="px-3 py-2 rounded-xl bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 text-sm focus:outline-none">
-                        <input type="text" id="input-sub-scientific-6" placeholder="المادة" class="px-3 py-2 rounded-xl bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 text-sm focus:outline-none">
-                        <input type="number" id="input-price-scientific-6" placeholder="السعر (د.ع)" class="px-3 py-2 rounded-xl bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 text-sm focus:outline-none">
-                        <input type="text" id="input-desc-scientific-6" placeholder="الوصف المختصر" class="px-3 py-2 rounded-xl bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 text-sm focus:outline-none">
+                <!-- أزرار الصفوف الإعدادية -->
+                <div class="grid grid-cols-3 gap-3 max-w-lg mx-auto">
+                    <button onclick="switchGrade('high', '4', this)" class="grade-tab-btn grade-btn-high px-4 py-3 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-sm font-bold text-center">الرابع إعدادي</button>
+                    <button onclick="switchGrade('high', '5', this)" class="grade-tab-btn grade-btn-high px-4 py-3 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-sm font-bold text-center">الخامس إعدادي</button>
+                    <button onclick="switchGrade('high', '6', this)" class="grade-tab-btn grade-btn-high active px-4 py-3 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-sm font-bold text-center">السادس إعدادي</button>
+                </div>
+
+                <!-- ملازم الصفوف الإعدادية -->
+                <div id="grade-high-4" class="grade-content grade-content-high hidden grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="search-item note-card bg-white dark:bg-slate-800 p-6 rounded-2xl border border-slate-200 dark:border-slate-700">
+                        <span class="bg-amber-100 dark:bg-amber-500/10 text-brand-gold text-xs font-bold px-3 py-1 rounded-full item-sub">الأحياء</span>
+                        <h3 class="text-lg font-bold mt-3 mb-2 item-title">ملزمة الأحياء - الرابع العلمي</h3>
+                        <p class="text-sm text-slate-500 dark:text-slate-400 mb-4">شرح المنهج العلمي والتوضيحات الرسمية.</p>
+                        <button class="w-full py-2 bg-brand-blue text-white font-bold rounded-xl text-sm hover:bg-blue-700 transition">طلب الملزمة</button>
                     </div>
-                    <button onclick="addNewNote('scientific-6')" class="px-5 py-2 bg-brand-gold text-slate-900 font-bold rounded-xl text-sm hover:bg-amber-500 transition shadow">إضافة المنتج للقسم</button>
                 </div>
-
-                <div id="notes-grid-scientific-6" class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                    <div class="search-item note-card card-hover-effect bg-white dark:bg-slate-800 p-6 rounded-2xl shadow-md dark:shadow-xl border border-slate-200 dark:border-slate-700 flex flex-col justify-between">
+                <div id="grade-high-5" class="grade-content grade-content-high hidden grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="search-item note-card bg-white dark:bg-slate-800 p-6 rounded-2xl border border-slate-200 dark:border-slate-700">
+                        <span class="bg-amber-100 dark:bg-amber-500/10 text-brand-gold text-xs font-bold px-3 py-1 rounded-full item-sub">الرياضيات</span>
+                        <h3 class="text-lg font-bold mt-3 mb-2 item-title">ملزمة الرياضيات - الخامس العلمي</h3>
+                        <p class="text-sm text-slate-500 dark:text-slate-400 mb-4">تغطية شاملة لفصول الرياضيات.</p>
+                        <button class="w-full py-2 bg-brand-blue text-white font-bold rounded-xl text-sm hover:bg-blue-700 transition">طلب الملزمة</button>
+                    </div>
+                </div>
+                <div id="grade-high-6" class="grade-content grade-content-high grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="search-item note-card card-hover-effect bg-white dark:bg-slate-800 p-6 rounded-2xl shadow-md border border-slate-200 dark:border-slate-700 flex flex-col justify-between">
                         <div>
-                            <div class="flex justify-between items-center mb-2">
-                                <span class="bg-amber-100 dark:bg-amber-500/10 text-brand-gold border border-amber-300 dark:border-amber-500/30 text-xs font-bold px-3 py-1 rounded-full item-sub">الكيمياء</span>
-                                <span class="font-extrabold text-brand-gold">11,000 د.ع</span>
-                            </div>
-                            <h3 class="text-xl font-bold mt-1 mb-2 item-title text-slate-800 dark:text-white">ملزمة الكيمياء - السادس العلمي</h3>
-                            <p class="text-sm text-slate-500 dark:text-slate-400 mb-4">تتضمن حلول الأسئلة الوزارية والشرح التوضيحي المكتمل.</p>
+                            <span class="bg-amber-100 dark:bg-amber-500/10 text-brand-gold border border-amber-300 dark:border-amber-500/30 text-xs font-bold px-3 py-1 rounded-full item-sub">الكيمياء</span>
+                            <h3 class="text-xl font-bold mt-3 mb-2 item-title text-slate-800 dark:text-white">ملزمة الكيمياء - السادس العلمي</h3>
+                            <p class="text-sm text-slate-500 dark:text-slate-400 mb-4">تتضمن حلول الأسئلة الوزارية والشرح التوضيحي.</p>
                         </div>
-                        <button onclick="addToCart('ملزمة الكيمياء - السادس العلمي', 11000)" class="w-full py-2.5 bg-brand-blue text-white font-bold rounded-xl hover:bg-blue-700 transition active:scale-95 shadow-md">طلب الملزمة</button>
+                        <button class="w-full py-2.5 bg-brand-blue text-white font-bold rounded-xl hover:bg-blue-700 transition active:scale-95 shadow-md">طلب الملزمة</button>
                     </div>
                 </div>
             </div>
+
         </section>
 
         <!-- 5. PAGE: BOOKS -->
@@ -693,77 +690,21 @@
 
             <div id="books-grid" class="grid grid-cols-1 md:grid-cols-3 gap-6">
                 <div class="search-item card-hover-effect bg-white dark:bg-slate-800 p-5 rounded-2xl shadow-md dark:shadow-xl border border-slate-200 dark:border-slate-700 flex gap-4">
-                    <div class="w-24 h-32 bg-slate-100 dark:bg-slate-900 rounded-xl flex-shrink-0 flex items-center justify-center text-3xl text-amber-500 border border-slate-200 dark:border-slate-700">
-                        <i class="fa-solid fa-book-bookmark"></i>
+                    <div class="w-24 h-32 bg-slate-100 dark:bg-slate-900 rounded-xl flex-shrink-0 flex items-center justify-center text-3xl text-slate-400 dark:text-slate-600 border border-slate-200 dark:border-slate-700">
+                        <i class="fa-solid fa-book"></i>
                     </div>
-                    <div class="flex flex-col justify-between flex-grow">
+                    <div class="flex flex-col justify-between">
                         <div>
                             <h3 class="font-bold text-slate-800 dark:text-slate-100 item-title">قصة المغامر الصغير</h3>
                             <p class="text-xs text-slate-500 dark:text-slate-400 mt-1 item-sub">قصص أطفال وتنمية مهارات</p>
-                            <span class="inline-block mt-2 font-black text-brand-gold text-sm">4,500 د.ع</span>
                         </div>
-                        <button onclick="addToCart('قصة المغامر الصغير', 4500)" class="px-4 py-1.5 bg-brand-gold text-slate-900 font-bold text-sm rounded-xl hover:bg-amber-500 transition active:scale-95 self-start">إضافة للسلة</button>
-                    </div>
-                </div>
-
-                <div class="search-item card-hover-effect bg-white dark:bg-slate-800 p-5 rounded-2xl shadow-md dark:shadow-xl border border-slate-200 dark:border-slate-700 flex gap-4">
-                    <div class="w-24 h-32 bg-slate-100 dark:bg-slate-900 rounded-xl flex-shrink-0 flex items-center justify-center text-3xl text-blue-500 border border-slate-200 dark:border-slate-700">
-                        <i class="fa-solid fa-brain"></i>
-                    </div>
-                    <div class="flex flex-col justify-between flex-grow">
-                        <div>
-                            <h3 class="font-bold text-slate-800 dark:text-slate-100 item-title">كتاب العبقري الصغير للذكاء</h3>
-                            <p class="text-xs text-slate-500 dark:text-slate-400 mt-1 item-sub">أحاجي وتمارين لتطوير التفكير</p>
-                            <span class="inline-block mt-2 font-black text-brand-gold text-sm">6,000 د.ع</span>
-                        </div>
-                        <button onclick="addToCart('كتاب العبقري الصغير للذكاء', 6000)" class="px-4 py-1.5 bg-brand-gold text-slate-900 font-bold text-sm rounded-xl hover:bg-amber-500 transition active:scale-95 self-start">إضافة للسلة</button>
+                        <button class="px-4 py-1.5 bg-brand-gold text-slate-900 font-bold text-sm rounded-xl hover:bg-amber-500 transition active:scale-95 self-start">تصفح الآن</button>
                     </div>
                 </div>
             </div>
         </section>
 
     </main>
-
-    <!-- SHOPPING CART DRAWER / SLIDE-OVER -->
-    <div id="cart-drawer" class="fixed inset-0 z-50 overflow-hidden pointer-events-none transition-opacity duration-300 opacity-0">
-        <div onclick="toggleCartDrawer()" class="absolute inset-0 bg-slate-900/60 backdrop-blur-sm pointer-events-auto"></div>
-        <div class="fixed inset-y-0 left-0 max-w-full flex pl-10 pointer-events-auto">
-            <div class="w-screen max-w-md bg-white dark:bg-slate-800 shadow-2xl flex flex-col justify-between border-r border-slate-200 dark:border-slate-700">
-                <div class="p-6 border-b border-slate-200 dark:border-slate-700 flex items-center justify-between">
-                    <h3 class="text-xl font-extrabold flex items-center gap-2"><i class="fa-solid fa-cart-shopping text-brand-gold"></i> سلة المشتريات</h3>
-                    <button onclick="toggleCartDrawer()" class="text-slate-400 hover:text-red-500 text-xl font-bold p-2"><i class="fa-solid fa-xmark"></i></button>
-                </div>
-
-                <!-- Cart Items Container -->
-                <div id="cart-items-container" class="p-6 flex-grow overflow-y-auto space-y-4">
-                    <div class="text-center py-12 text-slate-400">
-                        <i class="fa-solid fa-basket-shopping text-5xl mb-3 opacity-40"></i>
-                        <p class="font-bold">السلة فارغة حالياً</p>
-                    </div>
-                </div>
-
-                <!-- Cart Footer / Total -->
-                <div class="p-6 bg-slate-50 dark:bg-slate-900 border-t border-slate-200 dark:border-slate-700 space-y-4">
-                    <div class="flex justify-between items-center font-extrabold text-lg">
-                        <span>المجموع الكلي:</span>
-                        <span id="cart-total-price" class="text-brand-gold">0 د.ع</span>
-                    </div>
-                    <button onclick="checkoutWhatsApp()" class="w-full py-3 bg-emerald-600 hover:bg-emerald-700 text-white font-extrabold rounded-xl transition flex items-center justify-center gap-2 shadow-lg active:scale-95">
-                        <i class="fa-brands fa-whatsapp text-xl"></i> إتمام الطلب عبر واتساب
-                    </button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Bottom Navigation Bar for Mobile -->
-    <div class="md:hidden fixed bottom-0 left-0 right-0 z-40 bg-white/90 dark:bg-slate-800/90 backdrop-blur-md border-t border-slate-200 dark:border-slate-700 flex justify-around py-2.5 text-xs font-bold text-slate-600 dark:text-slate-300">
-        <button onclick="navigateTo('home')" class="flex flex-col items-center gap-1 hover:text-brand-gold"><i class="fa-solid fa-house text-base"></i>الرئيسية</button>
-        <button onclick="navigateTo('teachers')" class="flex flex-col items-center gap-1 hover:text-brand-gold"><i class="fa-solid fa-chalkboard-user text-base"></i>الأساتذة</button>
-        <button onclick="navigateTo('supplies')" class="flex flex-col items-center gap-1 hover:text-brand-gold"><i class="fa-solid fa-pen-ruler text-base"></i>المستلزمات</button>
-        <button onclick="navigateTo('notes')" class="flex flex-col items-center gap-1 hover:text-brand-gold"><i class="fa-solid fa-file-lines text-base"></i>الملازم</button>
-        <button onclick="navigateTo('books')" class="flex flex-col items-center gap-1 hover:text-brand-gold"><i class="fa-solid fa-book-open text-base"></i>الكتب</button>
-    </div>
 
     <!-- Footer -->
     <footer class="bg-slate-100 dark:bg-slate-950 text-slate-500 dark:text-slate-500 py-6 mt-10 border-t border-slate-200 dark:border-slate-800 relative z-10 transition-colors duration-300">
@@ -772,105 +713,9 @@
         </div>
     </footer>
 
-    <!-- JavaScript Logic -->
+    <!-- JavaScript Dynamic Logic -->
     <script>
-        // Shopping Cart State
-        let cart = [];
-
-        function addToCart(title, price) {
-            const existing = cart.find(item => item.title === title);
-            if (existing) {
-                existing.quantity += 1;
-            } else {
-                cart.push({ title, price, quantity: 1 });
-            }
-            updateCartUI();
-            showToast(`تمت إضافة "${title}" إلى السلة`);
-        }
-
-        function removeFromCart(index) {
-            cart.splice(index, 1);
-            updateCartUI();
-        }
-
-        function updateCartUI() {
-            const container = document.getElementById('cart-items-container');
-            const badge = document.getElementById('cart-badge');
-            const totalElement = document.getElementById('cart-total-price');
-
-            const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
-            const totalPrice = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
-
-            if (totalItems > 0) {
-                badge.textContent = totalItems;
-                badge.classList.remove('hidden');
-            } else {
-                badge.classList.add('hidden');
-            }
-
-            totalElement.textContent = `${totalPrice.toLocaleString()} د.ع`;
-
-            if (cart.length === 0) {
-                container.innerHTML = `
-                    <div class="text-center py-12 text-slate-400">
-                        <i class="fa-solid fa-basket-shopping text-5xl mb-3 opacity-40"></i>
-                        <p class="font-bold">السلة فارغة حالياً</p>
-                    </div>
-                `;
-                return;
-            }
-
-            container.innerHTML = cart.map((item, index) => `
-                <div class="flex items-center justify-between p-3 bg-slate-100 dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-700">
-                    <div class="flex-grow pr-2">
-                        <h4 class="font-bold text-sm text-slate-800 dark:text-white">${item.title}</h4>
-                        <p class="text-xs text-brand-gold font-bold mt-1">${item.price.toLocaleString()} د.ع × ${item.quantity}</p>
-                    </div>
-                    <button onclick="removeFromCart(${index})" class="text-red-500 hover:text-red-700 p-2 text-sm"><i class="fa-solid fa-trash-can"></i></button>
-                </div>
-            `).join('');
-        }
-
-        function toggleCartDrawer() {
-            const drawer = document.getElementById('cart-drawer');
-            if (drawer.classList.contains('pointer-events-none')) {
-                drawer.classList.remove('pointer-events-none', 'opacity-0');
-            } else {
-                drawer.classList.add('pointer-events-none', 'opacity-0');
-            }
-        }
-
-        function checkoutWhatsApp() {
-            if (cart.length === 0) {
-                alert("السلة فارغة، يرجى إضافة عناصر أولاً!");
-                return;
-            }
-
-            let message = "مرحباً مكتبة العبقري، أود طلب المواد التالية:\n\n";
-            cart.forEach((item, i) => {
-                message += `${i + 1}. ${item.title} (العدد: ${item.quantity}) - السعر: ${(item.price * item.quantity).toLocaleString()} د.ع\n`;
-            });
-
-            const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
-            message += `\nالمجموع الكلي: ${total.toLocaleString()} د.ع`;
-
-            const phone = "9647000000000"; // استبدل برقم الواتساب الخاص بك
-            const url = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
-            window.open(url, '_blank');
-        }
-
-        function showToast(msg) {
-            const toast = document.getElementById('toast-notification');
-            const msgEl = document.getElementById('toast-message');
-            msgEl.textContent = msg;
-            toast.classList.remove('-translate-x-full', 'opacity-0');
-
-            setTimeout(() => {
-                toast.classList.add('-translate-x-full', 'opacity-0');
-            }, 2500);
-        }
-
-        // Intro Splash Timer (1 Second)
+        // Intro Splash Screen
         window.addEventListener('DOMContentLoaded', () => {
             setTimeout(() => {
                 const splash = document.getElementById('welcome-splash');
@@ -881,7 +726,7 @@
             }, 1000);
         });
 
-        // Dark / Light Mode Toggle Logic
+        // Theme Toggle
         function toggleTheme() {
             const html = document.documentElement;
             const icon = document.getElementById('theme-toggle-icon');
@@ -909,7 +754,7 @@
             }
         })();
 
-        // Page Navigation
+        // Navigation Switch
         function navigateTo(pageId) {
             const pages = document.querySelectorAll('.page-section');
             pages.forEach(page => page.classList.add('hidden'));
@@ -921,7 +766,62 @@
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
-        // Switch Subject Tabs
+        // Switch Stage (Primary / Middle / High)
+        function switchStage(stageId, btn) {
+            const stageBtns = document.querySelectorAll('.stage-btn');
+            stageBtns.forEach(b => {
+                b.classList.remove('active', 'border-brand-gold', 'border-brand-lightBlue');
+                b.classList.add('border-slate-200', 'dark:border-slate-700');
+            });
+
+            btn.classList.add('active');
+            if (stageId === 'middle') {
+                btn.classList.add('border-brand-lightBlue');
+            } else {
+                btn.classList.add('border-brand-gold');
+            }
+
+            const stageContents = document.querySelectorAll('.stage-content');
+            stageContents.forEach(sc => sc.classList.add('hidden'));
+
+            const targetStage = document.getElementById('stage-' + stageId);
+            if (targetStage) {
+                targetStage.classList.remove('hidden');
+            }
+        }
+
+        // Switch Grade inside Stage
+        function switchGrade(stageId, gradeNumber, btn) {
+            const gradeBtns = document.querySelectorAll(`.grade-btn-${stageId}`);
+            gradeBtns.forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+
+            const gradeContents = document.querySelectorAll(`.grade-content-${stageId}`);
+            gradeContents.forEach(gc => gc.classList.add('hidden'));
+
+            const targetGrade = document.getElementById(`grade-${stageId}-${gradeNumber}`);
+            if (targetGrade) {
+                targetGrade.classList.remove('hidden');
+            }
+        }
+
+        // Search Notes Filter
+        function filterNotes(query) {
+            const filter = query.toLowerCase();
+            const items = document.querySelectorAll('.stage-content .search-item');
+
+            items.forEach(item => {
+                const title = item.querySelector('.item-title')?.textContent || '';
+                const sub = item.querySelector('.item-sub')?.textContent || '';
+                if (title.toLowerCase().includes(filter) || sub.toLowerCase().includes(filter)) {
+                    item.style.display = "";
+                } else {
+                    item.style.display = "none";
+                }
+            });
+        }
+
+        // Switch Subject Tabs (Teachers)
         function switchSubjectTab(subjectId, btn) {
             const allTabs = document.querySelectorAll('.subject-tab-btn');
             allTabs.forEach(t => t.classList.remove('active'));
@@ -936,110 +836,10 @@
             }
         }
 
-        // Switch Notes Categories
-        function switchNotesCategory(catId, btn) {
-            const allBtns = document.querySelectorAll('.notes-tab-btn');
-            allBtns.forEach(b => {
-                b.classList.remove('active', 'border-brand-gold', 'border-brand-lightBlue');
-                b.classList.add('border-slate-200', 'dark:border-slate-700');
-            });
-
-            btn.classList.add('active');
-            if (catId === 'middle-3') {
-                btn.classList.add('border-brand-lightBlue');
-            } else {
-                btn.classList.add('border-brand-gold');
-            }
-
-            const allCats = document.querySelectorAll('.notes-category-content');
-            allCats.forEach(c => c.classList.add('hidden'));
-
-            const targetCat = document.getElementById('notes-cat-' + catId);
-            if (targetCat) {
-                targetCat.classList.remove('hidden');
-            }
+        function selectTeacher(name, subject) {
+            alert(`تم اختيار الأستاذ: ${name} (${subject})`);
         }
 
-        // Click Counter for Secret Add Form (10 Clicks)
-        const clickTracker = {
-            'primary-6': 0,
-            'middle-3': 0,
-            'scientific-6': 0
-        };
-
-        function registerSecretClick(catKey) {
-            clickTracker[catKey] += 1;
-            
-            if (clickTracker[catKey] >= 10) {
-                const form = document.getElementById('add-form-' + catKey);
-                if (form) {
-                    form.classList.remove('hidden');
-                    alert(`مبروك! تم تفعيل وضع الإضافة الخفي لقسم (${catKey})`);
-                }
-                clickTracker[catKey] = 0;
-            }
-        }
-
-        // Function to dynamically add a product/note card
-        function addNewNote(catKey) {
-            const titleInput = document.getElementById('input-title-' + catKey);
-            const subInput = document.getElementById('input-sub-' + catKey);
-            const priceInput = document.getElementById('input-price-' + catKey);
-            const descInput = document.getElementById('input-desc-' + catKey);
-
-            const title = titleInput.value.trim();
-            const sub = subInput.value.trim() || "عام";
-            const price = parseInt(priceInput.value) || 10000;
-            const desc = descInput.value.trim() || "ملزمة متوفرة ومجهزة حسب المنهج.";
-
-            if (!title) {
-                alert("يرجى كتابة عنوان الملزمة على الأقل!");
-                return;
-            }
-
-            const container = document.getElementById('notes-grid-' + catKey);
-            
-            const card = document.createElement('div');
-            card.className = "search-item note-card card-hover-effect bg-white dark:bg-slate-800 p-6 rounded-2xl shadow-md dark:shadow-xl border border-slate-200 dark:border-slate-700 flex flex-col justify-between";
-            card.innerHTML = `
-                <div>
-                    <div class="flex justify-between items-center mb-2">
-                        <span class="bg-amber-100 dark:bg-amber-500/10 text-brand-gold border border-amber-300 dark:border-amber-500/30 text-xs font-bold px-3 py-1 rounded-full item-sub">${sub}</span>
-                        <span class="font-extrabold text-brand-gold">${price.toLocaleString()} د.ع</span>
-                    </div>
-                    <h3 class="text-xl font-bold mt-1 mb-2 item-title text-slate-800 dark:text-white">${title}</h3>
-                    <p class="text-sm text-slate-500 dark:text-slate-400 mb-4">${desc}</p>
-                </div>
-                <button onclick="addToCart('${title}', ${price})" class="w-full py-2.5 bg-brand-blue text-white font-bold rounded-xl hover:bg-blue-700 transition active:scale-95 shadow-md">طلب الملزمة</button>
-            `;
-
-            container.appendChild(card);
-
-            // Clear inputs
-            titleInput.value = '';
-            subInput.value = '';
-            priceInput.value = '';
-            descInput.value = '';
-            showToast("تم إضافة الملزمة بنجاح!");
-        }
-
-        // Filter Notes
-        function filterNotes(query) {
-            const filter = query.toLowerCase();
-            const items = document.querySelectorAll('.notes-category-content .search-item');
-
-            items.forEach(item => {
-                const title = item.querySelector('.item-title')?.textContent || '';
-                const sub = item.querySelector('.item-sub')?.textContent || '';
-                if (title.toLowerCase().includes(filter) || sub.toLowerCase().includes(filter)) {
-                    item.style.display = "";
-                } else {
-                    item.style.display = "none";
-                }
-            });
-        }
-
-        // Filter Teacher Categories
         function filterTeacherCategory(category, btn) {
             const siblings = btn.parentElement.querySelectorAll('.tab-btn');
             siblings.forEach(b => b.classList.remove('active'));
@@ -1060,7 +860,6 @@
             }
         }
 
-        // Filter Search for Teachers
         function filterTeachers(query) {
             const filter = query.toLowerCase();
             const cards = document.querySelectorAll('.teacher-card');
@@ -1075,7 +874,6 @@
             });
         }
 
-        // Search Filter General
         function filterItems(gridId, query) {
             const container = document.getElementById(gridId);
             const items = container.getElementsByClassName('search-item');
