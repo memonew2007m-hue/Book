@@ -178,6 +178,7 @@
             border: 2px solid #f59e0b;
             box-shadow: 0 0 12px rgba(245, 158, 11, 0.5);
             transition: transform 0.3s ease;
+            overflow: hidden;
         }
 
         .logo-box:hover {
@@ -211,8 +212,10 @@
     <header class="bg-white/90 dark:bg-slate-800/90 backdrop-blur-md text-slate-800 dark:text-white shadow-md sticky top-0 z-40 border-b border-slate-200 dark:border-slate-700 transition-colors duration-300">
         <div class="container mx-auto px-4 py-3 flex justify-between items-center">
             
-            <div id="secret-logo-btn" onclick="navigateTo('home')" class="flex items-center space-x-3 space-x-reverse cursor-pointer select-none group">
-                <div class="logo-box flex items-center justify-center">
+            <!-- النقر 5 مرات على شعار المكتبة يفتح لوحة التحكم الخفية -->
+            <div id="secret-logo-btn" onclick="handleSecretClick()" class="flex items-center space-x-3 space-x-reverse cursor-pointer select-none group" title="انقر 5 مرات بانتظام لفتح الإعدادات الخفية">
+                <div class="logo-box flex items-center justify-center relative">
+                    <img id="header-logo-img" class="hidden w-full h-full object-cover rounded-xl" src="" alt="شعار المنصة">
                     <i id="header-logo-icon" class="fa-solid fa-graduation-cap text-2xl text-brand-gold"></i>
                 </div>
                 <h1 class="text-2xl font-extrabold tracking-wide">
@@ -474,7 +477,7 @@
             </div>
         </section>
 
-        <!-- 4. PAGE: NOTES (الملازم الدراسية - المعدل) -->
+        <!-- 4. PAGE: NOTES -->
         <section id="page-notes" class="page-section hidden space-y-8">
             <div class="flex flex-col md:flex-row justify-between items-center gap-4 bg-white dark:bg-slate-800 p-4 rounded-2xl shadow-md border border-slate-200 dark:border-slate-700">
                 <button onclick="navigateTo('home')" class="flex items-center gap-2 text-brand-blue dark:text-brand-gold font-bold hover:translate-x-1 transition duration-200">
@@ -483,9 +486,8 @@
                 <input type="text" onkeyup="filterNotes(this.value)" placeholder="ابحث في كافة الملازم..." class="w-full md:w-80 px-4 py-2 bg-slate-100 dark:bg-slate-900 border border-slate-300 dark:border-slate-700 rounded-xl focus:outline-none focus:border-brand-gold text-slate-800 dark:text-white transition">
             </div>
 
-            <!-- 1. أزرار اختيار المرحلة الدراسية -->
+            <!-- أزرار اختيار المرحلة الدراسية -->
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <!-- المرحلة الابتدائية -->
                 <button onclick="switchStage('primary', this)" class="stage-btn active p-6 rounded-3xl border-2 border-brand-gold bg-white dark:bg-slate-800 shadow-xl flex flex-col items-center text-center space-y-3 group cursor-pointer">
                     <div class="w-16 h-16 rounded-2xl bg-amber-500/20 text-brand-gold flex items-center justify-center text-3xl font-black group-hover:scale-110 transition duration-300">
                         <i class="fa-solid fa-child"></i>
@@ -496,7 +498,6 @@
                     </div>
                 </button>
 
-                <!-- المرحلة المتوسطة -->
                 <button onclick="switchStage('middle', this)" class="stage-btn p-6 rounded-3xl border-2 border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 shadow-md flex flex-col items-center text-center space-y-3 group cursor-pointer">
                     <div class="w-16 h-16 rounded-2xl bg-blue-500/20 text-brand-lightBlue flex items-center justify-center text-3xl font-black group-hover:scale-110 transition duration-300">
                         <i class="fa-solid fa-school"></i>
@@ -507,7 +508,6 @@
                     </div>
                 </button>
 
-                <!-- المرحلة الإعدادية -->
                 <button onclick="switchStage('high', this)" class="stage-btn p-6 rounded-3xl border-2 border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 shadow-md flex flex-col items-center text-center space-y-3 group cursor-pointer">
                     <div class="w-16 h-16 rounded-2xl bg-amber-500/20 text-brand-gold flex items-center justify-center text-3xl font-black group-hover:scale-110 transition duration-300">
                         <i class="fa-solid fa-user-graduate"></i>
@@ -519,8 +519,6 @@
                 </button>
             </div>
 
-            <!-- 2. أقسام الصفوف حسب المرحلة المختارة -->
-
             <!-- تفاصيل المرحلة الابتدائية -->
             <div id="stage-primary" class="stage-content space-y-6">
                 <div class="flex items-center gap-3 border-b border-slate-200 dark:border-slate-700 pb-3">
@@ -528,7 +526,6 @@
                     <h2 class="text-2xl font-extrabold text-slate-800 dark:text-white">المرحلة الابتدائية - اختر الصف</h2>
                 </div>
 
-                <!-- أزرار الصفوف الابتدائية -->
                 <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-2">
                     <button onclick="switchGrade('primary', '1', this)" class="grade-tab-btn grade-btn-primary px-3 py-2.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-sm font-bold text-center">الأول ابتدائي</button>
                     <button onclick="switchGrade('primary', '2', this)" class="grade-tab-btn grade-btn-primary px-3 py-2.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-sm font-bold text-center">الثاني ابتدائي</button>
@@ -538,47 +535,11 @@
                     <button onclick="switchGrade('primary', '6', this)" class="grade-tab-btn grade-btn-primary active px-3 py-2.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-sm font-bold text-center">السادس ابتدائي</button>
                 </div>
 
-                <!-- ملازم الصفوف الابتدائية -->
-                <div id="grade-primary-1" class="grade-content grade-content-primary hidden grid grid-cols-1 md:grid-cols-3 gap-6">
-                    <div class="search-item note-card bg-white dark:bg-slate-800 p-6 rounded-2xl border border-slate-200 dark:border-slate-700">
-                        <span class="bg-amber-100 dark:bg-amber-500/10 text-brand-gold text-xs font-bold px-3 py-1 rounded-full item-sub">قراءة</span>
-                        <h3 class="text-lg font-bold mt-3 mb-2 item-title">ملزمة القراءة - الأول ابتدائي</h3>
-                        <p class="text-sm text-slate-500 dark:text-slate-400 mb-4">تعليم الحروف والكلمات بالصور التوضيحية.</p>
-                        <button class="w-full py-2 bg-brand-blue text-white font-bold rounded-xl text-sm hover:bg-blue-700 transition">طلب الملزمة</button>
-                    </div>
-                </div>
-                <div id="grade-primary-2" class="grade-content grade-content-primary hidden grid grid-cols-1 md:grid-cols-3 gap-6">
-                    <div class="search-item note-card bg-white dark:bg-slate-800 p-6 rounded-2xl border border-slate-200 dark:border-slate-700">
-                        <span class="bg-amber-100 dark:bg-amber-500/10 text-brand-gold text-xs font-bold px-3 py-1 rounded-full item-sub">الرياضيات</span>
-                        <h3 class="text-lg font-bold mt-3 mb-2 item-title">ملزمة الرياضيات - الثاني ابتدائي</h3>
-                        <p class="text-sm text-slate-500 dark:text-slate-400 mb-4">تمارين الحساب والأرقام الميسرة.</p>
-                        <button class="w-full py-2 bg-brand-blue text-white font-bold rounded-xl text-sm hover:bg-blue-700 transition">طلب الملزمة</button>
-                    </div>
-                </div>
-                <div id="grade-primary-3" class="grade-content grade-content-primary hidden grid grid-cols-1 md:grid-cols-3 gap-6">
-                    <div class="search-item note-card bg-white dark:bg-slate-800 p-6 rounded-2xl border border-slate-200 dark:border-slate-700">
-                        <span class="bg-amber-100 dark:bg-amber-500/10 text-brand-gold text-xs font-bold px-3 py-1 rounded-full item-sub">العلوم</span>
-                        <h3 class="text-lg font-bold mt-3 mb-2 item-title">ملزمة العلوم - الثالث ابتدائي</h3>
-                        <p class="text-sm text-slate-500 dark:text-slate-400 mb-4">شرح مبسط ومصور للعلوم الأساسية.</p>
-                        <button class="w-full py-2 bg-brand-blue text-white font-bold rounded-xl text-sm hover:bg-blue-700 transition">طلب الملزمة</button>
-                    </div>
-                </div>
-                <div id="grade-primary-4" class="grade-content grade-content-primary hidden grid grid-cols-1 md:grid-cols-3 gap-6">
-                    <div class="search-item note-card bg-white dark:bg-slate-800 p-6 rounded-2xl border border-slate-200 dark:border-slate-700">
-                        <span class="bg-amber-100 dark:bg-amber-500/10 text-brand-gold text-xs font-bold px-3 py-1 rounded-full item-sub">اللغة العربية</span>
-                        <h3 class="text-lg font-bold mt-3 mb-2 item-title">ملزمة القواعد - الرابع ابتدائي</h3>
-                        <p class="text-sm text-slate-500 dark:text-slate-400 mb-4">أساسيات قواعد اللغة العربية والملاء.</p>
-                        <button class="w-full py-2 bg-brand-blue text-white font-bold rounded-xl text-sm hover:bg-blue-700 transition">طلب الملزمة</button>
-                    </div>
-                </div>
-                <div id="grade-primary-5" class="grade-content grade-content-primary hidden grid grid-cols-1 md:grid-cols-3 gap-6">
-                    <div class="search-item note-card bg-white dark:bg-slate-800 p-6 rounded-2xl border border-slate-200 dark:border-slate-700">
-                        <span class="bg-amber-100 dark:bg-amber-500/10 text-brand-gold text-xs font-bold px-3 py-1 rounded-full item-sub">الإنكليزي</span>
-                        <h3 class="text-lg font-bold mt-3 mb-2 item-title">ملزمة اللغة الإنكليزية - الخامس ابتدائي</h3>
-                        <p class="text-sm text-slate-500 dark:text-slate-400 mb-4">مفردات وقواعد المنهج المفصلة.</p>
-                        <button class="w-full py-2 bg-brand-blue text-white font-bold rounded-xl text-sm hover:bg-blue-700 transition">طلب الملزمة</button>
-                    </div>
-                </div>
+                <div id="grade-primary-1" class="grade-content grade-content-primary hidden grid grid-cols-1 md:grid-cols-3 gap-6"></div>
+                <div id="grade-primary-2" class="grade-content grade-content-primary hidden grid grid-cols-1 md:grid-cols-3 gap-6"></div>
+                <div id="grade-primary-3" class="grade-content grade-content-primary hidden grid grid-cols-1 md:grid-cols-3 gap-6"></div>
+                <div id="grade-primary-4" class="grade-content grade-content-primary hidden grid grid-cols-1 md:grid-cols-3 gap-6"></div>
+                <div id="grade-primary-5" class="grade-content grade-content-primary hidden grid grid-cols-1 md:grid-cols-3 gap-6"></div>
                 <div id="grade-primary-6" class="grade-content grade-content-primary grid grid-cols-1 md:grid-cols-3 gap-6">
                     <div class="search-item note-card card-hover-effect bg-white dark:bg-slate-800 p-6 rounded-2xl shadow-md border border-slate-200 dark:border-slate-700 flex flex-col justify-between">
                         <div>
@@ -598,30 +559,14 @@
                     <h2 class="text-2xl font-extrabold text-slate-800 dark:text-white">المرحلة المتوسطة - اختر الصف</h2>
                 </div>
 
-                <!-- أزرار الصفوف المتوسطة -->
                 <div class="grid grid-cols-3 gap-3 max-w-lg mx-auto">
                     <button onclick="switchGrade('middle', '1', this)" class="grade-tab-btn grade-btn-middle px-4 py-3 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-sm font-bold text-center">الأول متوسط</button>
                     <button onclick="switchGrade('middle', '2', this)" class="grade-tab-btn grade-btn-middle px-4 py-3 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-sm font-bold text-center">الثاني متوسط</button>
                     <button onclick="switchGrade('middle', '3', this)" class="grade-tab-btn grade-btn-middle active px-4 py-3 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-sm font-bold text-center">الثالث متوسط</button>
                 </div>
 
-                <!-- ملازم الصفوف المتوسطة -->
-                <div id="grade-middle-1" class="grade-content grade-content-middle hidden grid grid-cols-1 md:grid-cols-3 gap-6">
-                    <div class="search-item note-card bg-white dark:bg-slate-800 p-6 rounded-2xl border border-slate-200 dark:border-slate-700">
-                        <span class="bg-blue-100 dark:bg-blue-500/10 text-brand-lightBlue text-xs font-bold px-3 py-1 rounded-full item-sub">الرياضيات</span>
-                        <h3 class="text-lg font-bold mt-3 mb-2 item-title">ملزمة الرياضيات - الجزء الأول</h3>
-                        <p class="text-sm text-slate-500 dark:text-slate-400 mb-4">شرح المنهج الجديد للأول متوسط.</p>
-                        <button class="w-full py-2 bg-brand-blue text-white font-bold rounded-xl text-sm hover:bg-blue-700 transition">طلب الملزمة</button>
-                    </div>
-                </div>
-                <div id="grade-middle-2" class="grade-content grade-content-middle hidden grid grid-cols-1 md:grid-cols-3 gap-6">
-                    <div class="search-item note-card bg-white dark:bg-slate-800 p-6 rounded-2xl border border-slate-200 dark:border-slate-700">
-                        <span class="bg-blue-100 dark:bg-blue-500/10 text-brand-lightBlue text-xs font-bold px-3 py-1 rounded-full item-sub">العلوم</span>
-                        <h3 class="text-lg font-bold mt-3 mb-2 item-title">ملزمة الفيزياء والكيمياء</h3>
-                        <p class="text-sm text-slate-500 dark:text-slate-400 mb-4">ملخص الفيزياء والكيمياء للثاني متوسط.</p>
-                        <button class="w-full py-2 bg-brand-blue text-white font-bold rounded-xl text-sm hover:bg-blue-700 transition">طلب الملزمة</button>
-                    </div>
-                </div>
+                <div id="grade-middle-1" class="grade-content grade-content-middle hidden grid grid-cols-1 md:grid-cols-3 gap-6"></div>
+                <div id="grade-middle-2" class="grade-content grade-content-middle hidden grid grid-cols-1 md:grid-cols-3 gap-6"></div>
                 <div id="grade-middle-3" class="grade-content grade-content-middle grid grid-cols-1 md:grid-cols-3 gap-6">
                     <div class="search-item note-card card-hover-effect bg-white dark:bg-slate-800 p-6 rounded-2xl shadow-md border border-slate-200 dark:border-slate-700 flex flex-col justify-between">
                         <div>
@@ -641,30 +586,14 @@
                     <h2 class="text-2xl font-extrabold text-slate-800 dark:text-white">المرحلة الإعدادية - اختر الصف</h2>
                 </div>
 
-                <!-- أزرار الصفوف الإعدادية -->
                 <div class="grid grid-cols-3 gap-3 max-w-lg mx-auto">
                     <button onclick="switchGrade('high', '4', this)" class="grade-tab-btn grade-btn-high px-4 py-3 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-sm font-bold text-center">الرابع إعدادي</button>
                     <button onclick="switchGrade('high', '5', this)" class="grade-tab-btn grade-btn-high px-4 py-3 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-sm font-bold text-center">الخامس إعدادي</button>
                     <button onclick="switchGrade('high', '6', this)" class="grade-tab-btn grade-btn-high active px-4 py-3 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-sm font-bold text-center">السادس إعدادي</button>
                 </div>
 
-                <!-- ملازم الصفوف الإعدادية -->
-                <div id="grade-high-4" class="grade-content grade-content-high hidden grid grid-cols-1 md:grid-cols-3 gap-6">
-                    <div class="search-item note-card bg-white dark:bg-slate-800 p-6 rounded-2xl border border-slate-200 dark:border-slate-700">
-                        <span class="bg-amber-100 dark:bg-amber-500/10 text-brand-gold text-xs font-bold px-3 py-1 rounded-full item-sub">الأحياء</span>
-                        <h3 class="text-lg font-bold mt-3 mb-2 item-title">ملزمة الأحياء - الرابع العلمي</h3>
-                        <p class="text-sm text-slate-500 dark:text-slate-400 mb-4">شرح المنهج العلمي والتوضيحات الرسمية.</p>
-                        <button class="w-full py-2 bg-brand-blue text-white font-bold rounded-xl text-sm hover:bg-blue-700 transition">طلب الملزمة</button>
-                    </div>
-                </div>
-                <div id="grade-high-5" class="grade-content grade-content-high hidden grid grid-cols-1 md:grid-cols-3 gap-6">
-                    <div class="search-item note-card bg-white dark:bg-slate-800 p-6 rounded-2xl border border-slate-200 dark:border-slate-700">
-                        <span class="bg-amber-100 dark:bg-amber-500/10 text-brand-gold text-xs font-bold px-3 py-1 rounded-full item-sub">الرياضيات</span>
-                        <h3 class="text-lg font-bold mt-3 mb-2 item-title">ملزمة الرياضيات - الخامس العلمي</h3>
-                        <p class="text-sm text-slate-500 dark:text-slate-400 mb-4">تغطية شاملة لفصول الرياضيات.</p>
-                        <button class="w-full py-2 bg-brand-blue text-white font-bold rounded-xl text-sm hover:bg-blue-700 transition">طلب الملزمة</button>
-                    </div>
-                </div>
+                <div id="grade-high-4" class="grade-content grade-content-high hidden grid grid-cols-1 md:grid-cols-3 gap-6"></div>
+                <div id="grade-high-5" class="grade-content grade-content-high hidden grid grid-cols-1 md:grid-cols-3 gap-6"></div>
                 <div id="grade-high-6" class="grade-content grade-content-high grid grid-cols-1 md:grid-cols-3 gap-6">
                     <div class="search-item note-card card-hover-effect bg-white dark:bg-slate-800 p-6 rounded-2xl shadow-md border border-slate-200 dark:border-slate-700 flex flex-col justify-between">
                         <div>
@@ -706,6 +635,109 @@
 
     </main>
 
+    <!-- SECRET ADMIN SETTINGS MODAL (إعدادات الموقع الخفية) -->
+    <div id="admin-modal" class="fixed inset-0 z-50 bg-black/70 backdrop-blur-sm hidden flex items-center justify-center p-4">
+        <div class="bg-white dark:bg-slate-800 w-full max-w-2xl rounded-3xl shadow-2xl border border-slate-200 dark:border-slate-700 max-h-[90vh] overflow-y-auto">
+            <div class="p-6 border-b border-slate-200 dark:border-slate-700 flex justify-between items-center bg-slate-50 dark:bg-slate-800/50 sticky top-0 z-10">
+                <h3 class="text-xl font-extrabold text-slate-800 dark:text-white flex items-center gap-2">
+                    <i class="fa-solid fa-gears text-brand-gold"></i> لوحة الإدارة وإعدادات المنصة الخفية
+                </h3>
+                <button onclick="toggleAdminModal(false)" class="w-9 h-9 rounded-full bg-slate-200 dark:bg-slate-700 hover:bg-red-500 hover:text-white transition flex items-center justify-center font-bold">✕</button>
+            </div>
+
+            <div class="p-6 space-y-8">
+                
+                <!-- 1. تعديل اسم المنصة والشعار -->
+                <div class="space-y-4 bg-slate-50 dark:bg-slate-900/50 p-5 rounded-2xl border border-slate-200 dark:border-slate-700">
+                    <h4 class="font-bold text-lg text-brand-gold flex items-center gap-2">
+                        <i class="fa-solid fa-sliders"></i> إعدادات الهوية والشعار
+                    </h4>
+                    
+                    <div>
+                        <label class="block text-sm font-bold mb-2">اسم المنصة الجديد:</label>
+                        <div class="flex gap-2">
+                            <input type="text" id="setting-brand-input" placeholder="أدخل الاسم الجديد..." class="w-full px-4 py-2.5 bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-xl focus:outline-none focus:border-brand-gold">
+                            <button onclick="updateBrandName()" class="px-5 py-2.5 bg-brand-blue hover:bg-blue-700 text-white font-bold rounded-xl transition whitespace-nowrap">حفظ الاسم</button>
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-bold mb-2">رفع لوجو الموقع من الاستوديو:</label>
+                        <input type="file" id="setting-logo-input" accept="image/*" class="w-full text-sm text-slate-500 file:mr-4 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-sm file:font-semibold file:bg-brand-gold file:text-slate-900 hover:file:bg-amber-500 cursor-pointer">
+                    </div>
+                </div>
+
+                <!-- 2. إضافة منتج جديد لكل الأقسام والملازم -->
+                <div class="space-y-4 bg-slate-50 dark:bg-slate-900/50 p-5 rounded-2xl border border-slate-200 dark:border-slate-700">
+                    <h4 class="font-bold text-lg text-brand-gold flex items-center gap-2">
+                        <i class="fa-solid fa-plus-circle"></i> إضافة عنصر/ملزمة/منتج جديد
+                    </h4>
+
+                    <form onsubmit="handleAddProduct(event)" class="space-y-4">
+                        <div>
+                            <label class="block text-sm font-bold mb-1">القسم الرئيسي:</label>
+                            <select id="prod-section" onchange="handleAdminSectionChange(this.value)" class="w-full px-4 py-2 bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-xl font-bold">
+                                <option value="notes">الملازم الدراسية</option>
+                                <option value="supplies">المستلزمات المدرسية</option>
+                                <option value="books">الكتب والقصص</option>
+                            </select>
+                        </div>
+
+                        <!-- خيارات الملازم الديناميكية -->
+                        <div id="notes-admin-options" class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-sm font-bold mb-1">المرحلة الدراسية:</label>
+                                <select id="prod-stage" onchange="updateGradeOptions(this.value)" class="w-full px-4 py-2 bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-xl">
+                                    <option value="primary">المرحلة الابتدائية</option>
+                                    <option value="middle">المرحلة المتوسطة</option>
+                                    <option value="high">المرحلة الإعدادية</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-bold mb-1">الصف الدراسي:</label>
+                                <select id="prod-grade" class="w-full px-4 py-2 bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-xl">
+                                    <!-- سيتم تعبئته ديناميكياً -->
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-sm font-bold mb-1">اسم العنصر / الملزمة:</label>
+                                <input type="text" id="prod-title" required placeholder="مثال: ملزمة الرياضيات الوزارية" class="w-full px-4 py-2 bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-xl">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-bold mb-1">المادة / التصنيف الفرعي:</label>
+                                <input type="text" id="prod-sub" required placeholder="مثال: الرياضيات / الأدوات الهندسية" class="w-full px-4 py-2 bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-xl">
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-sm font-bold mb-1">السعر (اختياري):</label>
+                                <input type="text" id="prod-price" placeholder="مثال: 5,000 د.ع" class="w-full px-4 py-2 bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-xl">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-bold mb-1">صورة المنتج من الاستوديو:</label>
+                                <input type="file" id="prod-image-file" accept="image/*" class="w-full text-xs text-slate-500 file:mr-2 file:py-2 file:px-3 file:rounded-xl file:border-0 file:bg-slate-200 dark:file:bg-slate-700 file:text-slate-800 dark:file:text-white cursor-pointer">
+                            </div>
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-bold mb-1">الوصف التفصيلي:</label>
+                            <textarea id="prod-desc" rows="2" placeholder="اكتب وصفاً قصيراً..." class="w-full px-4 py-2 bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-xl"></textarea>
+                        </div>
+
+                        <button type="submit" class="w-full py-3 bg-brand-gold hover:bg-amber-500 text-slate-900 font-extrabold rounded-xl transition shadow-lg flex items-center justify-center gap-2">
+                            <i class="fa-solid fa-plus"></i> إضافة المنتج فوراً للموقع
+                        </button>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
     <!-- Footer -->
     <footer class="bg-slate-100 dark:bg-slate-950 text-slate-500 dark:text-slate-500 py-6 mt-10 border-t border-slate-200 dark:border-slate-800 relative z-10 transition-colors duration-300">
         <div class="container mx-auto px-4 text-center space-y-2">
@@ -715,6 +747,179 @@
 
     <!-- JavaScript Dynamic Logic -->
     <script>
+        // Secret Click Logic (النقر 5 مرات فتح اللوحة)
+        let clickCount = 0;
+        let clickTimer = null;
+
+        function handleSecretClick() {
+            clickCount++;
+            clearTimeout(clickTimer);
+            if (clickCount >= 5) {
+                toggleAdminModal(true);
+                clickCount = 0;
+            } else {
+                clickTimer = setTimeout(() => { clickCount = 0; }, 1500);
+            }
+        }
+
+        function toggleAdminModal(show) {
+            const modal = document.getElementById('admin-modal');
+            if (show) {
+                modal.classList.remove('hidden');
+            } else {
+                modal.classList.add('hidden');
+            }
+        }
+
+        // Update Brand Name
+        function updateBrandName() {
+            const newName = document.getElementById('setting-brand-input').value.trim();
+            if (newName) {
+                document.getElementById('display-brand-name').textContent = newName;
+                document.getElementById('hero-brand-name').textContent = newName;
+                document.getElementById('footer-brand-name').textContent = newName;
+                document.getElementById('site-title').textContent = newName;
+                alert('تم تحديث اسم المنصة بنجاح!');
+            }
+        }
+
+        // Logo Upload Event Listener
+        document.getElementById('setting-logo-input').addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(event) {
+                    const img = document.getElementById('header-logo-img');
+                    const icon = document.getElementById('header-logo-icon');
+                    img.src = event.target.result;
+                    img.classList.remove('hidden');
+                    icon.classList.add('hidden');
+                    alert('تم تغيير لوجو المنصة بنجاح!');
+                }
+                reader.readAsDataURL(file);
+            }
+        });
+
+        // Admin Section Options Change
+        function handleAdminSectionChange(sec) {
+            const notesOpt = document.getElementById('notes-admin-options');
+            if (sec === 'notes') {
+                notesOpt.classList.remove('hidden');
+            } else {
+                notesOpt.classList.add('hidden');
+            }
+        }
+
+        function updateGradeOptions(stage) {
+            const gradeSelect = document.getElementById('prod-grade');
+            gradeSelect.innerHTML = '';
+            if (stage === 'primary') {
+                gradeSelect.innerHTML = `
+                    <option value="1">الأول ابتدائي</option>
+                    <option value="2">الثاني ابتدائي</option>
+                    <option value="3">الثالث ابتدائي</option>
+                    <option value="4">الرابع ابتدائي</option>
+                    <option value="5">الخامس ابتدائي</option>
+                    <option value="6" selected>السادس ابتدائي</option>
+                `;
+            } else if (stage === 'middle') {
+                gradeSelect.innerHTML = `
+                    <option value="1">الأول متوسط</option>
+                    <option value="2">الثاني متوسط</option>
+                    <option value="3" selected>الثالث متوسط</option>
+                `;
+            } else if (stage === 'high') {
+                gradeSelect.innerHTML = `
+                    <option value="4">الرابع إعدادي</option>
+                    <option value="5">الخامس إعدادي</option>
+                    <option value="6" selected>السادس إعدادي</option>
+                `;
+            }
+        }
+        updateGradeOptions('primary');
+
+        // Handle Add New Product Dynamically
+        function handleAddProduct(e) {
+            e.preventDefault();
+
+            const section = document.getElementById('prod-section').value;
+            const stage = document.getElementById('prod-stage').value;
+            const grade = document.getElementById('prod-grade').value;
+            const title = document.getElementById('prod-title').value;
+            const sub = document.getElementById('prod-sub').value;
+            const price = document.getElementById('prod-price').value || 'مجاني / حسب الطلب';
+            const desc = document.getElementById('prod-desc').value;
+            const fileInput = document.getElementById('prod-image-file');
+
+            let imgHtml = `<i class="fa-solid fa-file-lines text-4xl text-brand-gold"></i>`;
+            
+            const createCard = (imgSrc) => {
+                if (section === 'notes') {
+                    const targetContainer = document.getElementById(`grade-${stage}-${grade}`);
+                    if (targetContainer) {
+                        const newCard = document.createElement('div');
+                        newCard.className = "search-item note-card card-hover-effect bg-white dark:bg-slate-800 p-6 rounded-2xl shadow-md border border-slate-200 dark:border-slate-700 flex flex-col justify-between";
+                        newCard.innerHTML = `
+                            <div>
+                                ${imgSrc ? `<img src="${imgSrc}" class="w-full h-36 object-cover rounded-xl mb-3 border border-slate-200 dark:border-slate-700">` : ''}
+                                <span class="bg-amber-100 dark:bg-amber-500/10 text-brand-gold border border-amber-300 dark:border-amber-500/30 text-xs font-bold px-3 py-1 rounded-full item-sub">${sub}</span>
+                                <h3 class="text-xl font-bold mt-3 mb-2 item-title text-slate-800 dark:text-white">${title}</h3>
+                                <p class="text-sm text-slate-500 dark:text-slate-400 mb-4">${desc}</p>
+                            </div>
+                            <button class="w-full py-2.5 bg-brand-blue text-white font-bold rounded-xl hover:bg-blue-700 transition active:scale-95 shadow-md">طلب الملزمة (${price})</button>
+                        `;
+                        targetContainer.appendChild(newCard);
+                    }
+                } else if (section === 'supplies') {
+                    const grid = document.getElementById('supplies-grid');
+                    const newCard = document.createElement('div');
+                    newCard.className = "search-item supply-card card-hover-effect bg-white dark:bg-slate-800 rounded-2xl p-4 shadow-md border border-slate-200 dark:border-slate-700 flex flex-col justify-between";
+                    newCard.innerHTML = `
+                        <div>
+                            <div class="h-48 rounded-xl overflow-hidden mb-4 bg-slate-100 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 flex items-center justify-center">
+                                ${imgSrc ? `<img src="${imgSrc}" class="w-full h-full object-cover">` : `<i class="fa-solid fa-box-open text-5xl text-slate-400"></i>`}
+                            </div>
+                            <h3 class="font-bold text-slate-800 dark:text-slate-100 item-title text-lg">${title}</h3>
+                            <p class="text-xs text-slate-500 dark:text-slate-400 mb-2 item-sub">${sub}</p>
+                        </div>
+                        <div class="flex justify-between items-center mt-3 pt-3 border-t border-slate-200 dark:border-slate-700">
+                            <span class="font-extrabold text-brand-gold text-lg">${price}</span>
+                            <button class="px-4 py-1.5 bg-brand-blue text-white text-sm font-bold rounded-lg hover:bg-blue-600 transition active:scale-95">شراء</button>
+                        </div>
+                    `;
+                    grid.appendChild(newCard);
+                } else if (section === 'books') {
+                    const grid = document.getElementById('books-grid');
+                    const newCard = document.createElement('div');
+                    newCard.className = "search-item card-hover-effect bg-white dark:bg-slate-800 p-5 rounded-2xl shadow-md border border-slate-200 dark:border-slate-700 flex gap-4";
+                    newCard.innerHTML = `
+                        <div class="w-24 h-32 bg-slate-100 dark:bg-slate-900 rounded-xl flex-shrink-0 flex items-center justify-center border border-slate-200 dark:border-slate-700 overflow-hidden">
+                            ${imgSrc ? `<img src="${imgSrc}" class="w-full h-full object-cover">` : `<i class="fa-solid fa-book text-3xl text-slate-400"></i>`}
+                        </div>
+                        <div class="flex flex-col justify-between">
+                            <div>
+                                <h3 class="font-bold text-slate-800 dark:text-slate-100 item-title">${title}</h3>
+                                <p class="text-xs text-slate-500 dark:text-slate-400 mt-1 item-sub">${sub}</p>
+                            </div>
+                            <button class="px-4 py-1.5 bg-brand-gold text-slate-900 font-bold text-sm rounded-xl hover:bg-amber-500 transition active:scale-95 self-start">تصفح الآن (${price})</button>
+                        </div>
+                    `;
+                    grid.appendChild(newCard);
+                }
+
+                alert('تمت إضافة المنتج بنجاح وإدراجه في الموقع!');
+                toggleAdminModal(false);
+            };
+
+            if (fileInput.files && fileInput.files[0]) {
+                const reader = new FileReader();
+                reader.onload = (event) => createCard(event.target.result);
+                reader.readAsDataURL(fileInput.files[0]);
+            } else {
+                createCard(null);
+            }
+        }
+
         // Intro Splash Screen
         window.addEventListener('DOMContentLoaded', () => {
             setTimeout(() => {
