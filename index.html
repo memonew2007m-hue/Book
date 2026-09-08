@@ -106,10 +106,6 @@
             transform: scale(1.02);
         }
 
-        .subject-tab-btn {
-            transition: all 0.25s ease;
-        }
-
         .subject-tab-btn.active {
             background-color: #f59e0b;
             color: #0f172a;
@@ -118,20 +114,12 @@
             box-shadow: 0 4px 15px rgba(245, 158, 11, 0.4);
         }
 
-        .stage-btn {
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
         .stage-btn.active {
             background-color: #1e3a8a;
             color: #ffffff;
             border-color: #f59e0b;
             box-shadow: 0 8px 25px rgba(245, 158, 11, 0.35);
             transform: translateY(-2px) scale(1.02);
-        }
-
-        .grade-tab-btn {
-            transition: all 0.25s ease;
         }
 
         .grade-tab-btn.active {
@@ -203,7 +191,7 @@
     <header class="bg-white/90 dark:bg-slate-800/90 backdrop-blur-md text-slate-800 dark:text-white shadow-md sticky top-0 z-40 border-b border-slate-200 dark:border-slate-700 transition-colors duration-300">
         <div class="container mx-auto px-4 py-3 flex justify-between items-center">
             
-            <div id="secret-logo-btn" onclick="handleSecretClick()" class="flex items-center space-x-3 space-x-reverse cursor-pointer select-none group" title="انقر 5 مرات بانتظام لفتح الإعدادات الخفية">
+            <div id="secret-logo-btn" onclick="handleSecretClick()" class="flex items-center space-x-3 space-x-reverse cursor-pointer select-none group" title="انقر 5 مرات فتح الإعدادات الخفية">
                 <div class="logo-box flex items-center justify-center relative">
                     <img id="header-logo-img" class="hidden w-full h-full object-cover rounded-xl" src="" alt="شعار المنصة">
                     <i id="header-logo-icon" class="fa-solid fa-graduation-cap text-2xl text-brand-gold"></i>
@@ -674,7 +662,20 @@
     </footer>
 
     <script>
-        // --- حَفْط واسْتِعَادَةِ البَيَانَاتِ ---
+        // --- البيانات الافتراضية الأولية للمكتبة ---
+        const initialMockProducts = [
+            // مستلزمات
+            { id: '1', section: 'supplies', title: 'دفتر سلك 100 ورقة', sub: 'notebooks', price: '2,500 د.ع', desc: 'دفتر مذكرات فاخر بغلاف مقوى', imgSrc: '' },
+            { id: '2', section: 'supplies', title: 'طقم أقلام جاف ملون (12 قلم)', sub: 'stationery', price: '3,000 د.ع', desc: 'أقلام جافة عالية الجودة ومريحة لليد', imgSrc: '' },
+            { id: '3', section: 'supplies', title: 'حقيبة مدرسية متينة', sub: 'stationery', price: '25,000 د.ع', desc: 'حقيبة مقاومة للماء مع عدة جيوب', imgSrc: '' },
+            // كتب وقصص
+            { id: '4', section: 'books', title: 'قصص الأطفال العالمية', sub: 'قصص ومطالعة', price: '4,000 د.ع', desc: 'مجموعة قصصية مشوقة ومصورة للأطفال', imgSrc: '' },
+            { id: '5', section: 'books', title: 'معجم اللغة العربية المعاصر', sub: 'كتب خارجية', price: '12,000 د.ع', desc: 'مرجع شامل للطلاب والباحثين', imgSrc: '' },
+            // ملازم
+            { id: '6', section: 'notes', stage: 'primary', grade: '6', title: 'ملزمة الرياضيات الشاملة', sub: 'الرياضيات', price: '6,000 د.ع', desc: 'شرح مفصل ومحلول بالكامل لأسئلة الامتحان الوزاري', imgSrc: '' },
+            { id: '7', section: 'notes', stage: 'middle', grade: '3', title: 'المركّز في قواعد اللغة العربية', sub: 'اللغة العربية', price: '7,500 د.ع', desc: 'تضم أهم القواعد والتمارين للثالث متوسط', imgSrc: '' },
+            { id: '8', section: 'notes', stage: 'high', grade: '6', title: 'ملزمة الكيمياء للسادس العلمي', sub: 'الكيمياء', price: '10,000 د.ع', desc: 'تغطي كافة الفصول مع المخططات التوضيحية', imgSrc: '' }
+        ];
 
         function saveDataToStorage(key, data) {
             localStorage.setItem(key, JSON.stringify(data));
@@ -685,13 +686,12 @@
             return data ? JSON.parse(data) : null;
         }
 
-        // تحميل الإعدادات والمنتجات عند بدء التشغيل
         window.addEventListener('DOMContentLoaded', () => {
             // 1. استعادة اسم المنصة
             const savedBrandName = getDataFromStorage('brandName');
             if (savedBrandName) {
                 document.getElementById('display-brand-name').innerHTML = savedBrandName;
-                document.getElementById('hero-brand-name').textContent = savedBrandName.replace(/<span.*?>.*?<\/span>/g, '').trim() + " " + savedBrandName.match(/<span.*?>.*?<\/span>/g)[0].replace(/<[^>]*>/g, '');
+                document.getElementById('hero-brand-name').innerHTML = savedBrandName;
                 document.getElementById('footer-brand-name').textContent = savedBrandName.replace(/<[^>]*>/g, '');
                 document.getElementById('site-title').textContent = savedBrandName.replace(/<[^>]*>/g, '');
             }
@@ -706,13 +706,16 @@
                 icon.classList.add('hidden');
             }
 
-            // 3. استعادة المنتجات
-            const savedProducts = getDataFromStorage('customProducts');
-            if (savedProducts) {
-                savedProducts.forEach(prod => {
-                    renderProductCard(prod, false); // false يعني لا تحفظ مجدداً
-                });
+            // 3. استعادة أو إدخال المنتجات الافتراضية
+            let savedProducts = getDataFromStorage('customProducts');
+            if (!savedProducts || savedProducts.length === 0) {
+                savedProducts = initialMockProducts;
+                saveDataToStorage('customProducts', savedProducts);
             }
+
+            savedProducts.forEach(prod => {
+                renderProductCard(prod, false);
+            });
 
             setTimeout(() => {
                 const splash = document.getElementById('welcome-splash');
@@ -722,8 +725,6 @@
                 }
             }, 1000);
         });
-
-        // --- المَنْطِقِ الدِّينَامِيكِيُّ ---
 
         let clickCount = 0;
         let clickTimer = null;
@@ -820,6 +821,7 @@
         function renderProductCard(prod, shouldSave = true) {
             let container = null;
             let newCard = document.createElement('div');
+            const prodId = prod.id || Date.now().toString();
 
             if (prod.section === 'notes') {
                 container = document.getElementById(`grade-${prod.stage}-${prod.grade}`);
@@ -830,27 +832,27 @@
                             ${prod.imgSrc ? `<img src="${prod.imgSrc}" class="w-full h-36 object-cover rounded-xl mb-3 border border-slate-200 dark:border-slate-700">` : ''}
                             <span class="bg-amber-100 dark:bg-amber-500/10 text-brand-gold border border-amber-300 dark:border-amber-500/30 text-xs font-bold px-3 py-1 rounded-full item-sub">${prod.sub}</span>
                             <h3 class="text-xl font-bold mt-3 mb-2 item-title text-slate-800 dark:text-white">${prod.title}</h3>
-                            <p class="text-sm text-slate-500 dark:text-slate-400 mb-4">${prod.desc}</p>
+                            <p class="text-sm text-slate-500 dark:text-slate-400 mb-4">${prod.desc || ''}</p>
                         </div>
-                        <button class="w-full py-2.5 bg-brand-blue text-white font-bold rounded-xl hover:bg-blue-700 transition active:scale-95 shadow-md">طلب الملزمة (${prod.price})</button>
+                        <button onclick="orderProduct('${prod.title}')" class="w-full py-2.5 bg-brand-blue text-white font-bold rounded-xl hover:bg-blue-700 transition active:scale-95 shadow-md">طلب الملزمة (${prod.price})</button>
                     `;
                     container.appendChild(newCard);
                 }
             } else if (prod.section === 'supplies') {
                 container = document.getElementById('supplies-grid');
                 if (container) {
-                    newCard.className = "search-item supply-card card-hover-effect bg-white dark:bg-slate-800 rounded-2xl p-4 shadow-md border border-slate-200 dark:border-slate-700 flex flex-col justify-between";
+                    newCard.className = `search-item supply-card ${prod.sub} card-hover-effect bg-white dark:bg-slate-800 rounded-2xl p-4 shadow-md border border-slate-200 dark:border-slate-700 flex flex-col justify-between`;
                     newCard.innerHTML = `
                         <div>
                             <div class="h-48 rounded-xl overflow-hidden mb-4 bg-slate-100 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 flex items-center justify-center">
                                 ${prod.imgSrc ? `<img src="${prod.imgSrc}" class="w-full h-full object-cover">` : `<i class="fa-solid fa-box-open text-5xl text-slate-400"></i>`}
                             </div>
                             <h3 class="font-bold text-slate-800 dark:text-slate-100 item-title text-lg">${prod.title}</h3>
-                            <p class="text-xs text-slate-500 dark:text-slate-400 mb-2 item-sub">${prod.sub}</p>
+                            <p class="text-xs text-slate-500 dark:text-slate-400 mb-2 item-sub">${prod.desc || prod.sub}</p>
                         </div>
                         <div class="flex justify-between items-center mt-3 pt-3 border-t border-slate-200 dark:border-slate-700">
                             <span class="font-extrabold text-brand-gold text-lg">${prod.price}</span>
-                            <button class="px-4 py-1.5 bg-brand-blue text-white text-sm font-bold rounded-lg hover:bg-blue-600 transition active:scale-95">شراء</button>
+                            <button onclick="orderProduct('${prod.title}')" class="px-4 py-1.5 bg-brand-blue text-white text-sm font-bold rounded-lg hover:bg-blue-600 transition active:scale-95">شراء</button>
                         </div>
                     `;
                     container.appendChild(newCard);
@@ -868,7 +870,7 @@
                                 <h3 class="font-bold text-slate-800 dark:text-slate-100 item-title">${prod.title}</h3>
                                 <p class="text-xs text-slate-500 dark:text-slate-400 mt-1 item-sub">${prod.sub}</p>
                             </div>
-                            <button class="px-4 py-1.5 bg-brand-gold text-slate-900 font-bold text-sm rounded-xl hover:bg-amber-500 transition active:scale-95 self-start">تصفح الآن (${prod.price})</button>
+                            <button onclick="orderProduct('${prod.title}')" class="px-4 py-1.5 bg-brand-gold text-slate-900 font-bold text-sm rounded-xl hover:bg-amber-500 transition active:scale-95 self-start">تصفح الآن (${prod.price})</button>
                         </div>
                     `;
                     container.appendChild(newCard);
@@ -877,9 +879,14 @@
 
             if (shouldSave && container) {
                 const currentProducts = getDataFromStorage('customProducts') || [];
+                prod.id = prodId;
                 currentProducts.push(prod);
                 saveDataToStorage('customProducts', currentProducts);
             }
+        }
+
+        function orderProduct(title) {
+            alert(`شكراً لطلبك: "${title}"!\nيرجى التواصل معنا عبر واتساب لإكمال طلبك.`);
         }
 
         function handleAddProduct(e) {
