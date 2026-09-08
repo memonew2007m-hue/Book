@@ -4,11 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title id="site-title">مكتبة العبقري</title>
-    <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- FontAwesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Google Font Cairo -->
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
     
     <script>
@@ -38,7 +35,6 @@
             transition: background-color 0.4s ease, color 0.4s ease;
         }
 
-        /* Intro Welcome Screen */
         #welcome-splash {
             position: fixed;
             inset: 0;
@@ -67,7 +63,6 @@
             100% { transform: scale(1); opacity: 1; }
         }
 
-        /* Dynamic Floating Background Elements */
         .bg-glow-container {
             position: fixed;
             top: 0;
@@ -99,7 +94,6 @@
             50% { transform: translateY(-30px) rotate(12deg) scale(1.1); }
         }
 
-        /* UI Interactive Animations */
         .tab-btn {
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
@@ -188,7 +182,6 @@
 </head>
 <body class="bg-slate-50 dark:bg-slate-900 text-slate-800 dark:text-slate-100 min-h-screen flex flex-col justify-between relative overflow-x-hidden">
 
-    <!-- INTRO WELCOME SPLASH -->
     <div id="welcome-splash">
         <div class="text-center px-4">
             <i class="fa-solid fa-graduation-cap text-6xl text-brand-gold mb-4 animate-bounce"></i>
@@ -198,7 +191,6 @@
         </div>
     </div>
 
-    <!-- Background Icons -->
     <div class="bg-glow-container">
         <i class="fa-solid fa-book glow-icon glow-yellow" style="top: 10%; left: 12%; animation-delay: 0s;"></i>
         <i class="fa-solid fa-pen-nib glow-icon glow-blue" style="top: 25%; left: 80%; animation-delay: 2s;"></i>
@@ -208,11 +200,9 @@
         <i class="fa-solid fa-note-sticky glow-icon glow-blue" style="top: 85%; left: 40%; animation-delay: 5s;"></i>
     </div>
 
-    <!-- Header Section -->
     <header class="bg-white/90 dark:bg-slate-800/90 backdrop-blur-md text-slate-800 dark:text-white shadow-md sticky top-0 z-40 border-b border-slate-200 dark:border-slate-700 transition-colors duration-300">
         <div class="container mx-auto px-4 py-3 flex justify-between items-center">
             
-            <!-- النقر 5 مرات على شعار المكتبة يفتح لوحة التحكم الخفية -->
             <div id="secret-logo-btn" onclick="handleSecretClick()" class="flex items-center space-x-3 space-x-reverse cursor-pointer select-none group" title="انقر 5 مرات بانتظام لفتح الإعدادات الخفية">
                 <div class="logo-box flex items-center justify-center relative">
                     <img id="header-logo-img" class="hidden w-full h-full object-cover rounded-xl" src="" alt="شعار المنصة">
@@ -461,19 +451,6 @@
             </div>
 
             <div id="supplies-grid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 pt-4">
-                <div class="search-item supply-card notebooks card-hover-effect bg-white dark:bg-slate-800 rounded-2xl p-4 shadow-md dark:shadow-xl border border-slate-200 dark:border-slate-700 flex flex-col justify-between group">
-                    <div>
-                        <div class="h-48 rounded-xl overflow-hidden mb-4 bg-slate-100 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 flex items-center justify-center">
-                            <i class="fa-solid fa-book-open text-5xl text-slate-400"></i>
-                        </div>
-                        <h3 class="font-bold text-slate-800 dark:text-slate-100 item-title text-lg">دفتر سلك جامعي 200 ورقة</h3>
-                        <p class="text-xs text-slate-500 dark:text-slate-400 mb-2 item-sub">دفاتر عالية الجودة</p>
-                    </div>
-                    <div class="flex justify-between items-center mt-3 pt-3 border-t border-slate-200 dark:border-slate-700">
-                        <span class="font-extrabold text-brand-gold text-lg">3,500 د.ع</span>
-                        <button class="px-4 py-1.5 bg-brand-blue text-white text-sm font-bold rounded-lg hover:bg-blue-600 transition active:scale-95">شراء</button>
-                    </div>
-                </div>
             </div>
         </section>
 
@@ -486,7 +463,6 @@
                 <input type="text" onkeyup="filterNotes(this.value)" placeholder="ابحث في كافة الملازم..." class="w-full md:w-80 px-4 py-2 bg-slate-100 dark:bg-slate-900 border border-slate-300 dark:border-slate-700 rounded-xl focus:outline-none focus:border-brand-gold text-slate-800 dark:text-white transition">
             </div>
 
-            <!-- أزرار اختيار المرحلة الدراسية -->
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                 <button onclick="switchStage('primary', this)" class="stage-btn active p-6 rounded-3xl border-2 border-brand-gold bg-white dark:bg-slate-800 shadow-xl flex flex-col items-center text-center space-y-3 group cursor-pointer">
                     <div class="w-16 h-16 rounded-2xl bg-amber-500/20 text-brand-gold flex items-center justify-center text-3xl font-black group-hover:scale-110 transition duration-300">
@@ -519,7 +495,6 @@
                 </button>
             </div>
 
-            <!-- تفاصيل المرحلة الابتدائية -->
             <div id="stage-primary" class="stage-content space-y-6">
                 <div class="flex items-center gap-3 border-b border-slate-200 dark:border-slate-700 pb-3">
                     <i class="fa-solid fa-child text-brand-gold text-2xl"></i>
@@ -540,19 +515,9 @@
                 <div id="grade-primary-3" class="grade-content grade-content-primary hidden grid grid-cols-1 md:grid-cols-3 gap-6"></div>
                 <div id="grade-primary-4" class="grade-content grade-content-primary hidden grid grid-cols-1 md:grid-cols-3 gap-6"></div>
                 <div id="grade-primary-5" class="grade-content grade-content-primary hidden grid grid-cols-1 md:grid-cols-3 gap-6"></div>
-                <div id="grade-primary-6" class="grade-content grade-content-primary grid grid-cols-1 md:grid-cols-3 gap-6">
-                    <div class="search-item note-card card-hover-effect bg-white dark:bg-slate-800 p-6 rounded-2xl shadow-md border border-slate-200 dark:border-slate-700 flex flex-col justify-between">
-                        <div>
-                            <span class="bg-amber-100 dark:bg-amber-500/10 text-brand-gold border border-amber-300 dark:border-amber-500/30 text-xs font-bold px-3 py-1 rounded-full item-sub">العلوم</span>
-                            <h3 class="text-xl font-bold mt-3 mb-2 item-title text-slate-800 dark:text-white">ملزمة العلوم الشاملة</h3>
-                            <p class="text-sm text-slate-500 dark:text-slate-400 mb-4">شرح ميسر ملائم لطلاب السادس الابتدائي.</p>
-                        </div>
-                        <button class="w-full py-2.5 bg-brand-blue text-white font-bold rounded-xl hover:bg-blue-700 transition active:scale-95 shadow-md">طلب الملزمة</button>
-                    </div>
-                </div>
+                <div id="grade-primary-6" class="grade-content grade-content-primary grid grid-cols-1 md:grid-cols-3 gap-6"></div>
             </div>
 
-            <!-- تفاصيل المرحلة المتوسطة -->
             <div id="stage-middle" class="stage-content hidden space-y-6">
                 <div class="flex items-center gap-3 border-b border-slate-200 dark:border-slate-700 pb-3">
                     <i class="fa-solid fa-school text-brand-lightBlue text-2xl"></i>
@@ -567,19 +532,9 @@
 
                 <div id="grade-middle-1" class="grade-content grade-content-middle hidden grid grid-cols-1 md:grid-cols-3 gap-6"></div>
                 <div id="grade-middle-2" class="grade-content grade-content-middle hidden grid grid-cols-1 md:grid-cols-3 gap-6"></div>
-                <div id="grade-middle-3" class="grade-content grade-content-middle grid grid-cols-1 md:grid-cols-3 gap-6">
-                    <div class="search-item note-card card-hover-effect bg-white dark:bg-slate-800 p-6 rounded-2xl shadow-md border border-slate-200 dark:border-slate-700 flex flex-col justify-between">
-                        <div>
-                            <span class="bg-blue-100 dark:bg-blue-500/10 text-brand-lightBlue border border-blue-300 dark:border-blue-500/30 text-xs font-bold px-3 py-1 rounded-full item-sub">اللغة الإنجليزية</span>
-                            <h3 class="text-xl font-bold mt-3 mb-2 item-title text-slate-800 dark:text-white">ملزمة الإنكليزي المكثفة</h3>
-                            <p class="text-sm text-slate-500 dark:text-slate-400 mb-4">قواعد وإنشاءات الوزاري للثالث متوسط.</p>
-                        </div>
-                        <button class="w-full py-2.5 bg-brand-blue text-white font-bold rounded-xl hover:bg-blue-700 transition active:scale-95 shadow-md">طلب الملزمة</button>
-                    </div>
-                </div>
+                <div id="grade-middle-3" class="grade-content grade-content-middle grid grid-cols-1 md:grid-cols-3 gap-6"></div>
             </div>
 
-            <!-- تفاصيل المرحلة الإعدادية -->
             <div id="stage-high" class="stage-content hidden space-y-6">
                 <div class="flex items-center gap-3 border-b border-slate-200 dark:border-slate-700 pb-3">
                     <i class="fa-solid fa-user-graduate text-brand-gold text-2xl"></i>
@@ -594,16 +549,7 @@
 
                 <div id="grade-high-4" class="grade-content grade-content-high hidden grid grid-cols-1 md:grid-cols-3 gap-6"></div>
                 <div id="grade-high-5" class="grade-content grade-content-high hidden grid grid-cols-1 md:grid-cols-3 gap-6"></div>
-                <div id="grade-high-6" class="grade-content grade-content-high grid grid-cols-1 md:grid-cols-3 gap-6">
-                    <div class="search-item note-card card-hover-effect bg-white dark:bg-slate-800 p-6 rounded-2xl shadow-md border border-slate-200 dark:border-slate-700 flex flex-col justify-between">
-                        <div>
-                            <span class="bg-amber-100 dark:bg-amber-500/10 text-brand-gold border border-amber-300 dark:border-amber-500/30 text-xs font-bold px-3 py-1 rounded-full item-sub">الكيمياء</span>
-                            <h3 class="text-xl font-bold mt-3 mb-2 item-title text-slate-800 dark:text-white">ملزمة الكيمياء - السادس العلمي</h3>
-                            <p class="text-sm text-slate-500 dark:text-slate-400 mb-4">تتضمن حلول الأسئلة الوزارية والشرح التوضيحي.</p>
-                        </div>
-                        <button class="w-full py-2.5 bg-brand-blue text-white font-bold rounded-xl hover:bg-blue-700 transition active:scale-95 shadow-md">طلب الملزمة</button>
-                    </div>
-                </div>
+                <div id="grade-high-6" class="grade-content grade-content-high grid grid-cols-1 md:grid-cols-3 gap-6"></div>
             </div>
 
         </section>
@@ -618,24 +564,11 @@
             </div>
 
             <div id="books-grid" class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <div class="search-item card-hover-effect bg-white dark:bg-slate-800 p-5 rounded-2xl shadow-md dark:shadow-xl border border-slate-200 dark:border-slate-700 flex gap-4">
-                    <div class="w-24 h-32 bg-slate-100 dark:bg-slate-900 rounded-xl flex-shrink-0 flex items-center justify-center text-3xl text-slate-400 dark:text-slate-600 border border-slate-200 dark:border-slate-700">
-                        <i class="fa-solid fa-book"></i>
-                    </div>
-                    <div class="flex flex-col justify-between">
-                        <div>
-                            <h3 class="font-bold text-slate-800 dark:text-slate-100 item-title">قصة المغامر الصغير</h3>
-                            <p class="text-xs text-slate-500 dark:text-slate-400 mt-1 item-sub">قصص أطفال وتنمية مهارات</p>
-                        </div>
-                        <button class="px-4 py-1.5 bg-brand-gold text-slate-900 font-bold text-sm rounded-xl hover:bg-amber-500 transition active:scale-95 self-start">تصفح الآن</button>
-                    </div>
-                </div>
             </div>
         </section>
 
     </main>
 
-    <!-- SECRET ADMIN SETTINGS MODAL (إعدادات الموقع الخفية) -->
     <div id="admin-modal" class="fixed inset-0 z-50 bg-black/70 backdrop-blur-sm hidden flex items-center justify-center p-4">
         <div class="bg-white dark:bg-slate-800 w-full max-w-2xl rounded-3xl shadow-2xl border border-slate-200 dark:border-slate-700 max-h-[90vh] overflow-y-auto">
             <div class="p-6 border-b border-slate-200 dark:border-slate-700 flex justify-between items-center bg-slate-50 dark:bg-slate-800/50 sticky top-0 z-10">
@@ -647,7 +580,6 @@
 
             <div class="p-6 space-y-8">
                 
-                <!-- 1. تعديل اسم المنصة والشعار -->
                 <div class="space-y-4 bg-slate-50 dark:bg-slate-900/50 p-5 rounded-2xl border border-slate-200 dark:border-slate-700">
                     <h4 class="font-bold text-lg text-brand-gold flex items-center gap-2">
                         <i class="fa-solid fa-sliders"></i> إعدادات الهوية والشعار
@@ -667,7 +599,6 @@
                     </div>
                 </div>
 
-                <!-- 2. إضافة منتج جديد لكل الأقسام والملازم -->
                 <div class="space-y-4 bg-slate-50 dark:bg-slate-900/50 p-5 rounded-2xl border border-slate-200 dark:border-slate-700">
                     <h4 class="font-bold text-lg text-brand-gold flex items-center gap-2">
                         <i class="fa-solid fa-plus-circle"></i> إضافة عنصر/ملزمة/منتج جديد
@@ -683,7 +614,6 @@
                             </select>
                         </div>
 
-                        <!-- خيارات الملازم الديناميكية -->
                         <div id="notes-admin-options" class="grid grid-cols-1 md:grid-cols-2 gap-4">
                             <div>
                                 <label class="block text-sm font-bold mb-1">المرحلة الدراسية:</label>
@@ -696,7 +626,6 @@
                             <div>
                                 <label class="block text-sm font-bold mb-1">الصف الدراسي:</label>
                                 <select id="prod-grade" class="w-full px-4 py-2 bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-xl">
-                                    <!-- سيتم تعبئته ديناميكياً -->
                                 </select>
                             </div>
                         </div>
@@ -708,7 +637,7 @@
                             </div>
                             <div>
                                 <label class="block text-sm font-bold mb-1">المادة / التصنيف الفرعي:</label>
-                                <input type="text" id="prod-sub" required placeholder="مثال: الرياضيات / الأدوات الهندسية" class="w-full px-4 py-2 bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-xl">
+                                <input type="text" id="prod-sub" required placeholder="مثال: الرياضيات" class="w-full px-4 py-2 bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-xl">
                             </div>
                         </div>
 
@@ -738,16 +667,64 @@
         </div>
     </div>
 
-    <!-- Footer -->
     <footer class="bg-slate-100 dark:bg-slate-950 text-slate-500 dark:text-slate-500 py-6 mt-10 border-t border-slate-200 dark:border-slate-800 relative z-10 transition-colors duration-300">
         <div class="container mx-auto px-4 text-center space-y-2">
             <p class="text-sm">جميع الحقوق محفوظة &copy; 2026 - <span id="footer-brand-name" class="text-slate-700 dark:text-slate-300 font-bold">مكتبة العبقري</span></p>
         </div>
     </footer>
 
-    <!-- JavaScript Dynamic Logic -->
     <script>
-        // Secret Click Logic (النقر 5 مرات فتح اللوحة)
+        // --- حَفْط واسْتِعَادَةِ البَيَانَاتِ ---
+
+        function saveDataToStorage(key, data) {
+            localStorage.setItem(key, JSON.stringify(data));
+        }
+
+        function getDataFromStorage(key) {
+            const data = localStorage.getItem(key);
+            return data ? JSON.parse(data) : null;
+        }
+
+        // تحميل الإعدادات والمنتجات عند بدء التشغيل
+        window.addEventListener('DOMContentLoaded', () => {
+            // 1. استعادة اسم المنصة
+            const savedBrandName = getDataFromStorage('brandName');
+            if (savedBrandName) {
+                document.getElementById('display-brand-name').innerHTML = savedBrandName;
+                document.getElementById('hero-brand-name').textContent = savedBrandName.replace(/<span.*?>.*?<\/span>/g, '').trim() + " " + savedBrandName.match(/<span.*?>.*?<\/span>/g)[0].replace(/<[^>]*>/g, '');
+                document.getElementById('footer-brand-name').textContent = savedBrandName.replace(/<[^>]*>/g, '');
+                document.getElementById('site-title').textContent = savedBrandName.replace(/<[^>]*>/g, '');
+            }
+
+            // 2. استعادة اللوجو
+            const savedLogo = getDataFromStorage('logoImage');
+            if (savedLogo) {
+                const img = document.getElementById('header-logo-img');
+                const icon = document.getElementById('header-logo-icon');
+                img.src = savedLogo;
+                img.classList.remove('hidden');
+                icon.classList.add('hidden');
+            }
+
+            // 3. استعادة المنتجات
+            const savedProducts = getDataFromStorage('customProducts');
+            if (savedProducts) {
+                savedProducts.forEach(prod => {
+                    renderProductCard(prod, false); // false يعني لا تحفظ مجدداً
+                });
+            }
+
+            setTimeout(() => {
+                const splash = document.getElementById('welcome-splash');
+                if (splash) {
+                    splash.classList.add('fade-out');
+                    setTimeout(() => splash.remove(), 600);
+                }
+            }, 1000);
+        });
+
+        // --- المَنْطِقِ الدِّينَامِيكِيُّ ---
+
         let clickCount = 0;
         let clickTimer = null;
 
@@ -771,19 +748,20 @@
             }
         }
 
-        // Update Brand Name
         function updateBrandName() {
-            const newName = document.getElementById('setting-brand-input').value.trim();
-            if (newName) {
-                document.getElementById('display-brand-name').textContent = newName;
-                document.getElementById('hero-brand-name').textContent = newName;
-                document.getElementById('footer-brand-name').textContent = newName;
-                document.getElementById('site-title').textContent = newName;
+            const newNameText = document.getElementById('setting-brand-input').value.trim();
+            if (newNameText) {
+                const newBrandHTML = `مكتبة <span class="text-brand-gold">${newNameText}</span>`;
+                document.getElementById('display-brand-name').innerHTML = newBrandHTML;
+                document.getElementById('hero-brand-name').innerHTML = newBrandHTML;
+                document.getElementById('footer-brand-name').textContent = `مكتبة ${newNameText}`;
+                document.getElementById('site-title').textContent = `مكتبة ${newNameText}`;
+                
+                saveDataToStorage('brandName', newBrandHTML);
                 alert('تم تحديث اسم المنصة بنجاح!');
             }
         }
 
-        // Logo Upload Event Listener
         document.getElementById('setting-logo-input').addEventListener('change', function(e) {
             const file = e.target.files[0];
             if (file) {
@@ -794,13 +772,14 @@
                     img.src = event.target.result;
                     img.classList.remove('hidden');
                     icon.classList.add('hidden');
+                    
+                    saveDataToStorage('logoImage', event.target.result);
                     alert('تم تغيير لوجو المنصة بنجاح!');
                 }
                 reader.readAsDataURL(file);
             }
         });
 
-        // Admin Section Options Change
         function handleAdminSectionChange(sec) {
             const notesOpt = document.getElementById('notes-admin-options');
             if (sec === 'notes') {
@@ -838,7 +817,71 @@
         }
         updateGradeOptions('primary');
 
-        // Handle Add New Product Dynamically
+        function renderProductCard(prod, shouldSave = true) {
+            let container = null;
+            let newCard = document.createElement('div');
+
+            if (prod.section === 'notes') {
+                container = document.getElementById(`grade-${prod.stage}-${prod.grade}`);
+                if (container) {
+                    newCard.className = "search-item note-card card-hover-effect bg-white dark:bg-slate-800 p-6 rounded-2xl shadow-md border border-slate-200 dark:border-slate-700 flex flex-col justify-between";
+                    newCard.innerHTML = `
+                        <div>
+                            ${prod.imgSrc ? `<img src="${prod.imgSrc}" class="w-full h-36 object-cover rounded-xl mb-3 border border-slate-200 dark:border-slate-700">` : ''}
+                            <span class="bg-amber-100 dark:bg-amber-500/10 text-brand-gold border border-amber-300 dark:border-amber-500/30 text-xs font-bold px-3 py-1 rounded-full item-sub">${prod.sub}</span>
+                            <h3 class="text-xl font-bold mt-3 mb-2 item-title text-slate-800 dark:text-white">${prod.title}</h3>
+                            <p class="text-sm text-slate-500 dark:text-slate-400 mb-4">${prod.desc}</p>
+                        </div>
+                        <button class="w-full py-2.5 bg-brand-blue text-white font-bold rounded-xl hover:bg-blue-700 transition active:scale-95 shadow-md">طلب الملزمة (${prod.price})</button>
+                    `;
+                    container.appendChild(newCard);
+                }
+            } else if (prod.section === 'supplies') {
+                container = document.getElementById('supplies-grid');
+                if (container) {
+                    newCard.className = "search-item supply-card card-hover-effect bg-white dark:bg-slate-800 rounded-2xl p-4 shadow-md border border-slate-200 dark:border-slate-700 flex flex-col justify-between";
+                    newCard.innerHTML = `
+                        <div>
+                            <div class="h-48 rounded-xl overflow-hidden mb-4 bg-slate-100 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 flex items-center justify-center">
+                                ${prod.imgSrc ? `<img src="${prod.imgSrc}" class="w-full h-full object-cover">` : `<i class="fa-solid fa-box-open text-5xl text-slate-400"></i>`}
+                            </div>
+                            <h3 class="font-bold text-slate-800 dark:text-slate-100 item-title text-lg">${prod.title}</h3>
+                            <p class="text-xs text-slate-500 dark:text-slate-400 mb-2 item-sub">${prod.sub}</p>
+                        </div>
+                        <div class="flex justify-between items-center mt-3 pt-3 border-t border-slate-200 dark:border-slate-700">
+                            <span class="font-extrabold text-brand-gold text-lg">${prod.price}</span>
+                            <button class="px-4 py-1.5 bg-brand-blue text-white text-sm font-bold rounded-lg hover:bg-blue-600 transition active:scale-95">شراء</button>
+                        </div>
+                    `;
+                    container.appendChild(newCard);
+                }
+            } else if (prod.section === 'books') {
+                container = document.getElementById('books-grid');
+                if (container) {
+                    newCard.className = "search-item card-hover-effect bg-white dark:bg-slate-800 p-5 rounded-2xl shadow-md border border-slate-200 dark:border-slate-700 flex gap-4";
+                    newCard.innerHTML = `
+                        <div class="w-24 h-32 bg-slate-100 dark:bg-slate-900 rounded-xl flex-shrink-0 flex items-center justify-center border border-slate-200 dark:border-slate-700 overflow-hidden">
+                            ${prod.imgSrc ? `<img src="${prod.imgSrc}" class="w-full h-full object-cover">` : `<i class="fa-solid fa-book text-3xl text-slate-400"></i>`}
+                        </div>
+                        <div class="flex flex-col justify-between">
+                            <div>
+                                <h3 class="font-bold text-slate-800 dark:text-slate-100 item-title">${prod.title}</h3>
+                                <p class="text-xs text-slate-500 dark:text-slate-400 mt-1 item-sub">${prod.sub}</p>
+                            </div>
+                            <button class="px-4 py-1.5 bg-brand-gold text-slate-900 font-bold text-sm rounded-xl hover:bg-amber-500 transition active:scale-95 self-start">تصفح الآن (${prod.price})</button>
+                        </div>
+                    `;
+                    container.appendChild(newCard);
+                }
+            }
+
+            if (shouldSave && container) {
+                const currentProducts = getDataFromStorage('customProducts') || [];
+                currentProducts.push(prod);
+                saveDataToStorage('customProducts', currentProducts);
+            }
+        }
+
         function handleAddProduct(e) {
             e.preventDefault();
 
@@ -851,87 +894,24 @@
             const desc = document.getElementById('prod-desc').value;
             const fileInput = document.getElementById('prod-image-file');
 
-            let imgHtml = `<i class="fa-solid fa-file-lines text-4xl text-brand-gold"></i>`;
-            
-            const createCard = (imgSrc) => {
-                if (section === 'notes') {
-                    const targetContainer = document.getElementById(`grade-${stage}-${grade}`);
-                    if (targetContainer) {
-                        const newCard = document.createElement('div');
-                        newCard.className = "search-item note-card card-hover-effect bg-white dark:bg-slate-800 p-6 rounded-2xl shadow-md border border-slate-200 dark:border-slate-700 flex flex-col justify-between";
-                        newCard.innerHTML = `
-                            <div>
-                                ${imgSrc ? `<img src="${imgSrc}" class="w-full h-36 object-cover rounded-xl mb-3 border border-slate-200 dark:border-slate-700">` : ''}
-                                <span class="bg-amber-100 dark:bg-amber-500/10 text-brand-gold border border-amber-300 dark:border-amber-500/30 text-xs font-bold px-3 py-1 rounded-full item-sub">${sub}</span>
-                                <h3 class="text-xl font-bold mt-3 mb-2 item-title text-slate-800 dark:text-white">${title}</h3>
-                                <p class="text-sm text-slate-500 dark:text-slate-400 mb-4">${desc}</p>
-                            </div>
-                            <button class="w-full py-2.5 bg-brand-blue text-white font-bold rounded-xl hover:bg-blue-700 transition active:scale-95 shadow-md">طلب الملزمة (${price})</button>
-                        `;
-                        targetContainer.appendChild(newCard);
-                    }
-                } else if (section === 'supplies') {
-                    const grid = document.getElementById('supplies-grid');
-                    const newCard = document.createElement('div');
-                    newCard.className = "search-item supply-card card-hover-effect bg-white dark:bg-slate-800 rounded-2xl p-4 shadow-md border border-slate-200 dark:border-slate-700 flex flex-col justify-between";
-                    newCard.innerHTML = `
-                        <div>
-                            <div class="h-48 rounded-xl overflow-hidden mb-4 bg-slate-100 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 flex items-center justify-center">
-                                ${imgSrc ? `<img src="${imgSrc}" class="w-full h-full object-cover">` : `<i class="fa-solid fa-box-open text-5xl text-slate-400"></i>`}
-                            </div>
-                            <h3 class="font-bold text-slate-800 dark:text-slate-100 item-title text-lg">${title}</h3>
-                            <p class="text-xs text-slate-500 dark:text-slate-400 mb-2 item-sub">${sub}</p>
-                        </div>
-                        <div class="flex justify-between items-center mt-3 pt-3 border-t border-slate-200 dark:border-slate-700">
-                            <span class="font-extrabold text-brand-gold text-lg">${price}</span>
-                            <button class="px-4 py-1.5 bg-brand-blue text-white text-sm font-bold rounded-lg hover:bg-blue-600 transition active:scale-95">شراء</button>
-                        </div>
-                    `;
-                    grid.appendChild(newCard);
-                } else if (section === 'books') {
-                    const grid = document.getElementById('books-grid');
-                    const newCard = document.createElement('div');
-                    newCard.className = "search-item card-hover-effect bg-white dark:bg-slate-800 p-5 rounded-2xl shadow-md border border-slate-200 dark:border-slate-700 flex gap-4";
-                    newCard.innerHTML = `
-                        <div class="w-24 h-32 bg-slate-100 dark:bg-slate-900 rounded-xl flex-shrink-0 flex items-center justify-center border border-slate-200 dark:border-slate-700 overflow-hidden">
-                            ${imgSrc ? `<img src="${imgSrc}" class="w-full h-full object-cover">` : `<i class="fa-solid fa-book text-3xl text-slate-400"></i>`}
-                        </div>
-                        <div class="flex flex-col justify-between">
-                            <div>
-                                <h3 class="font-bold text-slate-800 dark:text-slate-100 item-title">${title}</h3>
-                                <p class="text-xs text-slate-500 dark:text-slate-400 mt-1 item-sub">${sub}</p>
-                            </div>
-                            <button class="px-4 py-1.5 bg-brand-gold text-slate-900 font-bold text-sm rounded-xl hover:bg-amber-500 transition active:scale-95 self-start">تصفح الآن (${price})</button>
-                        </div>
-                    `;
-                    grid.appendChild(newCard);
-                }
-
+            const file = fileInput.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(event) {
+                    const newProd = { section, stage, grade, title, sub, price, desc, imgSrc: event.target.result };
+                    renderProductCard(newProd, true);
+                    alert('تمت إضافة المنتج بنجاح وإدراجه في الموقع!');
+                    toggleAdminModal(false);
+                };
+                reader.readAsDataURL(file);
+            } else {
+                const newProd = { section, stage, grade, title, sub, price, desc, imgSrc: null };
+                renderProductCard(newProd, true);
                 alert('تمت إضافة المنتج بنجاح وإدراجه في الموقع!');
                 toggleAdminModal(false);
-            };
-
-            if (fileInput.files && fileInput.files[0]) {
-                const reader = new FileReader();
-                reader.onload = (event) => createCard(event.target.result);
-                reader.readAsDataURL(fileInput.files[0]);
-            } else {
-                createCard(null);
             }
         }
 
-        // Intro Splash Screen
-        window.addEventListener('DOMContentLoaded', () => {
-            setTimeout(() => {
-                const splash = document.getElementById('welcome-splash');
-                if (splash) {
-                    splash.classList.add('fade-out');
-                    setTimeout(() => splash.remove(), 600);
-                }
-            }, 1000);
-        });
-
-        // Theme Toggle
         function toggleTheme() {
             const html = document.documentElement;
             const icon = document.getElementById('theme-toggle-icon');
@@ -959,7 +939,6 @@
             }
         })();
 
-        // Navigation Switch
         function navigateTo(pageId) {
             const pages = document.querySelectorAll('.page-section');
             pages.forEach(page => page.classList.add('hidden'));
@@ -971,7 +950,6 @@
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
-        // Switch Stage (Primary / Middle / High)
         function switchStage(stageId, btn) {
             const stageBtns = document.querySelectorAll('.stage-btn');
             stageBtns.forEach(b => {
@@ -995,7 +973,6 @@
             }
         }
 
-        // Switch Grade inside Stage
         function switchGrade(stageId, gradeNumber, btn) {
             const gradeBtns = document.querySelectorAll(`.grade-btn-${stageId}`);
             gradeBtns.forEach(b => b.classList.remove('active'));
@@ -1010,7 +987,6 @@
             }
         }
 
-        // Search Notes Filter
         function filterNotes(query) {
             const filter = query.toLowerCase();
             const items = document.querySelectorAll('.stage-content .search-item');
@@ -1026,7 +1002,6 @@
             });
         }
 
-        // Switch Subject Tabs (Teachers)
         function switchSubjectTab(subjectId, btn) {
             const allTabs = document.querySelectorAll('.subject-tab-btn');
             allTabs.forEach(t => t.classList.remove('active'));
